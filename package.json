@@ -1,4 +1,7 @@
 {
   "name": "tutorias-ic3101",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "wrangler": "^4.127.1"
+  }
 }

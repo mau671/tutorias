@@ -5,6 +5,7 @@ allowBuilds:
   esbuild: true
   playwright-chromium: true
   vue-demi: true
+  workerd: true
 
 onlyBuiltDependencies:
   - esbuild
