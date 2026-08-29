@@ -11,7 +11,6 @@ addons:
   <h1 class="text-5xl font-bold mb-6">Procesamiento de cadenas y manipulación de memoria</h1>
   <div class="text-2xl text-blue-400">IC3101: Arquitectura de computadores</div>
 </div>
-
 <!--
 Hola a todos. Bienvenidos a la décima semana de tutorías de Arquitectura de Computadores.
 
@@ -29,7 +28,6 @@ transition: fade
 <div class="mb-4 text-sm text-gray-300">
 Dominar los mecanismos de bajo nivel para manipulación masiva de memoria:
 </div>
-
 <v-clicks>
 
 - **Representación de datos contiguos:** Comprender esquemas de longitud fija y cadenas terminadas en nulo.
@@ -39,7 +37,6 @@ Dominar los mecanismos de bajo nivel para manipulación masiva de memoria:
 - **Prefijos de repetición por hardware:** Evaluar la repetición incondicional y las condiciones de parada con <i>REPZ</i> y <i>REPNZ</i>.
 
 </v-clicks>
-
 <!--
 Revisemos los objetivos para esta primera sesión teórica:
 
@@ -64,14 +61,12 @@ transition: slide-up | slide-down
 <div class="text-[11px] text-gray-300 mb-1.5">
 Esquemas de organización de secuencias de bytes continuas:
 </div>
-
 <div v-click="1" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg text-xs mb-1.5">
   <div class="text-amber-400 font-bold text-[11px] mb-0.5">Longitud fija</div>
   <p class="text-gray-300 text-[10px] leading-tight">
     Ocupa un tamaño predefinido constante, rellenando con espacios o ceros.
   </p>
 </div>
-
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg text-xs">
   <div class="text-emerald-400 font-bold text-[11px] mb-0.5">Longitud variable (ASCIIZ)</div>
   <p class="text-gray-300 text-[10px] leading-tight">
@@ -83,46 +78,43 @@ Esquemas de organización de secuencias de bytes continuas:
 
 <div v-click="3" class="bg-gray-900/90 border border-gray-800 rounded-xl p-2.5 text-xs text-center">
   <div class="text-blue-400 font-bold mb-1 text-[10.5px]">Estructura de cadena ASCIIZ ("ARQUI")</div>
-  
   <div class="grid grid-cols-6 gap-1 font-mono text-[9px] my-1.5">
-    <div class="bg-blue-950/40 border border-blue-600/50 p-1 rounded">
-      <div class="text-[7.5px] text-gray-400">+0</div>
-      <div class="text-blue-300 font-bold text-xs">A</div>
-      <div class="text-[7.5px] text-gray-500">0x41</div>
-    </div>
-    <div class="bg-blue-950/40 border border-blue-600/50 p-1 rounded">
-      <div class="text-[7.5px] text-gray-400">+1</div>
-      <div class="text-blue-300 font-bold text-xs">R</div>
-      <div class="text-[7.5px] text-gray-500">0x52</div>
-    </div>
-    <div class="bg-blue-950/40 border border-blue-600/50 p-1 rounded">
-      <div class="text-[7.5px] text-gray-400">+2</div>
-      <div class="text-blue-300 font-bold text-xs">Q</div>
-      <div class="text-[7.5px] text-gray-500">0x51</div>
-    </div>
-    <div class="bg-blue-950/40 border border-blue-600/50 p-1 rounded">
-      <div class="text-[7.5px] text-gray-400">+3</div>
-      <div class="text-blue-300 font-bold text-xs">U</div>
-      <div class="text-[7.5px] text-gray-500">0x55</div>
-    </div>
-    <div class="bg-blue-950/40 border border-blue-600/50 p-1 rounded">
-      <div class="text-[7.5px] text-gray-400">+4</div>
-      <div class="text-blue-300 font-bold text-xs">I</div>
-      <div class="text-[7.5px] text-gray-500">0x49</div>
-    </div>
-    <div class="bg-emerald-950/50 border border-emerald-500 p-1 rounded">
-      <div class="text-[7.5px] text-emerald-400">+5</div>
-      <div class="text-emerald-300 font-bold text-xs">\0</div>
-      <div class="text-[7.5px] text-emerald-400 font-bold">0x00</div>
-    </div>
+  <div class="bg-blue-950/40 border border-blue-600/50 p-1 rounded">
+  <div class="text-[7.5px] text-gray-400">+0</div>
+  <div class="text-blue-300 font-bold text-xs">A</div>
+  <div class="text-[7.5px] text-gray-500">0x41</div>
   </div>
-
+  <div class="bg-blue-950/40 border border-blue-600/50 p-1 rounded">
+  <div class="text-[7.5px] text-gray-400">+1</div>
+  <div class="text-blue-300 font-bold text-xs">R</div>
+  <div class="text-[7.5px] text-gray-500">0x52</div>
+  </div>
+  <div class="bg-blue-950/40 border border-blue-600/50 p-1 rounded">
+  <div class="text-[7.5px] text-gray-400">+2</div>
+  <div class="text-blue-300 font-bold text-xs">Q</div>
+  <div class="text-[7.5px] text-gray-500">0x51</div>
+  </div>
+  <div class="bg-blue-950/40 border border-blue-600/50 p-1 rounded">
+  <div class="text-[7.5px] text-gray-400">+3</div>
+  <div class="text-blue-300 font-bold text-xs">U</div>
+  <div class="text-[7.5px] text-gray-500">0x55</div>
+  </div>
+  <div class="bg-blue-950/40 border border-blue-600/50 p-1 rounded">
+  <div class="text-[7.5px] text-gray-400">+4</div>
+  <div class="text-blue-300 font-bold text-xs">I</div>
+  <div class="text-[7.5px] text-gray-500">0x49</div>
+  </div>
+  <div class="bg-emerald-950/50 border border-emerald-500 p-1 rounded">
+  <div class="text-[7.5px] text-emerald-400">+5</div>
+  <div class="text-emerald-300 font-bold text-xs">\0</div>
+  <div class="text-[7.5px] text-emerald-400 font-bold">0x00</div>
+  </div>
+  </div>
   <div class="flex justify-between items-center bg-gray-950/80 p-1 rounded border border-gray-800 text-[9.5px]">
-    <span class="text-gray-300">Longitud: <strong class="text-blue-400">5 caracteres</strong></span>
-    <span class="text-emerald-400 font-bold">Byte centinela nulo</span>
+  <span class="text-gray-300">Longitud: <strong class="text-blue-400">5 caracteres</strong></span>
+  <span class="text-emerald-400 font-bold">Byte centinela nulo</span>
   </div>
 </div>
-
 <!--
 Comencemos revisando la forma en que representamos cadenas en bajo nivel.
 
@@ -145,23 +137,19 @@ transition: slide-left | slide-right
 <div class="text-[11px] text-gray-300 mb-1.5">
 La arquitectura IA-32 asigna roles específicos para operaciones de bloque:
 </div>
-
 <div class="space-y-1 text-xs font-mono">
 <div v-click="1" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg flex justify-between items-center">
   <span class="text-cyan-400 font-bold text-[11px]">ESI</span>
   <span class="text-gray-300 font-sans text-[10px]">Índice origen (memoria fuente)</span>
 </div>
-
 <div v-click="2" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg flex justify-between items-center">
   <span class="text-emerald-400 font-bold text-[11px]">EDI</span>
   <span class="text-gray-300 font-sans text-[10px]">Índice destino (memoria diana)</span>
 </div>
-
 <div v-click="3" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg flex justify-between items-center">
   <span class="text-amber-400 font-bold text-[11px]">ECX</span>
   <span class="text-gray-300 font-sans text-[10px]">Contador de repeticiones</span>
 </div>
-
 <div v-click="4" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg flex justify-between items-center">
   <span class="text-rose-400 font-bold text-[11px]">AL / EAX</span>
   <span class="text-gray-300 font-sans text-[10px]">Acumulador de datos</span>
@@ -174,43 +162,41 @@ La arquitectura IA-32 asigna roles específicos para operaciones de bloque:
 <div v-click="5" class="p-2 bg-gray-900/80 border border-gray-800 rounded-xl font-mono">
   <div class="text-blue-400 font-bold mb-1 text-center font-sans text-[10.5px]">Sufijos por tamaño de operando</div>
   <table class="w-full text-left border-collapse text-[10px]">
-    <thead>
-      <tr class="text-gray-400 border-b border-gray-700">
-        <th class="p-0.5">Sufijo</th>
-        <th class="p-0.5 font-sans">Tamaño</th>
-        <th class="p-0.5">Acumulador</th>
-        <th class="p-0.5">Avance</th>
-      </tr>
-    </thead>
-    <tbody class="text-gray-300 text-[9.5px]">
-      <tr class="border-b border-gray-800">
-        <td class="p-0.5 text-cyan-300 font-bold">B</td>
-        <td class="p-0.5 font-sans">Byte (8 bits)</td>
-        <td class="p-0.5">AL</td>
-        <td class="p-0.5">&plusmn;1 byte</td>
-      </tr>
-      <tr class="border-b border-gray-800">
-        <td class="p-0.5 text-emerald-300 font-bold">W</td>
-        <td class="p-0.5 font-sans">Word (16 bits)</td>
-        <td class="p-0.5">AX</td>
-        <td class="p-0.5">&plusmn;2 bytes</td>
-      </tr>
-      <tr>
-        <td class="p-0.5 text-amber-300 font-bold">D</td>
-        <td class="p-0.5 font-sans">DWord (32 bits)</td>
-        <td class="p-0.5">EAX</td>
-        <td class="p-0.5">&plusmn;4 bytes</td>
-      </tr>
-    </tbody>
+  <thead>
+  <tr class="text-gray-400 border-b border-gray-700">
+  <th class="p-0.5">Sufijo</th>
+  <th class="p-0.5 font-sans">Tamaño</th>
+  <th class="p-0.5">Acumulador</th>
+  <th class="p-0.5">Avance</th>
+  </tr>
+  </thead>
+  <tbody class="text-gray-300 text-[9.5px]">
+  <tr class="border-b border-gray-800">
+  <td class="p-0.5 text-cyan-300 font-bold">B</td>
+  <td class="p-0.5 font-sans">Byte (8 bits)</td>
+  <td class="p-0.5">AL</td>
+  <td class="p-0.5">&plusmn;1 byte</td>
+  </tr>
+  <tr class="border-b border-gray-800">
+  <td class="p-0.5 text-emerald-300 font-bold">W</td>
+  <td class="p-0.5 font-sans">Word (16 bits)</td>
+  <td class="p-0.5">AX</td>
+  <td class="p-0.5">&plusmn;2 bytes</td>
+  </tr>
+  <tr>
+  <td class="p-0.5 text-amber-300 font-bold">D</td>
+  <td class="p-0.5 font-sans">DWord (32 bits)</td>
+  <td class="p-0.5">EAX</td>
+  <td class="p-0.5">&plusmn;4 bytes</td>
+  </tr>
+  </tbody>
   </table>
 </div>
-
 <div v-click="6" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg text-gray-400 font-sans text-[10px]">
   <span class="text-emerald-400 font-bold block">Autoincremento implícito:</span>
   La CPU actualiza automáticamente <i>ESI</i> y <i>EDI</i> según el tamaño y la bandera <i>DF</i>.
 </div>
 </div>
-
 <!--
 Analicemos los registros dedicados en IA-32 para el manejo de cadenas.
 
@@ -237,22 +223,20 @@ transition: slide-up | slide-down
 <div class="text-[11px] text-gray-300 mb-1.5">
 Determina el sentido de desplazamiento de <i>ESI</i> y <i>EDI</i> en cada ciclo:
 </div>
-
 <div class="space-y-1.5 text-xs">
 <div v-click="1" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg">
   <div class="flex justify-between font-mono text-emerald-400 font-bold text-[10.5px]">
-    <span>CLD (DF = 0)</span>
-    <span>Hacia adelante (&rarr;)</span>
+  <span>CLD (DF = 0)</span>
+  <span>Hacia adelante (&rarr;)</span>
   </div>
   <p class="text-gray-400 font-sans text-[9.5px]">
     Incrementa punteros hacia direcciones crecientes (+1, +2, +4).
   </p>
 </div>
-
 <div v-click="2" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg">
   <div class="flex justify-between font-mono text-rose-400 font-bold text-[10.5px]">
-    <span>STD (DF = 1)</span>
-    <span>Hacia atrás (&larr;)</span>
+  <span>STD (DF = 1)</span>
+  <span>Hacia atrás (&larr;)</span>
   </div>
   <p class="text-gray-400 font-sans text-[9.5px]">
     Decrementa punteros hacia direcciones menores (-1, -2, -4).
@@ -264,26 +248,23 @@ Determina el sentido de desplazamiento de <i>ESI</i> y <i>EDI</i> en cada ciclo:
 
 <div v-click="3" class="bg-gray-900/90 border border-gray-800 rounded-xl p-2 text-xs text-center">
   <div class="text-amber-400 font-bold mb-1 text-[10.5px]">Dirección de recorrido en memoria</div>
-  
   <div class="grid grid-cols-4 gap-1 font-mono text-[9px] my-1">
-    <div class="bg-gray-800 p-0.5 rounded text-gray-300">0x100</div>
-    <div class="bg-gray-800 p-0.5 rounded text-gray-300">0x101</div>
-    <div class="bg-gray-800 p-0.5 rounded text-gray-300">0x102</div>
-    <div class="bg-gray-800 p-0.5 rounded text-gray-300">0x103</div>
+  <div class="bg-gray-800 p-0.5 rounded text-gray-300">0x100</div>
+  <div class="bg-gray-800 p-0.5 rounded text-gray-300">0x101</div>
+  <div class="bg-gray-800 p-0.5 rounded text-gray-300">0x102</div>
+  <div class="bg-gray-800 p-0.5 rounded text-gray-300">0x103</div>
   </div>
-
   <div class="space-y-1 mt-1 font-sans text-[9.5px]">
-    <div class="p-1 bg-emerald-950/40 border border-emerald-800 rounded flex justify-between items-center text-emerald-300">
-      <span><strong>CLD:</strong> Avance a la derecha</span>
-      <span class="font-bold">&rarr; (+1)</span>
-    </div>
-    <div class="p-1 bg-rose-950/40 border border-rose-800 rounded flex justify-between items-center text-rose-300">
-      <span><strong>STD:</strong> Retroceso a la izquierda</span>
-      <span class="font-bold">&larr; (-1)</span>
-    </div>
+  <div class="p-1 bg-emerald-950/40 border border-emerald-800 rounded flex justify-between items-center text-emerald-300">
+  <span><strong>CLD:</strong> Avance a la derecha</span>
+  <span class="font-bold">&rarr; (+1)</span>
+  </div>
+  <div class="p-1 bg-rose-950/40 border border-rose-800 rounded flex justify-between items-center text-rose-300">
+  <span><strong>STD:</strong> Retroceso a la izquierda</span>
+  <span class="font-bold">&larr; (-1)</span>
+  </div>
   </div>
 </div>
-
 <!--
 Estudiemos la bandera de dirección y su control en ensamblador.
 
@@ -306,18 +287,15 @@ transition: slide-left | slide-right
 <div class="text-[11px] text-gray-300 mb-1.5">
 Operaciones de movimiento entre memoria y registros:
 </div>
-
 <div class="space-y-1 text-xs font-mono">
 <div v-click="1" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-cyan-400 font-bold font-sans text-[10.5px]">LODS (Load):</span>
   <p class="text-gray-300 font-sans text-[9.5px]">Carga <i>[ESI]</i> en <i>AL/EAX</i> y actualiza <i>ESI</i>.</p>
 </div>
-
 <div v-click="2" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-emerald-400 font-bold font-sans text-[10.5px]">STOS (Store):</span>
   <p class="text-gray-300 font-sans text-[9.5px]">Escribe <i>AL/EAX</i> en <i>[EDI]</i> y actualiza <i>EDI</i>.</p>
 </div>
-
 <div v-click="3" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-amber-400 font-bold font-sans text-[10.5px]">MOVS (Move):</span>
   <p class="text-gray-300 font-sans text-[9.5px]">Copia <i>[ESI] &rarr; [EDI]</i> directamente.</p>
@@ -329,24 +307,23 @@ Operaciones de movimiento entre memoria y registros:
 <div v-click="4" class="bg-gray-900/90 border border-gray-800 rounded-xl p-2.5 text-xs font-mono">
   <div class="text-blue-400 font-bold mb-1 text-center font-sans text-[10.5px]">Rutas de transferencia</div>
   <div class="space-y-1.5 text-[9.5px]">
-    <div class="p-1.5 bg-cyan-950/30 border border-cyan-800 rounded flex justify-between items-center">
-      <span class="text-cyan-300 font-bold font-sans">LODSB:</span>
-      <span>[ESI] &rarr; AL</span>
-      <span class="text-gray-400 font-sans text-[8.5px]">ESI &plusmn;1</span>
-    </div>
-    <div class="p-1.5 bg-emerald-950/30 border border-emerald-800 rounded flex justify-between items-center">
-      <span class="text-emerald-300 font-bold font-sans">STOSB:</span>
-      <span>AL &rarr; [EDI]</span>
-      <span class="text-gray-400 font-sans text-[8.5px]">EDI &plusmn;1</span>
-    </div>
-    <div class="p-1.5 bg-amber-950/30 border border-amber-800 rounded flex justify-between items-center">
-      <span class="text-amber-300 font-bold font-sans">MOVSB:</span>
-      <span>[ESI] &rarr; [EDI]</span>
-      <span class="text-gray-400 font-sans text-[8.5px]">Ambos &plusmn;1</span>
-    </div>
+  <div class="p-1.5 bg-cyan-950/30 border border-cyan-800 rounded flex justify-between items-center">
+  <span class="text-cyan-300 font-bold font-sans">LODSB:</span>
+  <span>[ESI] &rarr; AL</span>
+  <span class="text-gray-400 font-sans text-[8.5px]">ESI &plusmn;1</span>
+  </div>
+  <div class="p-1.5 bg-emerald-950/30 border border-emerald-800 rounded flex justify-between items-center">
+  <span class="text-emerald-300 font-bold font-sans">STOSB:</span>
+  <span>AL &rarr; [EDI]</span>
+  <span class="text-gray-400 font-sans text-[8.5px]">EDI &plusmn;1</span>
+  </div>
+  <div class="p-1.5 bg-amber-950/30 border border-amber-800 rounded flex justify-between items-center">
+  <span class="text-amber-300 font-bold font-sans">MOVSB:</span>
+  <span>[ESI] &rarr; [EDI]</span>
+  <span class="text-gray-400 font-sans text-[8.5px]">Ambos &plusmn;1</span>
+  </div>
   </div>
 </div>
-
 <!--
 Veamos las tres instrucciones fundamentales para mover información en memoria.
 
@@ -371,7 +348,6 @@ transition: slide-up | slide-down
 <div class="text-[11px] text-gray-300 mb-1.5">
 Comparación de bloques y búsqueda de patrones actualizando banderas:
 </div>
-
 <div class="space-y-1.5 text-xs font-mono">
 <div v-click="1" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <div class="text-purple-400 font-bold font-sans text-[10.5px]">CMPS (Compare String)</div>
@@ -379,7 +355,6 @@ Comparación de bloques y búsqueda de patrones actualizando banderas:
     Resta <i>[ESI] - [EDI]</i> y actualiza <i>ZF</i>, <i>CF</i> sin alterar la memoria.
   </p>
 </div>
-
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <div class="text-emerald-400 font-bold font-sans text-[10.5px]">SCAS (Scan String)</div>
   <p class="text-gray-300 font-sans text-[10px]">
@@ -393,24 +368,22 @@ Comparación de bloques y búsqueda de patrones actualizando banderas:
 <div v-click="3" class="bg-gray-900/90 border border-gray-800 rounded-xl p-2.5 text-xs">
   <div class="text-cyan-400 font-bold mb-1 text-center font-sans text-[10.5px]">Resultado en bandera ZF</div>
   <div class="space-y-1.5 text-[9.5px]">
-    <div class="p-1.5 bg-purple-950/30 border border-purple-800 rounded">
-      <div class="text-purple-300 font-bold font-mono mb-0.5">CMPSB: [ESI] vs [EDI]</div>
-      <div class="flex justify-around font-mono text-[8.5px]">
-        <span class="text-emerald-300">Iguales: <i>ZF = 1</i></span>
-        <span class="text-rose-300">Distintos: <i>ZF = 0</i></span>
-      </div>
-    </div>
-
-    <div class="p-1.5 bg-emerald-950/30 border border-emerald-800 rounded">
-      <div class="text-emerald-300 font-bold font-mono mb-0.5">SCASB: AL vs [EDI]</div>
-      <div class="flex justify-around font-mono text-[8.5px]">
-        <span class="text-emerald-300">Encontrado: <i>ZF = 1</i></span>
-        <span class="text-gray-400">No hallado: <i>ZF = 0</i></span>
-      </div>
-    </div>
+  <div class="p-1.5 bg-purple-950/30 border border-purple-800 rounded">
+  <div class="text-purple-300 font-bold font-mono mb-0.5">CMPSB: [ESI] vs [EDI]</div>
+  <div class="flex justify-around font-mono text-[8.5px]">
+  <span class="text-emerald-300">Iguales: <i>ZF = 1</i></span>
+  <span class="text-rose-300">Distintos: <i>ZF = 0</i></span>
+  </div>
+  </div>
+  <div class="p-1.5 bg-emerald-950/30 border border-emerald-800 rounded">
+  <div class="text-emerald-300 font-bold font-mono mb-0.5">SCASB: AL vs [EDI]</div>
+  <div class="flex justify-around font-mono text-[8.5px]">
+  <span class="text-emerald-300">Encontrado: <i>ZF = 1</i></span>
+  <span class="text-gray-400">No hallado: <i>ZF = 0</i></span>
+  </div>
+  </div>
   </div>
 </div>
-
 <!--
 Analicemos ahora las instrucciones para comparar y buscar en memoria.
 
@@ -433,13 +406,11 @@ transition: slide-left | slide-right
 <div class="text-[11px] text-gray-300 mb-1.5">
 Repite la instrucción iterativamente mientras <i>ECX &gt; 0</i>:
 </div>
-
 <div class="space-y-1.5 text-xs">
 <div v-click="1" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-blue-400 font-bold font-mono text-[10.5px]">REP MOVSB:</span>
   <p class="text-gray-300 font-sans text-[10px]">Copia <i>ECX</i> bytes desde <i>ESI</i> a <i>EDI</i> en hardware.</p>
 </div>
-
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-emerald-400 font-bold font-mono text-[10.5px]">REP STOSB:</span>
   <p class="text-gray-300 font-sans text-[10px]">Rellena <i>ECX</i> bytes en <i>EDI</i> con el valor en <i>AL</i>.</p>
@@ -450,27 +421,25 @@ Repite la instrucción iterativamente mientras <i>ECX &gt; 0</i>:
 
 <div v-click="3" class="bg-gray-900/90 border border-gray-800 rounded-xl p-2.5 text-xs">
   <div class="text-amber-400 font-bold mb-1 text-center font-sans text-[10.5px]">Lógica del microcódigo REP</div>
-  
   <div class="space-y-1 text-[9.5px] font-sans">
-    <div class="p-1 bg-gray-950/80 border border-gray-800 rounded flex justify-between font-mono">
-      <span class="text-amber-300">Condición:</span>
-      <span>¿ECX &gt; 0?</span>
-    </div>
-    <div class="p-1 bg-blue-950/30 border border-blue-800 rounded flex justify-between font-mono">
-      <span class="text-blue-300">Operación:</span>
-      <span>Ejecutar instrucción</span>
-    </div>
-    <div class="p-1 bg-purple-950/30 border border-purple-800 rounded flex justify-between font-mono">
-      <span class="text-purple-300">Paso:</span>
-      <span><i>ECX = ECX - 1</i></span>
-    </div>
-    <div class="p-1 bg-emerald-950/30 border border-emerald-800 rounded flex justify-between font-mono">
-      <span class="text-emerald-300">Salida:</span>
-      <span>Al llegar a <i>ECX = 0</i></span>
-    </div>
+  <div class="p-1 bg-gray-950/80 border border-gray-800 rounded flex justify-between font-mono">
+  <span class="text-amber-300">Condición:</span>
+  <span>¿ECX &gt; 0?</span>
+  </div>
+  <div class="p-1 bg-blue-950/30 border border-blue-800 rounded flex justify-between font-mono">
+  <span class="text-blue-300">Operación:</span>
+  <span>Ejecutar instrucción</span>
+  </div>
+  <div class="p-1 bg-purple-950/30 border border-purple-800 rounded flex justify-between font-mono">
+  <span class="text-purple-300">Paso:</span>
+  <span><i>ECX = ECX - 1</i></span>
+  </div>
+  <div class="p-1 bg-emerald-950/30 border border-emerald-800 rounded flex justify-between font-mono">
+  <span class="text-emerald-300">Salida:</span>
+  <span>Al llegar a <i>ECX = 0</i></span>
+  </div>
   </div>
 </div>
-
 <!--
 Veamos el prefijo de repetición incondicional REP.
 
@@ -493,20 +462,18 @@ transition: slide-up | slide-down
 <div class="text-[11px] text-gray-300 mb-1.5">
 Evalúan simultáneamente el contador <i>ECX</i> y la bandera <i>ZF</i>:
 </div>
-
 <div class="space-y-1.5 text-xs">
 <div v-click="1" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <div class="flex justify-between font-mono text-emerald-400 font-bold text-[10.5px]">
-    <span>REPE / REPZ</span>
-    <span>Mientras sea igual (<i>ZF = 1</i>)</span>
+  <span>REPE / REPZ</span>
+  <span>Mientras sea igual (<i>ZF = 1</i>)</span>
   </div>
   <p class="text-gray-300 font-sans text-[10px]">Para si <i>ECX = 0</i> o al detectar la primera diferencia (<i>ZF = 0</i>).</p>
 </div>
-
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <div class="flex justify-between font-mono text-rose-400 font-bold text-[10.5px]">
-    <span>REPNE / REPNZ</span>
-    <span>Mientras difiera (<i>ZF = 0</i>)</span>
+  <span>REPNE / REPNZ</span>
+  <span>Mientras difiera (<i>ZF = 0</i>)</span>
   </div>
   <p class="text-gray-300 font-sans text-[10px]">Para si <i>ECX = 0</i> o al hallar coincidencia (<i>ZF = 1</i>).</p>
 </div>
@@ -518,31 +485,29 @@ Evalúan simultáneamente el contador <i>ECX</i> y la bandera <i>ZF</i>:
 <div v-click="3" class="p-2 bg-gray-900/80 border border-gray-800 rounded-xl">
   <div class="text-blue-400 font-bold mb-1 font-sans text-center text-[10.5px]">Casos de uso canónicos</div>
   <table class="w-full text-left border-collapse text-[9.5px]">
-    <thead>
-      <tr class="text-gray-400 border-b border-gray-700">
-        <th class="p-0.5">Instrucción</th>
-        <th class="p-0.5 font-sans">Uso estándar</th>
-      </tr>
-    </thead>
-    <tbody class="text-gray-300 text-[9px]">
-      <tr class="border-b border-gray-800">
-        <td class="p-0.5 text-emerald-300 font-bold">REPE CMPSB</td>
-        <td class="p-0.5 font-sans">Comparar cadenas (<i>strcmp</i>)</td>
-      </tr>
-      <tr>
-        <td class="p-0.5 text-rose-300 font-bold">REPNE SCASB</td>
-        <td class="p-0.5 font-sans">Buscar nulo o carácter (<i>strlen</i>)</td>
-      </tr>
-    </tbody>
+  <thead>
+  <tr class="text-gray-400 border-b border-gray-700">
+  <th class="p-0.5">Instrucción</th>
+  <th class="p-0.5 font-sans">Uso estándar</th>
+  </tr>
+  </thead>
+  <tbody class="text-gray-300 text-[9px]">
+  <tr class="border-b border-gray-800">
+  <td class="p-0.5 text-emerald-300 font-bold">REPE CMPSB</td>
+  <td class="p-0.5 font-sans">Comparar cadenas (<i>strcmp</i>)</td>
+  </tr>
+  <tr>
+  <td class="p-0.5 text-rose-300 font-bold">REPNE SCASB</td>
+  <td class="p-0.5 font-sans">Buscar nulo o carácter (<i>strlen</i>)</td>
+  </tr>
+  </tbody>
   </table>
 </div>
-
 <div v-click="4" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg text-gray-400 font-sans text-[10px]">
   <span class="text-amber-400 font-bold">Sinónimos:</span>
   <i>REPE</i> &equiv; <i>REPZ</i> y <i>REPNE</i> &equiv; <i>REPNZ</i> comparten el mismo código de máquina.
 </div>
 </div>
-
 <!--
 Llegamos a los prefijos condicionales, uno de los temas más evaluados en el curso.
 
@@ -563,27 +528,24 @@ transition: fade
 
 <div class="max-w-xl mx-auto text-left space-y-2.5 text-xs">
   <div class="p-2.5 bg-gray-900/80 border border-gray-800 rounded-lg">
-    <strong class="text-emerald-400 font-mono">1. Punteros y dirección:</strong>
-    <p class="text-gray-300 mt-0.5 text-[11px]">
-      <i>ESI</i> y <i>EDI</i> apuntan a origen y destino. La instrucción <i>CLD</i> garantiza avance ascendente y <i>STD</i> retroceso.
-    </p>
+  <strong class="text-emerald-400 font-mono">1. Punteros y dirección:</strong>
+  <p class="text-gray-300 mt-0.5 text-[11px]">
+  <i>ESI</i> y <i>EDI</i> apuntan a origen y destino. La instrucción <i>CLD</i> garantiza avance ascendente y <i>STD</i> retroceso.
+  </p>
   </div>
-
   <div class="p-2.5 bg-gray-900/80 border border-gray-800 rounded-lg">
-    <strong class="text-cyan-400 font-mono">2. Cinco nemónicos clave:</strong>
-    <p class="text-gray-300 mt-0.5 text-[11px]">
-      <i>LODS</i>, <i>STOS</i>, <i>MOVS</i>, <i>CMPS</i> y <i>SCAS</i> operan sobre bytes, palabras y dobles palabras de memoria.
-    </p>
+  <strong class="text-cyan-400 font-mono">2. Cinco nemónicos clave:</strong>
+  <p class="text-gray-300 mt-0.5 text-[11px]">
+  <i>LODS</i>, <i>STOS</i>, <i>MOVS</i>, <i>CMPS</i> y <i>SCAS</i> operan sobre bytes, palabras y dobles palabras de memoria.
+  </p>
   </div>
-
   <div v-click="1" class="p-2.5 bg-gray-900/80 border border-gray-800 rounded-lg">
-    <strong class="text-amber-400 font-mono">3. Pregunta detonante para el taller:</strong>
-    <p class="text-gray-300 mt-0.5 text-[11px] italic">
+  <strong class="text-amber-400 font-mono">3. Pregunta detonante para el taller:</strong>
+  <p class="text-gray-300 mt-0.5 text-[11px] italic">
       Si <i>REPNE SCASB</i> decrementa <i>ECX</i> en cada byte inspeccionado, ¿cómo calculamos con exactitud matemática la longitud de la cadena al hallar el byte nulo?
-    </p>
+  </p>
   </div>
 </div>
-
 <!--
 Con esto concluimos la primera sesión teórica. Hemos cubierto los registros especializados, el sentido de avance con la bandera DF y los prefijos de repetición.
 
@@ -600,7 +562,6 @@ transition: slide-up | slide-down
   <h1 class="text-6xl font-bold mb-8">Sesión 02: Taller práctico</h1>
   <div class="text-2xl text-blue-500 mt-4">IC3101: Arquitectura de computadores</div>
 </div>
-
 <!--
 ¡Bienvenidos a la segunda sesión de la semana!
 
@@ -616,7 +577,6 @@ transition: fade
 <div class="mb-4 text-sm text-gray-300">
 Implementar funciones estándar de memoria en lenguaje ensamblador de alto rendimiento:
 </div>
-
 <v-clicks>
 
 - **Cálculo de longitud de cadena (strlen):** Utilizar <i>REPNE SCASB</i> para escanear memoria hasta el byte centinela <i>0x00</i>.
@@ -626,7 +586,6 @@ Implementar funciones estándar de memoria en lenguaje ensamblador de alto rendi
 - **Análisis de eficiencia y caché:** Comparar la densidad y velocidad de las instrucciones de bloque frente a bucles manuales.
 
 </v-clicks>
-
 <!--
 Antes de iniciar los ejercicios, repasemos los objetivos de esta segunda sesión práctica:
 
@@ -651,7 +610,6 @@ transition: slide-left | slide-right
 <div class="text-[11px] text-gray-300 mb-1">
 Búsqueda del byte nulo <i>0x00</i> con <i>REPNE SCASB</i>:
 </div>
-
 <div class="font-mono text-[9px]">
 
 ```asm {1-4|6|8-10|all}
@@ -680,18 +638,15 @@ strlen_opt:
   <span class="text-cyan-400 font-bold block text-[10.5px]">Inicialización en -1:</span>
   <p class="text-gray-300 text-[10px]">Evita que <i>ECX</i> agote su cuenta antes de topar el nulo.</p>
 </div>
-
 <div v-click="2" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg font-sans text-xs">
   <span class="text-amber-400 font-bold block text-[10.5px]">Criterio de parada:</span>
   <p class="text-gray-300 text-[10px]">Al hallar <i>0x00</i>, <i>ZF = 1</i> y <i>REPNE</i> se detiene.</p>
 </div>
-
 <div v-click="3" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg font-sans text-xs">
   <span class="text-emerald-400 font-bold block text-[10.5px]">Cálculo matemático:</span>
   <p class="text-gray-300 text-[10px]"><span class="font-mono font-bold text-emerald-300">Longitud = NOT(ECX) - 1</span></p>
 </div>
 </div>
-
 <!--
 Analicemos la implementación clásica de strlen con instrucciones de bloque.
 
@@ -712,7 +667,6 @@ transition: slide-up | slide-down
 <div class="text-[11px] text-gray-300 mb-1">
 Transferencia por palabras dobles de 32 bits (4 bytes/ciclo):
 </div>
-
 <div class="font-mono text-[9px]">
 
 ```asm {1-4|6-7|9-11|all}
@@ -743,13 +697,11 @@ memcpy_opt:
   <span class="text-emerald-400 font-bold font-mono text-[10.5px] block">Transferencia por dwords:</span>
   <p class="text-gray-300 font-sans text-[10px]"><i>MOVSD</i> cuadruplica el ancho de banda transferido por ciclo de bus (4&times;).</p>
 </div>
-
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-blue-400 font-bold font-mono text-[10.5px] block">Manejo de remanentes:</span>
   <p class="text-gray-300 font-sans text-[10px]"><i>and ecx, 3</i> extrae los bytes finales (0 &le; r &le; 3) para copiarlos con <i>MOVSB</i>.</p>
 </div>
 </div>
-
 <!--
 Veamos ahora una optimización profesional para copiar memoria equivalente a la función memcpy.
 
@@ -770,7 +722,6 @@ transition: slide-left | slide-right
 <div class="text-[11px] text-gray-300 mb-1">
 Relleno masivo de memoria con valor uniforme mediante <i>REP STOSB</i>:
 </div>
-
 <div class="font-mono text-[9px]">
 
 ```asm {1-4|6-10|all}
@@ -795,30 +746,26 @@ limpiar_tabla:
 
 <div v-click="1" class="bg-gray-900/90 border border-gray-800 rounded-xl p-2.5 text-xs text-center font-mono">
   <div class="text-emerald-400 font-bold mb-1 font-sans text-[10.5px]">Efecto en memoria (REP STOSB)</div>
-  
   <div class="mb-1">
-    <div class="text-[8.5px] text-gray-400 mb-0.5 font-sans">Datos previos:</div>
-    <div class="grid grid-cols-4 gap-1 text-[9px]">
-      <div class="bg-gray-800 p-1 rounded text-gray-400">0xA3</div>
-      <div class="bg-gray-800 p-1 rounded text-gray-400">0x5F</div>
-      <div class="bg-gray-800 p-1 rounded text-gray-400">0x12</div>
-      <div class="bg-gray-800 p-1 rounded text-gray-400">0x8B</div>
-    </div>
+  <div class="text-[8.5px] text-gray-400 mb-0.5 font-sans">Datos previos:</div>
+  <div class="grid grid-cols-4 gap-1 text-[9px]">
+  <div class="bg-gray-800 p-1 rounded text-gray-400">0xA3</div>
+  <div class="bg-gray-800 p-1 rounded text-gray-400">0x5F</div>
+  <div class="bg-gray-800 p-1 rounded text-gray-400">0x12</div>
+  <div class="bg-gray-800 p-1 rounded text-gray-400">0x8B</div>
   </div>
-
+  </div>
   <div class="text-emerald-400 text-[9.5px] my-0.5 font-bold">&darr; Relleno con AL = 0x00 &darr;</div>
-
   <div>
-    <div class="text-[8.5px] text-gray-400 mb-0.5 font-sans">Memoria limpia:</div>
-    <div class="grid grid-cols-4 gap-1 text-[9px]">
-      <div class="bg-emerald-950/60 border border-emerald-600 p-1 rounded text-emerald-300 font-bold">0x00</div>
-      <div class="bg-emerald-950/60 border border-emerald-600 p-1 rounded text-emerald-300 font-bold">0x00</div>
-      <div class="bg-emerald-950/60 border border-emerald-600 p-1 rounded text-emerald-300 font-bold">0x00</div>
-      <div class="bg-emerald-950/60 border border-emerald-600 p-1 rounded text-emerald-300 font-bold">0x00</div>
-    </div>
+  <div class="text-[8.5px] text-gray-400 mb-0.5 font-sans">Memoria limpia:</div>
+  <div class="grid grid-cols-4 gap-1 text-[9px]">
+  <div class="bg-emerald-950/60 border border-emerald-600 p-1 rounded text-emerald-300 font-bold">0x00</div>
+  <div class="bg-emerald-950/60 border border-emerald-600 p-1 rounded text-emerald-300 font-bold">0x00</div>
+  <div class="bg-emerald-950/60 border border-emerald-600 p-1 rounded text-emerald-300 font-bold">0x00</div>
+  <div class="bg-emerald-950/60 border border-emerald-600 p-1 rounded text-emerald-300 font-bold">0x00</div>
+  </div>
   </div>
 </div>
-
 <!--
 Examinemos cómo inicializar memoria de forma ultrarrápida con REP STOSB.
 
@@ -839,7 +786,6 @@ transition: slide-up | slide-down
 <div class="text-[11px] text-gray-300 mb-1">
 Comparación byte a byte hasta hallar discrepancia con <i>REPE CMPSB</i>:
 </div>
-
 <div class="font-mono text-[8.5px]">
 
 ```asm {1-4|6-7|9-11|14-16|all}
@@ -870,10 +816,9 @@ cadenas_iguales:
 <div v-click="1" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-rose-400 font-bold font-mono text-[10.5px] block">Ajuste de puntero (-1):</span>
   <p class="text-gray-300 font-sans text-[10px]">
-    <i>CMPSB</i> incrementa antes de parar. Por ello leemos en <i>[esi - 1]</i> y <i>[edi - 1]</i>.
+  <i>CMPSB</i> incrementa antes de parar. Por ello leemos en <i>[esi - 1]</i> y <i>[edi - 1]</i>.
   </p>
 </div>
-
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-emerald-400 font-bold font-mono text-[10.5px] block">Comprobación con je:</span>
   <p class="text-gray-300 font-sans text-[10px]">
@@ -881,7 +826,6 @@ cadenas_iguales:
   </p>
 </div>
 </div>
-
 <!--
 Analicemos la función strcmp con REPE CMPSB.
 
@@ -900,7 +844,6 @@ transition: slide-left | slide-right
 <div class="text-[11px] text-gray-300 mb-1">
 Comparativa de rendimiento y eficiencia en caché:
 </div>
-
 <div class="font-mono text-[8.5px]">
 
 ```asm
@@ -926,18 +869,16 @@ rep movsb             ; En microcódigo de CPU
 <div v-click="1" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <div class="text-emerald-400 font-bold text-[10.5px] mb-0.5">Ventajas de instrucciones de bloque:</div>
   <ul class="space-y-0.5 text-gray-300 font-sans text-[10px]">
-    <li>&bull; Decodificación única sin salto repetido</li>
-    <li>&bull; Ráfagas continuas en bus de memoria</li>
-    <li>&bull; Cero fallos de predicción de saltos</li>
+  <li>&bull; Decodificación única sin salto repetido</li>
+  <li>&bull; Ráfagas continuas en bus de memoria</li>
+  <li>&bull; Cero fallos de predicción de saltos</li>
   </ul>
 </div>
-
 <div v-click="2" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg text-gray-300 font-sans text-[10px]">
   <span class="text-amber-400 font-bold block">Densidad de código:</span>
   Una sola instrucción de 2 bytes reemplaza 6 instrucciones ahorrando espacio en caché L1.
 </div>
 </div>
-
 <!--
 Comparemos el rendimiento entre ambas alternativas.
 
@@ -964,7 +905,6 @@ transition: fade
     &rarr; Respuesta correcta: B) CLD limpia la bandera de dirección (<i>DF = 0</i>) habilitando el incremento.
   </div>
 </div>
-
 <div class="p-2.5 bg-gray-900/60 border border-gray-800 rounded-xl">
   <strong class="text-amber-400 text-[11px]">2. ¿En qué condición se detiene la ejecución de REPE CMPSB?</strong>
   <p class="text-gray-300 mt-0.5 font-sans text-[10px]">
@@ -974,7 +914,6 @@ transition: fade
     &rarr; Respuesta correcta: A) Se detiene cuando se agota <i>ECX</i> o al hallar la primera diferencia (<i>ZF = 0</i>).
   </div>
 </div>
-
 <div class="p-2.5 bg-gray-900/60 border border-gray-800 rounded-xl">
   <strong class="text-purple-400 text-[11px]">3. ¿Cuál opción es más rápida para inicializar enteros de 32 bits con ceros?</strong>
   <p class="text-gray-300 mt-0.5 font-mono text-[10px]">
@@ -985,7 +924,6 @@ transition: fade
   </div>
 </div>
 </div>
-
 <!--
 Pongamos a prueba lo aprendido con este mini-quiz de cierre.
 
@@ -1006,24 +944,21 @@ transition: fade
 
 <div class="text-center max-w-xl mx-auto">
   <h1 class="text-3xl font-bold mb-3 text-white">Conclusiones integradoras</h1>
-  
   <div class="p-3.5 bg-gray-900/60 border border-gray-800 rounded-xl text-left text-xs text-gray-300 space-y-1.5 mt-3">
-    <p>
+  <p>
       &bull; Las instrucciones de manipulación de bloques de memoria aprovechan al máximo los registros <i>ESI</i>, <i>EDI</i> y <i>ECX</i> junto con la bandera <i>DF</i>.
-    </p>
-    <p>
+  </p>
+  <p>
       &bull; Los prefijos de repetición <i>REP</i>, <i>REPZ</i> y <i>REPNZ</i> permiten implementar algoritmos esenciales como <i>strlen</i>, <i>memcpy</i> y <i>strcmp</i> con rendimiento superior a cualquier bucle manual.
-    </p>
-    <p>
+  </p>
+  <p>
       &bull; Estos conocimientos son la base técnica imprescindible para el <strong>Proyecto de Ensamblador</strong> del curso.
-    </p>
+  </p>
   </div>
-
   <div class="text-blue-400 font-semibold mt-3 text-xs">
     ¡Muchas gracias por su dedicación y éxito en sus prácticas!
   </div>
 </div>
-
 <!--
 Con esto concluimos la décima semana de tutorías.
 
