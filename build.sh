@@ -29,14 +29,13 @@ cat << 'PORTAL' > dist/tutorias/IC3101/index.html
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorías IC3101 - Arquitectura de Computadores</title>
+  <title>Tutorías IC3101 - Arquitectura de computadores</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-neutral-950 text-neutral-100 min-h-screen p-6 md:p-12 flex flex-col items-center justify-center font-sans antialiased selection:bg-neutral-800 selection:text-white">
   <main class="max-w-xl w-full">
     <div class="mb-8">
-      <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-800 text-neutral-400 rounded-md text-xs font-mono font-medium">IC3101</span>
-      <h1 class="text-3xl md:text-4xl font-bold mt-3 text-white tracking-tight">Arquitectura de Computadores</h1>
+      <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Arquitectura de computadores</h1>
     </div>
 
     <div class="grid gap-3">
