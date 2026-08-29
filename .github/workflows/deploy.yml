@@ -14,16 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout del repositorio
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Instalar pnpm (última versión)
-        uses: pnpm/action-setup@v4
+      - name: Instalar pnpm
+        uses: pnpm/action-setup@v6
         with:
           version: latest
           run_install: false
 
-      - name: Configurar Node.js 24 y caché de pnpm
-        uses: actions/setup-node@v4
+      - name: Configurar Node.js y caché de pnpm
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: 'pnpm'
