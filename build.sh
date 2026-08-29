@@ -39,7 +39,7 @@ cat << 'PORTAL' > dist/tutorias/IC3101/index.html
     </div>
 
     <div class="grid gap-3">
-      <a href="./S04/" class="group p-4 bg-neutral-900/50 border border-neutral-800/80 rounded-xl hover:border-neutral-500 hover:bg-neutral-900 transition duration-150 block">
+      <a href="/tutorias/IC3101/S04/" class="group p-4 bg-neutral-900/50 border border-neutral-800/80 rounded-xl hover:border-neutral-500 hover:bg-neutral-900 transition duration-150 block">
         <div class="flex items-center justify-between mb-1">
           <span class="font-bold text-white group-hover:text-neutral-200 transition font-mono text-sm">Semana 04</span>
           <span class="text-xs text-neutral-500 font-mono">18 slides</span>
@@ -47,7 +47,7 @@ cat << 'PORTAL' > dist/tutorias/IC3101/index.html
         <p class="text-neutral-400 text-xs leading-relaxed">Multiplicación, división entera y formato de punto flotante IEEE 754</p>
       </a>
 
-      <a href="./S09/" class="group p-4 bg-neutral-900/50 border border-neutral-800/80 rounded-xl hover:border-neutral-500 hover:bg-neutral-900 transition duration-150 block">
+      <a href="/tutorias/IC3101/S09/" class="group p-4 bg-neutral-900/50 border border-neutral-800/80 rounded-xl hover:border-neutral-500 hover:bg-neutral-900 transition duration-150 block">
         <div class="flex items-center justify-between mb-1">
           <span class="font-bold text-white group-hover:text-neutral-200 transition font-mono text-sm">Semana 09</span>
           <span class="text-xs text-neutral-500 font-mono">19 slides</span>
@@ -55,7 +55,7 @@ cat << 'PORTAL' > dist/tutorias/IC3101/index.html
         <p class="text-neutral-400 text-xs leading-relaxed">Llamadas al sistema (int 0x80), descriptores de archivo y depuración con GDB</p>
       </a>
 
-      <a href="./S10/" class="group p-4 bg-neutral-900/50 border border-neutral-800/80 rounded-xl hover:border-neutral-500 hover:bg-neutral-900 transition duration-150 block">
+      <a href="/tutorias/IC3101/S10/" class="group p-4 bg-neutral-900/50 border border-neutral-800/80 rounded-xl hover:border-neutral-500 hover:bg-neutral-900 transition duration-150 block">
         <div class="flex items-center justify-between mb-1">
           <span class="font-bold text-white group-hover:text-neutral-200 transition font-mono text-sm">Semana 10</span>
           <span class="text-xs text-neutral-500 font-mono">19 slides</span>
@@ -72,7 +72,12 @@ cat << 'PORTAL' > dist/tutorias/IC3101/index.html
 </html>
 PORTAL
 
-# Copiar portal a /tutorias/index.html por si se accede a /tutorias/ directamente
+# Copiar portal a /tutorias/index.html
 cp dist/tutorias/IC3101/index.html dist/tutorias/index.html
+
+# Copiar también a /tutorias/SXX por si se accede sin IC3101
+cp -r dist/tutorias/IC3101/S04 dist/tutorias/S04
+cp -r dist/tutorias/IC3101/S09 dist/tutorias/S09
+cp -r dist/tutorias/IC3101/S10 dist/tutorias/S10
 
 echo "✨ Compilación finalizada con éxito en ./dist"
