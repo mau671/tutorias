@@ -3,11 +3,9 @@ set -e
 
 echo "🚀 Iniciando compilación de presentaciones (S04, S09, S10)..."
 
-ROOT_DIR="$(pwd)"
-
 # Limpiar y preparar directorios
-rm -rf "$ROOT_DIR/dist"
-mkdir -p "$ROOT_DIR/dist/tutorias/IC3101"
+rm -rf dist
+mkdir -p dist/tutorias/IC3101
 
 # Instalar dependencias del workspace
 pnpm install
@@ -16,16 +14,16 @@ pnpm install
 WEEKS=("S04" "S09" "S10")
 
 for week in "${WEEKS[@]}"; do
-  if [ -d "$ROOT_DIR/$week" ] && [ -f "$ROOT_DIR/$week/slides.md" ]; then
+  if [ -d "$week" ] && [ -f "$week/slides.md" ]; then
     echo "🔨 Compilando $week con base /tutorias/IC3101/$week/ ..."
-    (cd "$ROOT_DIR/$week" && pnpm exec slidev build --base "/tutorias/IC3101/$week/" --out "$ROOT_DIR/dist/tutorias/IC3101/$week/")
+    pnpm --filter "./$week" exec slidev build --base "/tutorias/IC3101/$week/" --out "../dist/tutorias/IC3101/$week/"
   else
     echo "⚠️  Advertencia: No se encontró la carpeta o slides.md para $week"
   fi
 done
 
 # Portal índice en /tutorias/IC3101/index.html
-cat << 'PORTAL' > "$ROOT_DIR/dist/tutorias/IC3101/index.html"
+cat << 'PORTAL' > dist/tutorias/IC3101/index.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -77,6 +75,6 @@ cat << 'PORTAL' > "$ROOT_DIR/dist/tutorias/IC3101/index.html"
 PORTAL
 
 # Copiar portal a /tutorias/index.html por si se accede a /tutorias/ directamente
-cp "$ROOT_DIR/dist/tutorias/IC3101/index.html" "$ROOT_DIR/dist/tutorias/index.html"
+cp dist/tutorias/IC3101/index.html dist/tutorias/index.html
 
-echo "✨ Compilación finalizada con éxito en $ROOT_DIR/dist"
+echo "✨ Compilación finalizada con éxito en ./dist"
