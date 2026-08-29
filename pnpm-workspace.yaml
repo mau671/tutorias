@@ -3,11 +3,11 @@ packages:
 
 allowBuilds:
   esbuild: true
-  playwright-chromium: true
+  playwright-chromium: set this to true or false
   vue-demi: true
   workerd: true
 
 onlyBuiltDependencies:
   - esbuild
-  - playwright-chromium
   - vue-demi
+  - workerd

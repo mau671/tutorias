@@ -7,8 +7,8 @@ echo "🚀 Iniciando compilación de presentaciones (S04, S09, S10)..."
 rm -rf dist
 mkdir -p dist/tutorias/IC3101
 
-# Instalar dependencias con caché y lockfile estricto
-pnpm install --frozen-lockfile
+# Instalar dependencias con caché y lockfile estricto (omitiendo opcionales como playwright)
+pnpm install --frozen-lockfile --no-optional
 
 # Lista de semanas a publicar
 WEEKS=("S04" "S09" "S10")

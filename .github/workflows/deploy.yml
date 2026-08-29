@@ -22,10 +22,10 @@ jobs:
           version: latest
           run_install: false
 
-      - name: Configurar Node.js y caché de pnpm
+      - name: Configurar Node.js 24 y caché de pnpm
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: 'pnpm'
 
       - name: Compilar presentaciones
