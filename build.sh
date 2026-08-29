@@ -7,8 +7,8 @@ echo "🚀 Iniciando compilación de presentaciones (S04, S09, S10)..."
 rm -rf dist
 mkdir -p dist/tutorias/IC3101
 
-# Instalar dependencias del workspace
-pnpm install
+# Instalar dependencias con caché y lockfile estricto
+pnpm install --frozen-lockfile
 
 # Lista de semanas a publicar
 WEEKS=("S04" "S09" "S10")
@@ -22,7 +22,7 @@ for week in "${WEEKS[@]}"; do
   fi
 done
 
-# Portal índice en /tutorias/IC3101/index.html
+# Portal índice monocromático en /tutorias/IC3101/index.html
 cat << 'PORTAL' > dist/tutorias/IC3101/index.html
 <!DOCTYPE html>
 <html lang="es">
@@ -32,42 +32,41 @@ cat << 'PORTAL' > dist/tutorias/IC3101/index.html
   <title>Tutorías IC3101 - Arquitectura de Computadores</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-950 text-gray-100 min-h-screen p-6 md:p-12 flex flex-col items-center justify-center font-sans antialiased">
-  <main class="max-w-2xl w-full">
+<body class="bg-neutral-950 text-neutral-100 min-h-screen p-6 md:p-12 flex flex-col items-center justify-center font-sans antialiased selection:bg-neutral-800 selection:text-white">
+  <main class="max-w-xl w-full">
     <div class="mb-8">
-      <span class="px-3 py-1 bg-blue-950/80 border border-blue-800 text-blue-400 rounded-full text-xs font-mono font-semibold">IC3101</span>
+      <span class="px-2.5 py-1 bg-neutral-900 border border-neutral-800 text-neutral-400 rounded-md text-xs font-mono font-medium">IC3101</span>
       <h1 class="text-3xl md:text-4xl font-bold mt-3 text-white tracking-tight">Arquitectura de Computadores</h1>
-      <p class="text-gray-400 mt-1 text-sm">Presentaciones interactivas de tutoría</p>
     </div>
 
-    <div class="grid gap-3.5">
-      <a href="./S04/" class="group p-4 bg-gray-900/80 border border-gray-800 rounded-xl hover:border-blue-500 hover:bg-gray-900 transition block">
+    <div class="grid gap-3">
+      <a href="./S04/" class="group p-4 bg-neutral-900/50 border border-neutral-800/80 rounded-xl hover:border-neutral-500 hover:bg-neutral-900 transition duration-150 block">
         <div class="flex items-center justify-between mb-1">
-          <span class="font-bold text-white group-hover:text-blue-400 transition font-mono text-sm">Semana 04</span>
-          <span class="text-xs text-gray-500 font-mono">18 slides</span>
+          <span class="font-bold text-white group-hover:text-neutral-200 transition font-mono text-sm">Semana 04</span>
+          <span class="text-xs text-neutral-500 font-mono">18 slides</span>
         </div>
-        <p class="text-gray-300 text-xs leading-relaxed">Multiplicación, división entera y formato de punto flotante IEEE 754</p>
+        <p class="text-neutral-400 text-xs leading-relaxed">Multiplicación, división entera y formato de punto flotante IEEE 754</p>
       </a>
 
-      <a href="./S09/" class="group p-4 bg-gray-900/80 border border-gray-800 rounded-xl hover:border-blue-500 hover:bg-gray-900 transition block">
+      <a href="./S09/" class="group p-4 bg-neutral-900/50 border border-neutral-800/80 rounded-xl hover:border-neutral-500 hover:bg-neutral-900 transition duration-150 block">
         <div class="flex items-center justify-between mb-1">
-          <span class="font-bold text-white group-hover:text-blue-400 transition font-mono text-sm">Semana 09</span>
-          <span class="text-xs text-gray-500 font-mono">19 slides</span>
+          <span class="font-bold text-white group-hover:text-neutral-200 transition font-mono text-sm">Semana 09</span>
+          <span class="text-xs text-neutral-500 font-mono">19 slides</span>
         </div>
-        <p class="text-gray-300 text-xs leading-relaxed">Llamadas al sistema (int 0x80), descriptores de archivo y depuración con GDB</p>
+        <p class="text-neutral-400 text-xs leading-relaxed">Llamadas al sistema (int 0x80), descriptores de archivo y depuración con GDB</p>
       </a>
 
-      <a href="./S10/" class="group p-4 bg-gray-900/80 border border-gray-800 rounded-xl hover:border-blue-500 hover:bg-gray-900 transition block">
+      <a href="./S10/" class="group p-4 bg-neutral-900/50 border border-neutral-800/80 rounded-xl hover:border-neutral-500 hover:bg-neutral-900 transition duration-150 block">
         <div class="flex items-center justify-between mb-1">
-          <span class="font-bold text-white group-hover:text-blue-400 transition font-mono text-sm">Semana 10</span>
-          <span class="text-xs text-gray-500 font-mono">19 slides</span>
+          <span class="font-bold text-white group-hover:text-neutral-200 transition font-mono text-sm">Semana 10</span>
+          <span class="text-xs text-neutral-500 font-mono">19 slides</span>
         </div>
-        <p class="text-gray-300 text-xs leading-relaxed">Instrucciones de bloque (MOVS, STOS, LODS, CMPS, SCAS) y prefijos de repetición</p>
+        <p class="text-neutral-400 text-xs leading-relaxed">Instrucciones de bloque (MOVS, STOS, LODS, CMPS, SCAS) y prefijos de repetición</p>
       </a>
     </div>
 
-    <footer class="mt-8 text-center text-xs text-gray-600 font-mono">
-      Mauricio Gutiérrez &bull; Tutorías IC3101
+    <footer class="mt-12 text-center text-xs text-neutral-500 font-sans">
+      Hecho con ❤️ por <a href="https://maugp.com" target="_blank" rel="noopener noreferrer" class="text-neutral-300 hover:text-white hover:underline transition font-medium">Mauricio González Prendas</a>
     </footer>
   </main>
 </body>

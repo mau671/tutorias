@@ -16,15 +16,17 @@ jobs:
       - name: Checkout del repositorio
         uses: actions/checkout@v4
 
-      - name: Instalar pnpm
+      - name: Instalar pnpm (última versión)
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: latest
+          run_install: false
 
-      - name: Configurar Node.js
+      - name: Configurar Node.js y caché de pnpm
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'pnpm'
 
       - name: Compilar presentaciones
         run: |
