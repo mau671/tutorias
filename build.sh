@@ -19,7 +19,7 @@ for week in "${WEEKS[@]}"; do
   fi
 done
 
-# Portal índice en /tutorias/IC3101/
+# Portal índice en /tutorias/IC3101/index.html
 cat << 'PORTAL' > dist/tutorias/IC3101/index.html
 <!DOCTYPE html>
 <html lang="es">
@@ -70,5 +70,8 @@ cat << 'PORTAL' > dist/tutorias/IC3101/index.html
 </body>
 </html>
 PORTAL
+
+# Copiar portal a /tutorias/index.html por si se accede a /tutorias/ directamente
+cp dist/tutorias/IC3101/index.html dist/tutorias/index.html
 
 echo "✨ Compilación finalizada con éxito en ./dist"
