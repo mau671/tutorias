@@ -252,7 +252,7 @@ Asignación estandarizada de registros para transferir argumentos:
 
 <div v-click="6" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg text-gray-400 font-sans text-[10px]">
   <span class="text-cyan-400 font-bold block mb-0.5">Valor de retorno:</span>
-  Al completar, $EAX$ almacena la cantidad de bytes procesados o un valor negativo de error ($EAX < 0$).
+  Al completar, <i>EAX</i> almacena la cantidad de bytes procesados o un valor negativo de error (<i>EAX &lt; 0</i>).
 </div>
 </div>
 
@@ -672,7 +672,7 @@ La llamada <i>sys_read</i> suspende la ejecución hasta recibir la entrada del u
 
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg text-gray-300 font-sans text-xs">
   <span class="text-amber-400 font-bold font-mono text-[10.5px] block">Retorno en EAX:</span>
-  Al volver, <i>EAX</i> contiene los bytes leídos incluyendo el salto de línea $0	ext{x}0	ext{A}$ (${\setminus}	ext{n}$).
+  Al volver, <i>EAX</i> contiene los bytes leídos incluyendo el salto de línea <i>0x0A</i> (<i>\n</i>).
 </div>
 </div>
 
@@ -823,7 +823,7 @@ transition: slide-left | slide-right
 # Supresión del salto de línea
 
 <div class="text-[11px] text-gray-300 mb-1.5">
-Sustitución del byte $0	ext{x}0	ext{A}$ por el terminador nulo $0	ext{x}00$ (ASCIIZ):
+Sustitución del byte <i>0x0A</i> por el terminador nulo <i>0x00</i> (ASCIIZ):
 </div>
 
 <div class="font-mono text-[9.5px]">
@@ -1048,7 +1048,7 @@ transition: fade
     A) 4 &nbsp;&nbsp;&nbsp; B) 5 &nbsp;&nbsp;&nbsp; C) 0 &nbsp;&nbsp;&nbsp; D) -1
   </p>
   <div v-click="3" class="text-emerald-400 mt-0.5 text-[10px] font-sans font-bold">
-    &rarr; Respuesta correcta: B) Deja 5 bytes (los 4 caracteres visibles más el salto de línea $0	ext{x}0	ext{A}$).
+    &rarr; Respuesta correcta: B) Deja 5 bytes (los 4 caracteres visibles más el salto de línea <i>0x0A</i>).
   </div>
 </div>
 </div>

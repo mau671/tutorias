@@ -75,7 +75,7 @@ Esquemas de organización de secuencias de bytes continuas:
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg text-xs">
   <div class="text-emerald-400 font-bold text-[11px] mb-0.5">Longitud variable (ASCIIZ)</div>
   <p class="text-gray-300 text-[10px] leading-tight">
-    Finaliza con byte centinela $0	ext{x}00$ (nulo ${\setminus}0$). Estándar en C y eficiente en RAM.
+    Finaliza con byte centinela <i>0x00</i> (nulo <i>\0</i>). Estándar en C y eficiente en RAM.
   </p>
 </div>
 
@@ -187,19 +187,19 @@ La arquitectura IA-32 asigna roles específicos para operaciones de bloque:
         <td class="p-0.5 text-cyan-300 font-bold">B</td>
         <td class="p-0.5 font-sans">Byte (8 bits)</td>
         <td class="p-0.5">AL</td>
-        <td class="p-0.5">$\pm 1$ byte</td>
+        <td class="p-0.5">&plusmn;1 byte</td>
       </tr>
       <tr class="border-b border-gray-800">
         <td class="p-0.5 text-emerald-300 font-bold">W</td>
         <td class="p-0.5 font-sans">Word (16 bits)</td>
         <td class="p-0.5">AX</td>
-        <td class="p-0.5">$\pm 2$ bytes</td>
+        <td class="p-0.5">&plusmn;2 bytes</td>
       </tr>
       <tr>
         <td class="p-0.5 text-amber-300 font-bold">D</td>
         <td class="p-0.5 font-sans">DWord (32 bits)</td>
         <td class="p-0.5">EAX</td>
-        <td class="p-0.5">$\pm 4$ bytes</td>
+        <td class="p-0.5">&plusmn;4 bytes</td>
       </tr>
     </tbody>
   </table>
@@ -245,7 +245,7 @@ Determina el sentido de desplazamiento de <i>ESI</i> y <i>EDI</i> en cada ciclo:
     <span>Hacia adelante (&rarr;)</span>
   </div>
   <p class="text-gray-400 font-sans text-[9.5px]">
-    Incrementa punteros hacia direcciones crecientes ($+1, +2, +4$).
+    Incrementa punteros hacia direcciones crecientes (+1, +2, +4).
   </p>
 </div>
 
@@ -255,7 +255,7 @@ Determina el sentido de desplazamiento de <i>ESI</i> y <i>EDI</i> en cada ciclo:
     <span>Hacia atrás (&larr;)</span>
   </div>
   <p class="text-gray-400 font-sans text-[9.5px]">
-    Decrementa punteros hacia direcciones menores ($-1, -2, -4$).
+    Decrementa punteros hacia direcciones menores (-1, -2, -4).
   </p>
 </div>
 </div>
@@ -332,17 +332,17 @@ Operaciones de movimiento entre memoria y registros:
     <div class="p-1.5 bg-cyan-950/30 border border-cyan-800 rounded flex justify-between items-center">
       <span class="text-cyan-300 font-bold font-sans">LODSB:</span>
       <span>[ESI] &rarr; AL</span>
-      <span class="text-gray-400 font-sans text-[8.5px]">ESI $\pm 1$</span>
+      <span class="text-gray-400 font-sans text-[8.5px]">ESI &plusmn;1</span>
     </div>
     <div class="p-1.5 bg-emerald-950/30 border border-emerald-800 rounded flex justify-between items-center">
       <span class="text-emerald-300 font-bold font-sans">STOSB:</span>
       <span>AL &rarr; [EDI]</span>
-      <span class="text-gray-400 font-sans text-[8.5px]">EDI $\pm 1$</span>
+      <span class="text-gray-400 font-sans text-[8.5px]">EDI &plusmn;1</span>
     </div>
     <div class="p-1.5 bg-amber-950/30 border border-amber-800 rounded flex justify-between items-center">
       <span class="text-amber-300 font-bold font-sans">MOVSB:</span>
       <span>[ESI] &rarr; [EDI]</span>
-      <span class="text-gray-400 font-sans text-[8.5px]">Ambos $\pm 1$</span>
+      <span class="text-gray-400 font-sans text-[8.5px]">Ambos &plusmn;1</span>
     </div>
   </div>
 </div>
@@ -376,14 +376,14 @@ Comparación de bloques y búsqueda de patrones actualizando banderas:
 <div v-click="1" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <div class="text-purple-400 font-bold font-sans text-[10.5px]">CMPS (Compare String)</div>
   <p class="text-gray-300 font-sans text-[10px]">
-    Resta $[ESI] - [EDI]$ y actualiza $ZF$, $CF$ sin alterar la memoria.
+    Resta <i>[ESI] - [EDI]</i> y actualiza <i>ZF</i>, <i>CF</i> sin alterar la memoria.
   </p>
 </div>
 
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <div class="text-emerald-400 font-bold font-sans text-[10.5px]">SCAS (Scan String)</div>
   <p class="text-gray-300 font-sans text-[10px]">
-    Resta $AL - [EDI]$ y actualiza banderas para hallar un carácter diana.
+    Resta <i>AL - [EDI]</i> y actualiza banderas para hallar un carácter diana.
   </p>
 </div>
 </div>
@@ -396,16 +396,16 @@ Comparación de bloques y búsqueda de patrones actualizando banderas:
     <div class="p-1.5 bg-purple-950/30 border border-purple-800 rounded">
       <div class="text-purple-300 font-bold font-mono mb-0.5">CMPSB: [ESI] vs [EDI]</div>
       <div class="flex justify-around font-mono text-[8.5px]">
-        <span class="text-emerald-300">Iguales: $ZF = 1$</span>
-        <span class="text-rose-300">Distintos: $ZF = 0$</span>
+        <span class="text-emerald-300">Iguales: <i>ZF = 1</i></span>
+        <span class="text-rose-300">Distintos: <i>ZF = 0</i></span>
       </div>
     </div>
 
     <div class="p-1.5 bg-emerald-950/30 border border-emerald-800 rounded">
       <div class="text-emerald-300 font-bold font-mono mb-0.5">SCASB: AL vs [EDI]</div>
       <div class="flex justify-around font-mono text-[8.5px]">
-        <span class="text-emerald-300">Encontrado: $ZF = 1$</span>
-        <span class="text-gray-400">No hallado: $ZF = 0$</span>
+        <span class="text-emerald-300">Encontrado: <i>ZF = 1</i></span>
+        <span class="text-gray-400">No hallado: <i>ZF = 0</i></span>
       </div>
     </div>
   </div>
@@ -431,18 +431,18 @@ transition: slide-left | slide-right
 # Prefijo incondicional: REP
 
 <div class="text-[11px] text-gray-300 mb-1.5">
-Repite la instrucción iterativamente mientras $ECX > 0$:
+Repite la instrucción iterativamente mientras <i>ECX &gt; 0</i>:
 </div>
 
 <div class="space-y-1.5 text-xs">
 <div v-click="1" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-blue-400 font-bold font-mono text-[10.5px]">REP MOVSB:</span>
-  <p class="text-gray-300 font-sans text-[10px]">Copia $ECX$ bytes desde $ESI$ a $EDI$ en hardware.</p>
+  <p class="text-gray-300 font-sans text-[10px]">Copia <i>ECX</i> bytes desde <i>ESI</i> a <i>EDI</i> en hardware.</p>
 </div>
 
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-emerald-400 font-bold font-mono text-[10.5px]">REP STOSB:</span>
-  <p class="text-gray-300 font-sans text-[10px]">Rellena $ECX$ bytes en $EDI$ con el valor en $AL$.</p>
+  <p class="text-gray-300 font-sans text-[10px]">Rellena <i>ECX</i> bytes en <i>EDI</i> con el valor en <i>AL</i>.</p>
 </div>
 </div>
 
@@ -462,11 +462,11 @@ Repite la instrucción iterativamente mientras $ECX > 0$:
     </div>
     <div class="p-1 bg-purple-950/30 border border-purple-800 rounded flex justify-between font-mono">
       <span class="text-purple-300">Paso:</span>
-      <span>$ECX = ECX - 1$</span>
+      <span><i>ECX = ECX - 1</i></span>
     </div>
     <div class="p-1 bg-emerald-950/30 border border-emerald-800 rounded flex justify-between font-mono">
       <span class="text-emerald-300">Salida:</span>
-      <span>Al llegar a $ECX = 0$</span>
+      <span>Al llegar a <i>ECX = 0</i></span>
     </div>
   </div>
 </div>
@@ -491,24 +491,24 @@ transition: slide-up | slide-down
 # Prefijos condicionales: REPE y REPNE
 
 <div class="text-[11px] text-gray-300 mb-1.5">
-Evalúan simultáneamente el contador $ECX$ y la bandera $ZF$:
+Evalúan simultáneamente el contador <i>ECX</i> y la bandera <i>ZF</i>:
 </div>
 
 <div class="space-y-1.5 text-xs">
 <div v-click="1" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <div class="flex justify-between font-mono text-emerald-400 font-bold text-[10.5px]">
     <span>REPE / REPZ</span>
-    <span>Mientras sea igual ($ZF = 1$)</span>
+    <span>Mientras sea igual (<i>ZF = 1</i>)</span>
   </div>
-  <p class="text-gray-300 font-sans text-[10px]">Para si $ECX = 0$ o al detectar la primera diferencia ($ZF = 0$).</p>
+  <p class="text-gray-300 font-sans text-[10px]">Para si <i>ECX = 0</i> o al detectar la primera diferencia (<i>ZF = 0</i>).</p>
 </div>
 
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <div class="flex justify-between font-mono text-rose-400 font-bold text-[10.5px]">
     <span>REPNE / REPNZ</span>
-    <span>Mientras difiera ($ZF = 0$)</span>
+    <span>Mientras difiera (<i>ZF = 0</i>)</span>
   </div>
-  <p class="text-gray-300 font-sans text-[10px]">Para si $ECX = 0$ o al hallar coincidencia ($ZF = 1$).</p>
+  <p class="text-gray-300 font-sans text-[10px]">Para si <i>ECX = 0</i> o al hallar coincidencia (<i>ZF = 1</i>).</p>
 </div>
 </div>
 
@@ -539,7 +539,7 @@ Evalúan simultáneamente el contador $ECX$ y la bandera $ZF$:
 
 <div v-click="4" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg text-gray-400 font-sans text-[10px]">
   <span class="text-amber-400 font-bold">Sinónimos:</span>
-  <i>REPE</i> $\equiv$ <i>REPZ</i> y <i>REPNE</i> $\equiv$ <i>REPNZ</i> comparten el mismo código de máquina.
+  <i>REPE</i> &equiv; <i>REPZ</i> y <i>REPNE</i> &equiv; <i>REPNZ</i> comparten el mismo código de máquina.
 </div>
 </div>
 
@@ -619,7 +619,7 @@ Implementar funciones estándar de memoria en lenguaje ensamblador de alto rendi
 
 <v-clicks>
 
-- **Cálculo de longitud de cadena (strlen):** Utilizar <i>REPNE SCASB</i> para escanear memoria hasta el byte centinela $0	ext{x}00$.
+- **Cálculo de longitud de cadena (strlen):** Utilizar <i>REPNE SCASB</i> para escanear memoria hasta el byte centinela <i>0x00</i>.
 - **Duplicación masiva de bloques (memcpy y strcpy):** Optimizar transferencias por palabras dobles con <i>REP MOVSD</i> y <i>MOVSB</i>.
 - **Inicialización de memoria (memset):** Rellenar rápidamente buffers con patrones de bytes mediante <i>REP STOSB</i>.
 - **Comparación léxica de textos (strcmp):** Evaluar igualdad y orden lexicográfico con <i>REPE CMPSB</i>.
@@ -649,7 +649,7 @@ transition: slide-left | slide-right
 # Taller 1: Longitud de cadena (strlen)
 
 <div class="text-[11px] text-gray-300 mb-1">
-Búsqueda del byte nulo $0	ext{x}00$ con <i>REPNE SCASB</i>:
+Búsqueda del byte nulo <i>0x00</i> con <i>REPNE SCASB</i>:
 </div>
 
 <div class="font-mono text-[9px]">
@@ -678,17 +678,17 @@ strlen_opt:
 <div class="space-y-1.5 font-mono text-xs">
 <div v-click="1" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg font-sans text-xs">
   <span class="text-cyan-400 font-bold block text-[10.5px]">Inicialización en -1:</span>
-  <p class="text-gray-300 text-[10px]">Evita que $ECX$ agote su cuenta antes de topar el nulo.</p>
+  <p class="text-gray-300 text-[10px]">Evita que <i>ECX</i> agote su cuenta antes de topar el nulo.</p>
 </div>
 
 <div v-click="2" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg font-sans text-xs">
   <span class="text-amber-400 font-bold block text-[10.5px]">Criterio de parada:</span>
-  <p class="text-gray-300 text-[10px]">Al hallar $0	ext{x}00$, $ZF = 1$ y $REPNE$ se detiene.</p>
+  <p class="text-gray-300 text-[10px]">Al hallar <i>0x00</i>, <i>ZF = 1</i> y <i>REPNE</i> se detiene.</p>
 </div>
 
 <div v-click="3" class="p-1.5 bg-gray-900/60 border border-gray-800 rounded-lg font-sans text-xs">
   <span class="text-emerald-400 font-bold block text-[10.5px]">Cálculo matemático:</span>
-  <p class="text-gray-300 text-[10px]">$$	ext{Longitud} = 	ext{NOT}(ECX) - 1$$</p>
+  <p class="text-gray-300 text-[10px]"><span class="font-mono font-bold text-emerald-300">Longitud = NOT(ECX) - 1</span></p>
 </div>
 </div>
 
@@ -741,12 +741,12 @@ memcpy_opt:
 <div class="space-y-1.5 text-xs">
 <div v-click="1" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-emerald-400 font-bold font-mono text-[10.5px] block">Transferencia por dwords:</span>
-  <p class="text-gray-300 font-sans text-[10px]"><i>MOVSD</i> cuadruplica el ancho de banda transferido por ciclo de bus ($4	imes$).</p>
+  <p class="text-gray-300 font-sans text-[10px]"><i>MOVSD</i> cuadruplica el ancho de banda transferido por ciclo de bus (4&times;).</p>
 </div>
 
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-blue-400 font-bold font-mono text-[10.5px] block">Manejo de remanentes:</span>
-  <p class="text-gray-300 font-sans text-[10px]"><i>and ecx, 3</i> extrae los bytes finales ($0 \le r \le 3$) para copiarlos con <i>MOVSB</i>.</p>
+  <p class="text-gray-300 font-sans text-[10px]"><i>and ecx, 3</i> extrae los bytes finales (0 &le; r &le; 3) para copiarlos con <i>MOVSB</i>.</p>
 </div>
 </div>
 
@@ -870,14 +870,14 @@ cadenas_iguales:
 <div v-click="1" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-rose-400 font-bold font-mono text-[10.5px] block">Ajuste de puntero (-1):</span>
   <p class="text-gray-300 font-sans text-[10px]">
-    <i>CMPSB</i> incrementa antes de parar. Por ello leemos en $[esi - 1]$ y $[edi - 1]$.
+    <i>CMPSB</i> incrementa antes de parar. Por ello leemos en <i>[esi - 1]</i> y <i>[edi - 1]</i>.
   </p>
 </div>
 
 <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
   <span class="text-emerald-400 font-bold font-mono text-[10.5px] block">Comprobación con je:</span>
   <p class="text-gray-300 font-sans text-[10px]">
-    Si $ZF = 1$, el bucle concluyó sin discrepancias y retorna cero ($EAX = 0$).
+    Si <i>ZF = 1</i>, el bucle concluyó sin discrepancias y retorna cero (<i>EAX = 0</i>).
   </p>
 </div>
 </div>
@@ -961,17 +961,17 @@ transition: fade
     A) STD &nbsp;&nbsp;&nbsp; B) CLD &nbsp;&nbsp;&nbsp; C) REP &nbsp;&nbsp;&nbsp; D) INC
   </p>
   <div v-click="1" class="text-emerald-400 mt-0.5 text-[10px] font-sans font-bold">
-    &rarr; Respuesta correcta: B) CLD limpia la bandera de dirección ($DF = 0$) habilitando el incremento.
+    &rarr; Respuesta correcta: B) CLD limpia la bandera de dirección (<i>DF = 0</i>) habilitando el incremento.
   </div>
 </div>
 
 <div class="p-2.5 bg-gray-900/60 border border-gray-800 rounded-xl">
   <strong class="text-amber-400 text-[11px]">2. ¿En qué condición se detiene la ejecución de REPE CMPSB?</strong>
   <p class="text-gray-300 mt-0.5 font-sans text-[10px]">
-    A) Cuando $ECX$ llega a cero o cuando $ZF$ pasa a cero &nbsp;&nbsp;&nbsp; B) Solo cuando $ECX$ es cero &nbsp;&nbsp;&nbsp; C) Cuando $ZF$ es uno
+    A) Cuando <i>ECX</i> llega a cero o cuando <i>ZF</i> pasa a cero &nbsp;&nbsp;&nbsp; B) Solo cuando <i>ECX</i> es cero &nbsp;&nbsp;&nbsp; C) Cuando <i>ZF</i> es uno
   </p>
   <div v-click="2" class="text-emerald-400 mt-0.5 text-[10px] font-sans font-bold">
-    &rarr; Respuesta correcta: A) Se detiene cuando se agota $ECX$ o al hallar la primera diferencia ($ZF = 0$).
+    &rarr; Respuesta correcta: A) Se detiene cuando se agota <i>ECX</i> o al hallar la primera diferencia (<i>ZF = 0</i>).
   </div>
 </div>
 
