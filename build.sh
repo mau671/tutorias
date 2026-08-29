@@ -8,7 +8,7 @@ rm -rf dist
 mkdir -p dist/tutorias/IC3101
 
 # Instalar dependencias con caché y lockfile estricto (omitiendo opcionales como playwright)
-pnpm install --frozen-lockfile --no-optional
+pnpm install --frozen-lockfile 
 
 # Lista de semanas a publicar
 WEEKS=("S04" "S09" "S10")
