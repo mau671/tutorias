@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "tutorias-ic3101",
+  "main": "./src/worker.ts",
   "compatibility_date": "2026-08-29",
   "routes": [
     {
@@ -10,6 +11,7 @@
   ],
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "none"
   }
 }
