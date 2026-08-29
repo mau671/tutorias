@@ -7,8 +7,8 @@ echo "🚀 Iniciando compilación de presentaciones (S04, S09, S10)..."
 rm -rf dist
 mkdir -p dist/tutorias/IC3101
 
-# Instalar dependencias con caché y lockfile estricto (omitiendo opcionales como playwright)
-pnpm install --frozen-lockfile 
+# Instalar dependencias con caché y lockfile estricto
+pnpm install --frozen-lockfile
 
 # Lista de semanas a publicar
 WEEKS=("S04" "S09" "S10")
@@ -22,7 +22,7 @@ for week in "${WEEKS[@]}"; do
   fi
 done
 
-# Portal índice monocromático en /tutorias/IC3101/index.html
+# Portal índice monocromático canónico en /tutorias/IC3101/index.html
 cat << 'PORTAL' > dist/tutorias/IC3101/index.html
 <!DOCTYPE html>
 <html lang="es">
@@ -72,12 +72,20 @@ cat << 'PORTAL' > dist/tutorias/IC3101/index.html
 </html>
 PORTAL
 
-# Copiar portal a /tutorias/index.html
-cp dist/tutorias/IC3101/index.html dist/tutorias/index.html
-
-# Copiar también a /tutorias/SXX por si se accede sin IC3101
-cp -r dist/tutorias/IC3101/S04 dist/tutorias/S04
-cp -r dist/tutorias/IC3101/S09 dist/tutorias/S09
-cp -r dist/tutorias/IC3101/S10 dist/tutorias/S10
+# Redirección automática si se accede a la raíz /tutorias/
+cat << 'REDIRECT' > dist/tutorias/index.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0; url=/tutorias/IC3101/">
+  <script>window.location.replace("/tutorias/IC3101/");</script>
+  <title>Redirigiendo a Tutorías IC3101...</title>
+</head>
+<body style="background-color: #0a0a0a; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+  <p>Redirigiendo a <a href="/tutorias/IC3101/" style="color: #fff;">/tutorias/IC3101/</a>...</p>
+</body>
+</html>
+REDIRECT
 
 echo "✨ Compilación finalizada con éxito en ./dist"
