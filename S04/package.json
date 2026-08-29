@@ -1,0 +1,24 @@
+{
+  "name": "semana_4",
+  "version": "1.0.0",
+  "description": "Presentación de la semana 4 de tutorías IC3101",
+  "main": "index.js",
+  "scripts": {
+    "dev": "slidev",
+    "build": "slidev build",
+    "export": "slidev export"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@slidev/cli": "^52.16.0",
+    "@slidev/theme-default": "^0.25.0",
+    "playwright-chromium": "^1.61.1"
+  },
+  "dependencies": {
+    "slidev-addon-fancy-arrow": "^0.16.1",
+    "slidev-component-zoom": "^1.1.0"
+  }
+}

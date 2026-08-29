@@ -1,0 +1,6 @@
+allowBuilds:
+  playwright-chromium: true
+  vue-demi: true
+minimumReleaseAgeExclude:
+  - playwright-chromium@1.61.1
+  - playwright-core@1.61.1

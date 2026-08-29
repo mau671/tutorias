@@ -1,0 +1,40 @@
+/* Estilos globales de la presentación */
+
+/* Separación horizontal amplia y respiración entre columnas para todos los layouts de dos columnas */
+.slidev-layout.two-columns,
+.slidev-layout.two-cols-header {
+  column-gap: 3rem !important;
+  row-gap: 1.5rem !important;
+}
+
+/* Alineación de cabeceras de tablas */
+th.text-center,
+.text-center th,
+td.text-center {
+  text-align: center !important;
+}
+
+th.text-left,
+.text-left th,
+td.text-left {
+  text-align: left !important;
+}
+
+/* Animación suave de aparición para elementos con v-click */
+.slidev-vclick-target {
+  transition: opacity 350ms cubic-bezier(0.16, 1, 0.3, 1), transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slidev-vclick-hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+/* Tablas con alineación consistente entre cabecera y celdas */
+table.text-center th {
+  text-align: center;
+}
+table.text-center th.text-left {
+  text-align: left;
+}

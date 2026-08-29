@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tutorias-ic3101",
+  "compatibility_date": "2026-08-29",
+  "routes": [
+    {
+      "pattern": "maugp.com/tutorias/*",
+      "zone_name": "maugp.com"
+    }
+  ],
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}
