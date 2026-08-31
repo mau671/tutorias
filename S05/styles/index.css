@@ -1,0 +1,305 @@
+/* Estilos globales de la presentación */
+
+/* Separación horizontal amplia y respiración entre columnas para todos los layouts de dos columnas */
+.slidev-layout.two-columns,
+.slidev-layout.two-cols-header {
+  column-gap: 3rem !important;
+  row-gap: 1.5rem !important;
+}
+
+/* Alineación de cabeceras de tablas */
+th.text-center,
+.text-center th,
+td.text-center {
+  text-align: center !important;
+}
+
+th.text-left,
+.text-left th,
+td.text-left {
+  text-align: left !important;
+}
+
+/* Animación suave de aparición para elementos con v-click */
+.slidev-vclick-target {
+  transition: opacity 350ms cubic-bezier(0.16, 1, 0.3, 1), transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slidev-vclick-hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+/* Tablas con alineación consistente entre cabecera y celdas */
+table.text-center th {
+  text-align: center;
+}
+table.text-center th.text-left {
+  text-align: left;
+}
+
+/* Centrado y temas automáticos de diagramas Mermaid */
+.mermaid,
+.slidev-mermaid {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.mermaid svg,
+.slidev-mermaid svg {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  font-family: inherit !important;
+}
+
+/* ==========================================================================
+   Estilos de Mermaid para TEMA CLARO (por defecto)
+   ========================================================================== */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon,
+.mermaid .node path,
+.slidev-mermaid .node rect,
+.slidev-mermaid .node circle,
+.slidev-mermaid .node ellipse,
+.slidev-mermaid .node polygon,
+.slidev-mermaid .node path {
+  fill: #ffffff !important;
+  stroke: #cbd5e1 !important;
+  stroke-width: 1.5px !important;
+}
+
+.mermaid .node .label,
+.mermaid .node text,
+.mermaid .node span,
+.slidev-mermaid .node .label,
+.slidev-mermaid .node text,
+.slidev-mermaid .node span {
+  color: #0f172a !important;
+  fill: #0f172a !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+}
+
+.mermaid .edgePath .path,
+.mermaid .flowchart-link,
+.slidev-mermaid .edgePath .path,
+.slidev-mermaid .flowchart-link {
+  stroke: #94a3b8 !important;
+  stroke-width: 1.5px !important;
+}
+
+.mermaid marker path,
+.slidev-mermaid marker path {
+  fill: #94a3b8 !important;
+  stroke: #94a3b8 !important;
+}
+
+/* Máscara limpia en etiquetas de conectores/aristas (coincide con el fondo de diapositiva para cortar la línea) */
+.mermaid .edgeLabel,
+.mermaid .edgeLabel rect,
+.mermaid .edgeLabel .label,
+.mermaid .edgeLabel foreignObject,
+.mermaid .edgeLabel foreignObject div,
+.mermaid .edgeLabel span,
+.mermaid .labelBkg,
+.slidev-mermaid .edgeLabel,
+.slidev-mermaid .edgeLabel rect,
+.slidev-mermaid .edgeLabel .label,
+.slidev-mermaid .edgeLabel foreignObject,
+.slidev-mermaid .edgeLabel foreignObject div,
+.slidev-mermaid .edgeLabel span,
+.slidev-mermaid .labelBkg {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border: none !important;
+  fill: #ffffff !important;
+  stroke: none !important;
+  box-shadow: none !important;
+}
+
+.mermaid .edgeLabel text,
+.mermaid .edgeLabel span,
+.mermaid .edgeLabel div,
+.slidev-mermaid .edgeLabel text,
+.slidev-mermaid .edgeLabel span,
+.slidev-mermaid .edgeLabel div {
+  color: #475569 !important;
+  fill: #475569 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 9.5px !important;
+  font-weight: 600 !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+}
+
+/* Badges de archivos a la derecha en Mermaid */
+.mermaid .fileBadge rect,
+.slidev-mermaid .fileBadge rect {
+  fill: #f0fdf4 !important;
+  stroke: #86efac !important;
+  stroke-dasharray: 3 3 !important;
+  stroke-width: 1.2px !important;
+  rx: 6px !important;
+  ry: 6px !important;
+}
+
+.mermaid .fileBadge .label,
+.mermaid .fileBadge text,
+.mermaid .fileBadge span,
+.slidev-mermaid .fileBadge .label,
+.slidev-mermaid .fileBadge text,
+.slidev-mermaid .fileBadge span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  color: #166534 !important;
+  fill: #166534 !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+}
+
+/* ==========================================================================
+   Estilos de Mermaid para TEMA OSCURO (.dark o html.dark)
+   ========================================================================== */
+html.dark .mermaid .node rect,
+html.dark .mermaid .node circle,
+html.dark .mermaid .node ellipse,
+html.dark .mermaid .node polygon,
+html.dark .mermaid .node path,
+html.dark .slidev-mermaid .node rect,
+html.dark .slidev-mermaid .node circle,
+html.dark .slidev-mermaid .node ellipse,
+html.dark .slidev-mermaid .node polygon,
+html.dark .slidev-mermaid .node path,
+.dark .mermaid .node rect,
+.dark .mermaid .node circle,
+.dark .mermaid .node ellipse,
+.dark .mermaid .node polygon,
+.dark .mermaid .node path,
+.dark .slidev-mermaid .node rect,
+.dark .slidev-mermaid .node circle,
+.dark .slidev-mermaid .node ellipse,
+.dark .slidev-mermaid .node polygon,
+.dark .slidev-mermaid .node path {
+  fill: #111827 !important;
+  stroke: #374151 !important;
+  stroke-width: 1.5px !important;
+}
+
+html.dark .mermaid .node .label,
+html.dark .mermaid .node text,
+html.dark .mermaid .node span,
+html.dark .slidev-mermaid .node .label,
+html.dark .slidev-mermaid .node text,
+html.dark .slidev-mermaid .node span,
+.dark .mermaid .node .label,
+.dark .mermaid .node text,
+.dark .mermaid .node span,
+.dark .slidev-mermaid .node .label,
+.dark .slidev-mermaid .node text,
+.dark .slidev-mermaid .node span {
+  color: #f3f4f6 !important;
+  fill: #f3f4f6 !important;
+  font-weight: 600 !important;
+}
+
+html.dark .mermaid .edgePath .path,
+html.dark .mermaid .flowchart-link,
+html.dark .slidev-mermaid .edgePath .path,
+html.dark .slidev-mermaid .flowchart-link,
+.dark .mermaid .edgePath .path,
+.dark .mermaid .flowchart-link,
+.dark .slidev-mermaid .edgePath .path,
+.dark .slidev-mermaid .flowchart-link {
+  stroke: #4b5563 !important;
+  stroke-width: 1.5px !important;
+}
+
+html.dark .mermaid marker path,
+html.dark .slidev-mermaid marker path,
+.dark .mermaid marker path,
+.dark .slidev-mermaid marker path {
+  fill: #4b5563 !important;
+  stroke: #4b5563 !important;
+}
+
+html.dark .mermaid .edgeLabel,
+html.dark .mermaid .edgeLabel rect,
+html.dark .mermaid .edgeLabel .label,
+html.dark .mermaid .edgeLabel foreignObject,
+html.dark .mermaid .edgeLabel foreignObject div,
+html.dark .mermaid .edgeLabel span,
+html.dark .mermaid .labelBkg,
+html.dark .slidev-mermaid .edgeLabel,
+html.dark .slidev-mermaid .edgeLabel rect,
+html.dark .slidev-mermaid .edgeLabel .label,
+html.dark .slidev-mermaid .edgeLabel foreignObject,
+html.dark .slidev-mermaid .edgeLabel foreignObject div,
+html.dark .slidev-mermaid .edgeLabel span,
+html.dark .slidev-mermaid .labelBkg,
+.dark .mermaid .edgeLabel,
+.dark .mermaid .edgeLabel rect,
+.dark .mermaid .edgeLabel .label,
+.dark .mermaid .edgeLabel foreignObject,
+.dark .mermaid .edgeLabel foreignObject div,
+.dark .mermaid .edgeLabel span,
+.dark .mermaid .labelBkg,
+.dark .slidev-mermaid .edgeLabel,
+.dark .slidev-mermaid .edgeLabel rect,
+.dark .slidev-mermaid .edgeLabel .label,
+.dark .slidev-mermaid .edgeLabel foreignObject,
+.dark .slidev-mermaid .edgeLabel foreignObject div,
+.dark .slidev-mermaid .edgeLabel span,
+.dark .slidev-mermaid .labelBkg {
+  background: #121212 !important;
+  background-color: #121212 !important;
+  fill: #121212 !important;
+  border: none !important;
+}
+
+html.dark .mermaid .edgeLabel text,
+html.dark .mermaid .edgeLabel span,
+html.dark .mermaid .edgeLabel div,
+html.dark .slidev-mermaid .edgeLabel text,
+html.dark .slidev-mermaid .edgeLabel span,
+html.dark .slidev-mermaid .edgeLabel div,
+.dark .mermaid .edgeLabel text,
+.dark .mermaid .edgeLabel span,
+.dark .mermaid .edgeLabel div,
+.dark .slidev-mermaid .edgeLabel text,
+.dark .slidev-mermaid .edgeLabel span,
+.dark .slidev-mermaid .edgeLabel div {
+  color: #9ca3af !important;
+  fill: #9ca3af !important;
+}
+
+html.dark .mermaid .fileBadge rect,
+.dark .mermaid .fileBadge rect,
+html.dark .slidev-mermaid .fileBadge rect,
+.dark .slidev-mermaid .fileBadge rect {
+  fill: #064e3b !important;
+  stroke: #059669 !important;
+  stroke-dasharray: 3 3 !important;
+}
+
+html.dark .mermaid .fileBadge .label,
+html.dark .mermaid .fileBadge text,
+html.dark .mermaid .fileBadge span,
+.dark .mermaid .fileBadge .label,
+.dark .mermaid .fileBadge text,
+.dark .mermaid .fileBadge span,
+html.dark .slidev-mermaid .fileBadge .label,
+html.dark .slidev-mermaid .fileBadge text,
+html.dark .slidev-mermaid .fileBadge span,
+.dark .slidev-mermaid .fileBadge .label,
+.dark .slidev-mermaid .fileBadge text,
+.dark .slidev-mermaid .fileBadge span {
+  color: #6ee7b7 !important;
+  fill: #6ee7b7 !important;
+}
+

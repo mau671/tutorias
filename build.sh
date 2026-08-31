@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Iniciando compilación de presentaciones (S04, S09, S10)..."
+echo "🚀 Iniciando compilación de presentaciones (S04, S05, S09, S10)..."
 
 # Limpiar y preparar directorios
 rm -rf dist
@@ -11,7 +11,7 @@ mkdir -p dist/tutorias/IC3101
 pnpm install --frozen-lockfile
 
 # Lista de semanas a publicar
-WEEKS=("S04" "S09" "S10")
+WEEKS=("S04" "S05" "S09" "S10")
 
 for week in "${WEEKS[@]}"; do
   if [ -d "$week" ] && [ -f "$week/slides.md" ]; then
@@ -45,6 +45,14 @@ cat << 'PORTAL' > dist/tutorias/IC3101/index.html
           <span class="text-xs text-neutral-500 font-mono">18 slides</span>
         </div>
         <p class="text-neutral-400 text-xs leading-relaxed">Multiplicación, división entera y formato de punto flotante IEEE 754</p>
+      </a>
+
+      <a href="/tutorias/IC3101/S05/" class="group p-4 bg-neutral-900/50 border border-neutral-800/80 rounded-xl hover:border-neutral-500 hover:bg-neutral-900 transition duration-150 block">
+        <div class="flex items-center justify-between mb-1">
+          <span class="font-bold text-white group-hover:text-neutral-200 transition font-mono text-sm">Semana 05</span>
+          <span class="text-xs text-neutral-500 font-mono">22 slides</span>
+        </div>
+        <p class="text-neutral-400 text-xs leading-relaxed">Introducción a C y x86: registros, mapa de memoria, MOV, ADD, SUB y GDB</p>
       </a>
 
       <a href="/tutorias/IC3101/S09/" class="group p-4 bg-neutral-900/50 border border-neutral-800/80 rounded-xl hover:border-neutral-500 hover:bg-neutral-900 transition duration-150 block">

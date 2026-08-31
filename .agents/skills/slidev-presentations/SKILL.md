@@ -71,9 +71,36 @@ Las diapositivas NO deben ser genéricas ni consistir únicamente en listas inte
   - Al escribir estructuras HTML (como tarjetas dentro de un grid), NUNCA dejar líneas en blanco intermedias seguidas de etiquetas sangradas con 4 espacios; mantener el bloque HTML continuo o indentado con 2 espacios.
 * **Estética visual minimalista y técnica (Evitar diseño genérico/boilerplate):**
   - **Prohibición de bordes gruesos y franjas de colores chillones:** NO usar `border-2 border-color-500`, `border-t-4`, `border-l-4` ni fondos hipersaturados que parezcan generados por plantillas automáticas.
-  - **Superficies sobrias y elegantes:** Usar tarjetas con fondo neutro sutil (`bg-gray-900/60 border border-gray-800 rounded-xl`), tipografía sans-serif limpia y amplia respiración.
+  - **Prohibición de tarjetas monótonas repetitivas en la columna izquierda:** NO estructurar todas las diapositivas con 3 cajas rectangulares genéricas apiladas verticalmente. Emplear una rica variedad de patrones de diseño:
+    1. **Patrón A — Jerarquía vertical / Línea de tiempo conectada:** Línea guía vertical (`border-l-2 border-gray-200 dark:border-gray-800`), nodos con puntos de color (`w-2.5 h-2.5 rounded-full ring-4 ring-white dark:ring-gray-950`), badges en sans-serif (`text-[9.5px] font-semibold px-2 py-0.5 rounded-full`), conectores de transición (`&darr;`) y párrafos fluidos sin recuadros pesados.
+    2. **Patrón B — Flujo conector con flechas (`Concepto ----> Sintaxis/Código`):** Título a la izquierda, flecha estilizada `&mdash;&mdash;&gt;`, etiqueta de código/sintaxis (`<code>`) y explicación directa indentada sin cajas envolventes.
+    3. **Patrón C — Tarjeta unificada estructural (Blueprint card):** Un único contenedor estilizado que refleja la anatomía del archivo de código (ej. `.data`, `.bss`, `.text` divididos con separadores `border-t border-gray-200 dark:border-gray-800/80`), en simetría con el bloque de código de la derecha.
+    4. **Patrón D — Tablas comparativas y matrices técnicas independientes:** Tablas compactas con cabeceras sobrias, bordes limpios y título fuera del contenedor, sin envolverlas innecesariamente en tarjetas cerradas.
+  - **Tablas limpias sin tarjeta envolvente:**
+    - El título de la tabla debe situarse fuera (`<div class="text-blue-600 dark:text-blue-400 font-bold mb-2 text-[11px] font-sans">Título</div>`).
+    - La tabla debe tener sus propios encabezados limpios (`border-b border-gray-300 dark:border-gray-700`), filas contrastadas (`divide-y divide-gray-200 dark:divide-gray-800 text-gray-700 dark:text-gray-300`) y estructura independiente.
+  - **Accesibilidad y soporte bidireccional de temas (Claro y Oscuro):**
+    - Todo texto, tarjeta, badge y elemento visual DEBE tener contraste accesible verificado tanto en tema claro como en tema oscuro (usando prefijos `dark:`).
+    - **Subtítulos bajo `# Título`:** Usar siempre `text-gray-600 dark:text-gray-400` (NUNCA `text-gray-300` a secas, ya que resulta invisible sobre fondo blanco).
+    - **Párrafos descriptivos:** Usar `text-gray-600 dark:text-gray-300` o `text-gray-700 dark:text-gray-300`.
+    - **Contenedores y tarjetas:** Usar `bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800`.
+    - **Badges y chips de código:**
+      - Azul: `bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/40`
+      - Esmeralda: `bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/40`
+      - Ámbar: `bg-amber-50 text-amber-800 border border-amber-200 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800/40`
+      - Púrpura: `bg-purple-50 text-purple-700 border border-purple-200 dark:bg-purple-950/60 dark:text-purple-300 dark:border-purple-800/40`
+      - Rosa: `bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800/40`
+      - Cyan: `bg-cyan-50 text-cyan-800 border border-cyan-200 dark:bg-cyan-950/60 dark:text-cyan-300 dark:border-cyan-800/40`
   - **Pipelines y pasos ordenados:** En lugar de cajas desconectadas o tablas pesadas, usar flujos de procesos limpios con números circulares sobrios (`1`, `2`, `3`, `4`) y conectores sutiles en escala de grises.
   - **Registros y diagramas de bits:** Diseñar los campos de datos como barras segmentadas elegantes de una sola pieza con tintes pasteles/apagados (`bg-rose-950/30`, `bg-blue-950/30`, `bg-emerald-950/30`) y etiquetas en minúsculas (*Signo (s)*, *Exponente (e)*, *Mantisa (f)*).
+* **Iluminación progresiva de líneas de código (*Line Highlighting* interactivo):**
+  - Siempre que se explique un fragmento de código, utilizar la sintaxis `{all|rango_1|rango_2|...}` sincronizada 1:1 con las revelaciones de la columna izquierda (ej. ````c {all|1|7,16-17|4-5,9-10|12-15}````).
+* **Centrado limpio y temas automáticos de diagramas Mermaid:**
+  - **Prohibición de `theme: 'dark'` o `theme: 'neutral'` cableados:** NO fijar temas rígidos en el bloque ```` ```mermaid {theme: 'dark'} ````; permitir que el sistema CSS global (`styles/index.css`) controle la reactividad clara/oscura.
+  - **Pipelines con salidas/artefactos laterales:** Cuando un flujo requiera una columna central rígida (ej. fases de compilación `gcc`, pipelines de instrucciones) con flechas hacia la derecha apuntando a artefactos (`ejemplo.c`, `ejemplo.s`), NO usar diagramas ramificados en Mermaid (el motor Dagre fuerza una estructura en árbol/zigzag desplazando la columna principal). En su lugar, estructurar el pipeline con HTML/Tailwind nativo, donde la columna principal se mantiene 100% vertical, los conectores verticales cortan limpiamente en las etiquetas de herramientas (`gcc -E`, `as`, `ld`) sin líneas cruzadas, y las flechas laterales apuntan con precisión a badges de archivo (`bg-emerald-50 text-emerald-700`).
+* **Separación estricta de la Sesión 2 en 2 diapositivas independientes:**
+  - **Diapositiva A (Portada de Sesión 2):** Diapositiva centrada (`layout: center`, `transition: slide-up | slide-down`) con número de semana, título de la sesión y subtítulo. Queda estrictamente prohibido colocar los objetivos en esta diapositiva.
+  - **Diapositiva B (Objetivos de la Sesión 2):** Diapositiva independiente (`transition: fade`) con `# Objetivos de la segunda sesión`, lista `<v-clicks>` y guión oral sincronizado.
 * **Marcadores y transformaciones animadas:**
   - Usar marcadores visuales `v-mark` (ej. `<span v-mark="{ at: 1, color: 'red', type: 'underline' }">...</span>`).
   - Utilizar transformaciones de código animadas con `magic-move` (```` ````md magic-move ```` ````).

@@ -44,6 +44,22 @@ importers:
         specifier: ^0.25.0
         version: 0.25.0
 
+  S05:
+    dependencies:
+      slidev-addon-fancy-arrow:
+        specifier: ^0.16.1
+        version: 0.16.1(typescript@6.0.3)
+      slidev-component-zoom:
+        specifier: ^1.1.0
+        version: 1.1.0(@slidev/client@0.48.9(@nuxt/kit@3.21.11)(@vue/compiler-sfc@3.5.42)(postcss@8.5.26)(rollup@4.63.1)(supports-color@10.2.2)(vite@5.4.21(@types/node@22.20.1)(lightningcss@1.33.0)))(vue@3.5.42(typescript@6.0.3))
+    devDependencies:
+      '@slidev/cli':
+        specifier: ^52.16.0
+        version: 52.19.1(@nuxt/kit@3.21.11)(@oxc-project/types@0.147.0)(@types/markdown-it@14.2.0)(@types/node@22.20.1)(@vitejs/devtools-kit@0.4.12(@modelcontextprotocol/server@2.0.0)(cac@7.0.0)(srvx@0.12.7)(vite@5.4.21(@types/node@22.20.1)(lightningcss@1.33.0)))(@vue/compiler-sfc@3.5.42)(cac@7.0.0)(esbuild@0.28.1)(hono@4.13.5)(lightningcss@1.33.0)(markdown-it@14.3.1)(oxc-parser@0.131.0)(playwright-chromium@1.62.1)(postcss@8.5.26)(rolldown@1.2.6)(rollup@4.63.1)(srvx@0.12.7)(supports-color@10.2.2)
+      '@slidev/theme-default':
+        specifier: ^0.25.0
+        version: 0.25.0
+
   S09:
     dependencies:
       slidev-addon-fancy-arrow:
