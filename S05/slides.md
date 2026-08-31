@@ -867,31 +867,34 @@ Espacio de direcciones virtuales estructurado por el sistema operativo:
 
 ::right::
 
-<div v-click="4" class="p-2 bg-gray-50 border border-gray-200 dark:bg-gray-900/90 dark:border-gray-800 rounded-xl text-center font-mono text-[9px]">
-  <div class="text-gray-500 dark:text-gray-400 mb-1">0xFFFFFFFF (Direcciones altas)</div>
-  <div class="space-y-1 max-w-[210px] mx-auto">
-    <div class="bg-rose-50 border border-rose-300 text-rose-800 dark:bg-rose-950/60 dark:border-rose-600/70 dark:text-rose-200 p-1.5 rounded">
-      <div class="font-bold text-[10px]">Pila</div>
+<div v-click="4" class="w-full text-center font-mono text-[9px] max-w-[240px] mx-auto">
+  <div class="text-gray-500 dark:text-gray-400 text-[8.5px] mb-1.5">0xFFFFFFFF &bull; Direcciones altas</div>
+  <div class="space-y-1.5">
+    <div class="bg-rose-50 border border-rose-300 text-rose-800 dark:bg-rose-950/60 dark:border-rose-700/60 dark:text-rose-200 py-1.5 px-2 rounded-lg">
+      <div class="font-bold text-[10.5px]">Pila</div>
       <div class="text-[8px] text-rose-600 dark:text-rose-300">&darr; Crece hacia abajo (ESP)</div>
     </div>
-    <div class="p-1 text-gray-500 border border-dashed border-gray-300 dark:border-gray-700 rounded text-[8px]">
+    
+    <div class="py-3.5 px-2 text-gray-500 dark:text-gray-400 border border-dashed border-gray-300 dark:border-gray-700 rounded-lg text-[8.5px] bg-gray-50/60 dark:bg-gray-900/40 flex items-center justify-center">
       Espacio libre compartido
     </div>
-    <div class="bg-amber-50 border border-amber-300 text-amber-800 dark:bg-amber-950/60 dark:border-amber-600/70 dark:text-amber-200 p-1.5 rounded">
+
+    <div class="bg-amber-50 border border-amber-300 text-amber-800 dark:bg-amber-950/60 dark:border-amber-700/60 dark:text-amber-200 py-1.5 px-2 rounded-lg">
       <div class="text-[8px] text-amber-600 dark:text-amber-300">&uarr; Crece hacia arriba (brk)</div>
-      <div class="font-bold text-[10px]">Montículo</div>
+      <div class="font-bold text-[10.5px]">Montículo</div>
     </div>
-    <div class="bg-indigo-50 border border-indigo-300 text-indigo-800 dark:bg-indigo-950/60 dark:border-indigo-600/70 dark:text-indigo-200 p-1 rounded">
+    
+    <div class="bg-indigo-50 border border-indigo-200 text-indigo-800 dark:bg-indigo-950/60 dark:border-indigo-800/40 dark:text-indigo-200 py-1 px-2 rounded-md font-semibold text-[9.5px]">
       Sección .bss
     </div>
-    <div class="bg-emerald-50 border border-emerald-300 text-emerald-800 dark:bg-emerald-950/60 dark:border-emerald-600/70 dark:text-emerald-200 p-1 rounded">
+    <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 dark:bg-emerald-950/60 dark:border-emerald-800/40 dark:text-emerald-200 py-1 px-2 rounded-md font-semibold text-[9.5px]">
       Sección .data
     </div>
-    <div class="bg-blue-50 border border-blue-300 text-blue-800 dark:bg-blue-950/60 dark:border-blue-600/70 dark:text-blue-200 p-1 rounded">
+    <div class="bg-blue-50 border border-blue-200 text-blue-800 dark:bg-blue-950/60 dark:border-blue-800/40 dark:text-blue-200 py-1 px-2 rounded-md font-semibold text-[9.5px]">
       Sección .text
     </div>
   </div>
-  <div class="text-gray-500 dark:text-gray-400 mt-1">0x08048000 (Direcciones bajas)</div>
+  <div class="text-gray-500 dark:text-gray-400 text-[8.5px] mt-1.5">0x08048000 &bull; Direcciones bajas</div>
 </div>
 <!--
 Comprendamos ahora dónde reside cada elemento dentro de la memoria física y virtual.
