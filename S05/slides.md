@@ -874,16 +874,13 @@ Espacio de direcciones virtuales estructurado por el sistema operativo:
       <div class="font-bold text-[10.5px]">Pila</div>
       <div class="text-[8px] text-rose-600 dark:text-rose-300">&darr; Crece hacia abajo (ESP)</div>
     </div>
-    
     <div class="py-3.5 px-2 text-gray-500 dark:text-gray-400 border border-dashed border-gray-300 dark:border-gray-700 rounded-lg text-[8.5px] bg-gray-50/60 dark:bg-gray-900/40 flex items-center justify-center">
       Espacio libre compartido
     </div>
-
     <div class="bg-amber-50 border border-amber-300 text-amber-800 dark:bg-amber-950/60 dark:border-amber-700/60 dark:text-amber-200 py-1.5 px-2 rounded-lg">
       <div class="text-[8px] text-amber-600 dark:text-amber-300">&uarr; Crece hacia arriba (brk)</div>
       <div class="font-bold text-[10.5px]">Montículo</div>
     </div>
-    
     <div class="bg-indigo-50 border border-indigo-200 text-indigo-800 dark:bg-indigo-950/60 dark:border-indigo-800/40 dark:text-indigo-200 py-1 px-2 rounded-md font-semibold text-[9.5px]">
       Sección .bss
     </div>
