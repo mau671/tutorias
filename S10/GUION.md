@@ -1,368 +1,283 @@
 # Guión de exposición oral: Semana 10
-## Procesamiento de cadenas y manipulación de bloques de memoria
+## Procesamiento de cadenas y manipulación masiva de memoria
 ### IC3101: Arquitectura de computadores
 
-Este documento compila el discurso oral del tutor para las dos sesiones de 90 minutos de la Semana 10.
+Este documento compila el guión oral del tutor para las dos sesiones de 90 minutos de la Semana 10, sincronizado con cada diapositiva y marcador de animación `[click]`.
 
 ---
 
-### Diapositiva 01: Diapositiva 1
-
-Sin notas registradas.
-
----
-
-### Diapositiva 02: Diapositiva 2
+### Diapositiva 01: Portada de la tutoría
 
 Hola a todos. Bienvenidos a la décima semana de tutorías de Arquitectura de Computadores.
 
-En la semana anterior aprendimos a comunicarnos con el sistema operativo para realizar operaciones de entrada y salida mediante llamadas al sistema.
+En la sesión anterior dominamos las llamadas al sistema operativo y la entrada y salida por consola.
 
-Hoy abordaremos uno de los mecanismos más potentes y optimizados de la arquitectura x86: las instrucciones especializadas para procesamiento de cadenas y transferencia de bloques de memoria, junto con los prefijos de repetición por hardware.
-
----
-
-### Diapositiva 03: Diapositiva 3
-
-Sin notas registradas.
+Hoy nos adentraremos en una de las características más potentes y optimizadas de la arquitectura x86: las instrucciones especializadas de bloque y procesamiento de cadenas. Estudiaremos los registros dedicados ESI y EDI, la bandera de dirección, los prefijos de repetición por microcódigo y la implementación de rutinas fundamentales como strlen, memcpy, memset y strcmp.
 
 ---
 
-### Diapositiva 04: Objetivos de la primera sesión
+### Diapositiva 02: Objetivos de la primera sesión
 
-Revisemos los objetivos para esta primera sesión teórica:
+Antes de comenzar con los fundamentos teóricos, repasemos los objetivos de esta primera jornada:
 
-[click] Primero, entenderemos cómo se representan las cadenas de caracteres y los arreglos en la memoria principal.
+[click] Primero, comprenderemos cómo se representan las cadenas en la memoria, contrastando el esquema de longitud fija con el formato ASCIIZ estándar.
 
-[click] Segundo, analizaremos los registros dedicados de la arquitectura x86 que soportan estas operaciones de manera automática.
+[click] Segundo, analizaremos los registros especializados que el procesador dedica exclusivamente para operaciones de cadenas y bloques de memoria.
 
-[click] Tercero, estudiaremos la bandera de dirección para controlar si el procesamiento avanza hacia adelante o retrocede en memoria.
+[click] Tercero, estudiaremos el control del sentido de recorrido en la memoria a través de la bandera de dirección en el registro EFLAGS.
 
-[click] Cuarto, examinaremos las cinco instrucciones de manipulación de bloques en sus diferentes tamaños de datos.
+[click] Cuarto, analizaremos las cinco instrucciones elementales de transferencia, almacenamiento, comparación y búsqueda en memoria.
 
-[click] Y quinto, dominaremos los prefijos de repetición que permiten ejecutar bucles completos a nivel de microcódigo en el procesador.
-
----
-
-### Diapositiva 05: Diapositiva 5
-
-Sin notas registradas.
+[click] Y quinto, dominaremos los prefijos de repetición que permiten ejecutar bucles completos directamente a nivel de microcódigo en el chip.
 
 ---
 
-### Diapositiva 06: Representación de cadenas en memoria
+### Diapositiva 03: Representación de cadenas en memoria
 
-Comencemos revisando la forma en que representamos cadenas en bajo nivel.
+Comencemos revisando cómo se representan las secuencias de texto en memoria.
 
-[click] La primera alternativa son las cadenas de longitud fija, donde reservamos un espacio constante y rellenamos los sobrantes.
+[click] En las cadenas de longitud fija se reserva un tamaño constante y los espacios sobrantes se rellenan con caracteres nulos o blancos, lo cual resulta ineficiente cuando los textos varían en longitud.
 
-[click] La segunda alternativa, y la más extendida, son las cadenas de longitud variable terminadas en nulo, también conocidas como cadenas ASCIIZ.
+[click] Por otro lado, el estándar predominante en la arquitectura x86 y los sistemas UNIX son las cadenas de longitud variable terminadas en nulo, comúnmente llamadas ASCIIZ.
 
-[click] Observemos en este mapa de memoria cómo cada letra ocupa exactamente un byte y la secuencia finaliza con el valor hexadecimal cero.
+[click] Observemos el esquema a la derecha: cada carácter ocupa un byte en direcciones consecutivas de memoria, y el final de la cadena queda marcado de forma inequívoca por el byte cero hexadecimal.
 
-[click] Un aspecto vital es que las instrucciones de cadenas no se limitan a texto, sino que funcionan para manipular cualquier bloque continuo de memoria como arreglos numéricos o estructuras de datos.
-
----
-
-### Diapositiva 07: Diapositiva 7
-
-Sin notas registradas.
+[click] Las instrucciones de cadenas no solo operan sobre texto legible, sino sobre cualquier bloque contiguo de bytes o enteros en memoria RAM.
 
 ---
 
-### Diapositiva 08: Registros dedicados en cadenas
+### Diapositiva 04: Registros dedicados en cadenas
 
-Analicemos los registros dedicados en IA-32 para el manejo de cadenas.
+Analicemos los registros dedicados por hardware en la arquitectura x86.
 
-[click] El registro ESI actúa como puntero al bloque fuente u origen de los datos.
+[click] El registro ESI actúa como el puntero de origen de datos, indexando la memoria fuente con el segmento DS.
 
-[click] El registro EDI actúa como puntero al bloque de destino donde escribiremos o compararemos.
+[click] El registro EDI actúa como el puntero de destino, indexando la memoria receptora con el segmento ES.
 
-[click] El registro ECX sirve de contador automático de repeticiones en las instrucciones iterativas.
+[click] El registro ECX sirve de contador automático para las instrucciones repetitivas.
 
-[click] Y el registro acumulador, ya sea AL, AX o EAX, almacena el valor transferido o el patrón buscado.
+[click] Y el acumulador, ya sea AL, AX o EAX, almacena el valor leído, transferido o el patrón buscado.
 
-[click] Cada instrucción de cadena posee tres variantes según el tamaño: sufijo B para bytes con avance de un paso, sufijo W para palabras de dos bytes y sufijo D para palabras dobles de cuatro bytes.
+[click] Cada instrucción de cadena dispone de tres variantes según el sufijo: B para un byte con avance de un paso, W para palabras de dos bytes y D para palabras dobles de cuatro bytes.
 
-[click] Notemos que el hardware se encarga de modificar los punteros en cada iteración de manera automática.
-
----
-
-### Diapositiva 09: Diapositiva 9
-
-Sin notas registradas.
+[click] Notemos que el hardware se encarga de modificar los punteros en cada ciclo de reloj sin necesidad de instrucciones de incremento manual.
 
 ---
 
-### Diapositiva 10: Control de dirección (Bandera DF)
+### Diapositiva 05: Control de dirección (Bandera DF)
 
-Estudiemos la bandera de dirección y su control en ensamblador.
+Estudiemos la bandera de dirección y su influencia en el registro EFLAGS.
 
-[click] La instrucción cld limpia la bandera estableciendo DF en cero. Esto provoca que ESI y EDI avancen hacia adelante incrementando sus direcciones de memoria.
+[click] La instrucción CLD pone a cero la bandera DF. Con ello, tanto ESI como EDI avanzan hacia adelante incrementando sus direcciones de memoria.
 
-[click] La instrucción std establece la bandera en uno. Esto hace que los punteros retrocedan hacia direcciones de memoria inferiores.
+[click] Por el contrario, la instrucción STD fija la bandera en uno, provocando que los punteros retrocedan hacia direcciones inferiores. Esto resulta sumamente útil cuando se mueven bloques contiguos de memoria que se solapan entre sí.
 
-[click] En el diagrama observamos con claridad la dirección del flujo de datos en ambos escenarios.
+[click] En el gráfico de la derecha podemos apreciar la dirección del flujo de datos en ambos casos.
 
-[click] Una regla indispensable de buena práctica es ejecutar siempre la instrucción cld antes de cualquier rutina de cadenas para evitar comportamientos imprevistos.
-
----
-
-### Diapositiva 11: Diapositiva 11
-
-Sin notas registradas.
+[click] Una regla de oro de la arquitectura x86 es anteponer siempre la instrucción CLD antes de operar con cadenas para evitar que una función anterior haya dejado la bandera DF activada.
 
 ---
 
-### Diapositiva 12: Transferencia: LODS, STOS y MOVS
+### Diapositiva 06: Transferencia: LODS, STOS y MOVS
 
-Veamos las tres instrucciones fundamentales para mover información en memoria.
+Examinemos las tres instrucciones fundamentales de movimiento de información.
 
-[click] LODSB carga en el acumulador el byte apuntado por ESI y desplaza dicho puntero al siguiente byte.
+[click] LODSB carga en el acumulador el byte apuntado por ESI y actualiza dicho puntero al siguiente elemento.
 
-[click] STOSB toma el valor actual del acumulador y lo deposita en la dirección apuntada por EDI, avanzando este último.
+[click] STOSB deposita el valor del acumulador en la posición apuntada por EDI y avanza el puntero de destino.
 
-[click] MOVSB combina ambas tareas transfiriendo el byte directamente desde la dirección origen ESI hacia la dirección destino EDI en un solo paso y actualizando ambos punteros a la vez.
+[click] MOVSB combina ambas operaciones en una sola instrucción atómica de procesador: transfiere el dato desde la dirección ESI a la dirección EDI y actualiza ambos punteros a la vez.
 
-[click] Notemos en este resumen cómo actúa cada instrucción sobre los registros y la memoria.
+[click] En el diagrama observamos cómo fluyen los datos en el bus interno del microprocesador.
 
-[click] La instrucción MOVSB es sumamente rápida porque realiza la transferencia de memoria a memoria de forma optimizada por microcódigo.
-
----
-
-### Diapositiva 13: Diapositiva 13
-
-Sin notas registradas.
+[click] MOVSB es de altísima velocidad porque delega la copia completa al microcódigo interno de la CPU.
 
 ---
 
-### Diapositiva 14: Inspección: CMPS y SCAS
+### Diapositiva 07: Inspección: CMPS y SCAS
 
-Analicemos ahora las instrucciones para comparar y buscar en memoria.
+Analicemos ahora las instrucciones para comparar y buscar patrones en memoria.
 
-[click] CMPSB compara el byte de la fuente apuntado por ESI contra el byte del destino apuntado por EDI mediante una resta interna, actualizando las banderas como ZF y CF antes de desplazar ambos punteros.
+[click] CMPSB compara el byte apuntado por ESI contra el apuntado por EDI realizando una resta aritmética sin guardar la diferencia, actualizando banderas como ZF y CF.
 
-[click] SCASB compara el valor que tenemos en el acumulador AL contra el byte en la dirección EDI. Es la instrucción predilecta para buscar caracteres en una cadena.
+[click] SCASB compara el contenido del acumulador AL contra el byte apuntado por EDI. Es la instrucción ideal para buscar caracteres específicos como el terminador nulo.
 
-[click] Observemos cómo la bandera ZF se pone en uno cuando los elementos son iguales y en cero cuando difieren.
+[click] Observemos cómo la bandera ZF se pone en uno cuando hay coincidencia exacta y en cero cuando los elementos difieren.
 
-[click] Esta bandera de cero será evaluada en cada iteración cuando combinemos estas instrucciones con los prefijos de repetición condicional.
-
----
-
-### Diapositiva 15: Diapositiva 15
-
-Sin notas registradas.
+[click] Este comportamiento de la bandera de cero es el núcleo que aprovechan los prefijos de repetición condicional.
 
 ---
 
-### Diapositiva 16: Prefijo incondicional: REP
+### Diapositiva 08: Prefijo incondicional: REP
 
 Veamos el prefijo de repetición incondicional REP.
 
-[click] Al anteponer REP a MOVSB, el procesador transfiere tantos bytes como indique el registro ECX, decrementando dicho contador hasta llegar a cero.
+[click] Al anteponer REP a MOVSB o MOVSD, el procesador transfiere tantos elementos como indique el registro ECX, decrementándolo en cada ciclo.
 
-[click] Si lo usamos con STOSB, rellenamos rápidamente un área de memoria con un valor fijo, equivalente a la función memset de C.
+[click] Al combinarlo con STOSB o STOSD, inicializamos bloques masivos de memoria con un valor predeterminado, equivalente a la función memset de C.
 
-[click] Apreciemos el flujo interno ejecutado por la unidad de control en este diagrama de estados.
+[click] Apreciemos en la columna derecha el ciclo de microcódigo: la CPU evalúa si ECX es mayor a cero, ejecuta la instrucción, resta una unidad a ECX y repite hasta llegar a cero.
 
-[click] Este mecanismo es órdenes de magnitud más veloz que escribir un bucle manual con saltos, ya que la iteración ocurre directamente en el microcódigo del chip.
-
----
-
-### Diapositiva 17: Diapositiva 17
-
-Sin notas registradas.
+[click] Esto ahorra ciclos de decodificación y elimina paradas de salto condicional en el cauce de la CPU.
 
 ---
 
-### Diapositiva 18: Prefijos condicionales: REPE y REPNE
+### Diapositiva 09: Prefijos condicionales: REPE y REPNE
 
-Llegamos a los prefijos condicionales, uno de los temas más evaluados en el curso.
+Llegamos a los prefijos condicionales, un tema de alta relevancia analítica.
 
-[click] REPE o REPZ repite la operación mientras los datos comparados sean idénticos, es decir, mientras la bandera ZF permanezca en uno. En el instante en que detecta una diferencia, la instrucción finaliza de inmediato.
+[click] REPE o REPZ repite la operación mientras los elementos comparados sean idénticos, es decir mientras la bandera ZF sea uno. En cuanto detecta una diferencia, la repetición finaliza de inmediato.
 
-[click] Por el contrario, REPNE o REPNZ repite la operación mientras no haya coincidencia, o sea mientras ZF sea cero. Se detiene tan pronto encuentra el elemento buscado.
+[click] En cambio, REPNE o REPNZ repite la instrucción mientras no haya coincidencia, o sea mientras ZF sea cero. Se detiene tan pronto encuentra el carácter buscado.
 
-[click] En esta tabla resumimos los dos grandes casos de uso: comparar dos cadenas completas con REPE CMPSB y buscar el carácter de fin de cadena con REPNE SCASB.
+[click] A la derecha resumimos los dos grandes casos canónicos: comparar dos cadenas completas con REPE CMPSB y calcular la longitud escaneando el byte nulo con REPNE SCASB.
 
-[click] Tengamos en cuenta que REPE y REPZ generan exactamente el mismo byte de instrucción en la máquina.
-
----
-
-### Diapositiva 19: Diapositiva 19
-
-Sin notas registradas.
+[click] Tengamos presente que los mnemónicos REPE y REPZ son alias sinónimos del mismo código de máquina.
 
 ---
 
-### Diapositiva 20: Síntesis de la primera sesión
+### Diapositiva 10: Síntesis de la primera sesión
 
-Con esto concluimos la primera sesión teórica. Hemos cubierto los registros especializados, el sentido de avance con la bandera DF y los prefijos de repetición.
+Con esto concluimos la primera sesión teórica de la semana. Hemos analizado los registros dedicados, el control de dirección con DF y la lógica de los prefijos de repetición.
 
-[click] Les dejo esta pregunta detonante para reflexionar antes del taller práctico: ¿cómo convertimos el valor residual de ECX en la longitud exacta de la cadena usando operaciones lógicas?
-
----
-
-### Diapositiva 21: Diapositiva 21
-
-Sin notas registradas.
+[click] Les dejo esta pregunta detonante para reflexionar antes de pasar al taller práctico: si ECX empieza en menos uno y se decrementa en cada byte, ¿cómo deducimos la longitud exacta aplicando operadores a nivel de bits?
 
 ---
 
-### Diapositiva 22: Diapositiva 22
+### Diapositiva 11: Portada de la segunda sesión
 
 ¡Bienvenidos a la segunda sesión de la semana!
 
-Habiendo cubierto toda la base teórica de las instrucciones de cadena y los prefijos de repetición, dedicaremos esta jornada completa a la implementación práctica de rutinas de alto rendimiento.
+Habiendo cubierto toda la base teórica de las instrucciones de bloque y los prefijos de repetición, dedicaremos esta jornada completa a implementar de forma práctica funciones esenciales de memoria como strlen, memcpy, memset y strcmp, evaluando su rendimiento real frente a bucles tradicionales.
 
 ---
 
-### Diapositiva 23: Diapositiva 23
+### Diapositiva 12: Objetivos de la segunda sesión
 
-Sin notas registradas.
+Antes de iniciar los ejercicios prácticos, repasemos los objetivos de esta segunda sesión:
 
----
+[click] Primero, implementaremos la función strlen utilizando el prefijo REPNE SCASB para buscar el fin de cadena en memoria.
 
-### Diapositiva 24: Objetivos de la segunda sesión
-
-Antes de iniciar los ejercicios, repasemos los objetivos de esta segunda sesión práctica:
-
-[click] Primero, implementaremos la función strlen utilizando el prefijo REPNE SCASB para buscar el fin de cadena.
-
-[click] Segundo, construiremos una rutina de copia de memoria optimizada por palabras dobles de 32 bits.
+[click] Segundo, construiremos una rutina de copia masiva de memoria optimizada por palabras dobles de 32 bits.
 
 [click] Tercero, aprenderemos a inicializar buffers de forma instantánea con REP STOSB.
 
-[click] Cuarto, implementaremos la comparación de textos con REPE CMPSB detectando discrepancias.
+[click] Cuarto, implementaremos la comparación de textos con REPE CMPSB determinando cuál cadena es mayor.
 
-[click] Y quinto, analizaremos por qué estas instrucciones en microcódigo superan ampliamente a los bucles tradicionales con saltos.
-
----
-
-### Diapositiva 25: Diapositiva 25
-
-Sin notas registradas.
+[click] Y quinto, analizaremos cuantitativamente por qué estas instrucciones en microcódigo superan ampliamente a los bucles manuales de software.
 
 ---
 
-### Diapositiva 26: Taller 1: Longitud de cadena (strlen)
+### Diapositiva 13: Longitud de cadena con strlen
 
 Analicemos la implementación clásica de strlen con instrucciones de bloque.
 
-[click] Primero aseguramos la dirección con cld, colocamos ECX en menos uno y limpiamos AL con xor al, al.
+[click] Primero aseguramos la dirección de avance con cld, colocamos ECX en menos uno y limpiamos AL con xor al, al para buscar el byte cero.
 
-[click] Al ejecutar repne scasb, el procesador escanea la memoria a máxima velocidad hasta hallar el byte cero.
+[click] Al ejecutar repne scasb, el procesador inspecciona byte a byte en microcódigo hasta toparse con el terminador nulo, activando la bandera ZF.
 
-[click] Notemos este truco matemático: al aplicar la instrucción NOT sobre ECX y decrementar una unidad, obtenemos con precisión matemática el número exacto de caracteres de la cadena.
-
----
-
-### Diapositiva 27: Diapositiva 27
-
-Sin notas registradas.
+[click] Notemos este elegante truco matemático: al aplicar NOT sobre ECX y restar una unidad con dec ecx, obtenemos con precisión matemática el número exacto de caracteres de la cadena.
 
 ---
 
-### Diapositiva 28: Taller 2: Copia de memoria (memcpy)
+### Diapositiva 14: Copia de memoria optimizada con memcpy
 
-Veamos ahora una optimización profesional para copiar memoria equivalente a la función memcpy.
+Veamos una optimización profesional para duplicar bloques de memoria equivalente a memcpy en C.
 
-[click] En lugar de copiar byte por byte con MOVSB, dividimos ECX entre cuatro con shr ecx, 2 y transferimos de cuatro en cuatro bytes usando rep movsd.
+[click] En vez de copiar byte a byte con MOVSB, dividimos el total de bytes entre cuatro mediante shr ecx, 2 y transferimos de cuatro en cuatro bytes usando rep movsd.
 
-[click] Luego recuperamos el residuo con and ecx, 3 y copiamos los bytes sobrantes con rep movsb.
+[click] Luego recuperamos el total original de la pila, extraemos el residuo con and ecx, 3 y copiamos los bytes finales con rep movsb.
 
-Esta técnica maximiza el ancho de banda del bus de datos de la máquina.
-
----
-
-### Diapositiva 29: Diapositiva 29
-
-Sin notas registradas.
+Esta técnica explota al máximo el ancho de palabra del procesador.
 
 ---
 
-### Diapositiva 30: Taller 3: Inicialización (memset)
+### Diapositiva 15: Inicialización de memoria con memset
 
-Examinemos cómo inicializar memoria de forma ultrarrápida con REP STOSB.
+Revisemos cómo inicializar memoria de forma ultrarrápida utilizando REP STOSB.
 
-[click] Con solo configurar EDI con el puntero al buffer, AL con el byte deseado y ECX con la longitud, la instrucción rep stosb escribe en memoria en cada ciclo de reloj.
+[click] Con solo cargar EDI con la dirección base del buffer, AL con el valor a escribir y ECX con la longitud, la instrucción rep stosb escribe en memoria en cada ciclo de procesador.
 
-[click] Apreciemos en el gráfico cómo cada celda se llena uniformemente con ceros mientras EDI avanza hacia el final del bloque.
+[click] Apreciemos en la ilustración gráfica cómo las celdas previamente sucias con datos residuales quedan completamente limpias con ceros.
 
-Esta es la rutina que utilizan los sistemas operativos para limpiar buffers de memoria antes de entregarlos a un proceso de usuario.
-
----
-
-### Diapositiva 31: Diapositiva 31
-
-Sin notas registradas.
+Esta es exactamente la rutina que utilizan los sistemas operativos para inicializar páginas de memoria antes de entregarlas a los procesos de usuario.
 
 ---
 
-### Diapositiva 32: Taller 4: Comparación léxica (strcmp)
+### Diapositiva 16: Comparación léxica con strcmp
 
-Analicemos la función strcmp con REPE CMPSB.
+Analicemos la función strcmp implementada con REPE CMPSB.
 
-[click] Al ejecutar repe cmpsb, el procesador compara byte a byte ambas cadenas. Si son idénticas en todas sus posiciones, el bucle concluye con la bandera ZF en uno y saltamos a cadenas_iguales retornando cero.
+[click] Al ejecutar repe cmpsb, el procesador compara byte a byte ambas cadenas mientras sean iguales. Si no se detecta ninguna diferencia, el bucle finaliza con ZF en uno y retornamos cero.
 
-[click] Si se detecta una diferencia, el prefijo se detiene inmediatamente. Un detalle crítico es que como los punteros ya avanzaron una posición, debemos leer en esi menos uno y edi menos uno para restar los caracteres y determinar cuál cadena es léxicamente mayor.
-
----
-
-### Diapositiva 33: Diapositiva 33
-
-Sin notas registradas.
+[click] Si se detecta una diferencia, el prefijo se detiene inmediatamente. Un detalle crítico de bajo nivel es que los punteros ya avanzaron una posición, por lo que leemos en esi menos uno y edi menos uno para restar los caracteres y determinar cuál cadena es mayor.
 
 ---
 
-### Diapositiva 34: Rendimiento: Bloques vs bucles
+### Diapositiva 17: Rendimiento: Bloques frente a bucles
 
 Comparemos el rendimiento entre ambas alternativas.
 
-En la columna izquierda vemos el bucle tradicional: lectura, escritura, incrementos, decremento y salto condicional con riesgo de fallo de predicción.
+En la columna izquierda observamos el bucle manual tradicional: lectura, escritura, incrementos de punteros, decremento de contador y salto condicional con riesgo de fallos de predicción.
 
-[click] Con REP MOVSB eliminamos toda esa sobrecarga. La decodificación ocurre una sola vez y el procesador ejecuta la copia continua a velocidad de hardware.
+[click] Con REP MOVSD eliminamos toda esa sobrecarga. La decodificación ocurre una sola vez y el procesador transfiere datos en ráfagas directas a velocidad de hardware.
 
-[click] Además de ganar velocidad, el código binario es mucho más compacto y no satura la memoria caché del procesador.
-
----
-
-### Diapositiva 35: Diapositiva 35
-
-Sin notas registradas.
+[click] Además de ganar velocidad, el binario resultante es mucho más compacto y no satura las líneas de la memoria caché L1 del procesador.
 
 ---
 
-### Diapositiva 36: Mini-quiz formativo (Sesión 2)
+### Diapositiva 18: Trampas comunes en cadenas
 
-Pongamos a prueba lo aprendido con este mini-quiz de cierre.
+Revisemos las trampas más frecuentes al programar con instrucciones de cadenas en x86.
+
+[click] La primera es no limpiar la bandera DF con cld. Si una rutina previa ejecutó STD, nuestros punteros retrocederán y corromperán datos ajenos en la memoria.
+
+[click] La segunda trampa es el desfase de punteros: al detenerse una búsqueda o comparación con CMPSB o SCASB, el hardware ya incrementó los punteros, por lo que el byte que causó la parada está en la posición menos uno.
+
+[click] La tercera es confundir ESI con EDI, recordando que STOS escribe siempre en la dirección de EDI.
+
+[click] En la tabla derecha resumimos las correcciones estandarizadas para asegurar la estabilidad de nuestras rutinas.
+
+---
+
+### Diapositiva 19: Ejercicios de práctica (Parte 1)
+
+Evaluemos lo aprendido con esta primera ronda de ejercicios formativos.
 
 Pregunta uno: ¿Qué instrucción asegura que los punteros avancen hacia adelante?
 [click] Correcto, la instrucción CLD.
 
-Pregunta dos: ¿Cuándo se detiene el prefijo REPE CMPSB?
-[click] Exacto, cuando ECX llega a cero o cuando se encuentra la primera diferencia con ZF en cero.
+Pregunta dos: En STOSD, ¿cuál es el registro origen y cuál el destino?
+[click] Exacto, opción B: el origen es EAX y el destino es la memoria apuntada por EDI.
 
-Pregunta tres: ¿Cuál es la forma más rápida de inicializar un arreglo de enteros con ceros?
-[click] Muy bien, REP STOSD utilizando el registro EAX con valor cero.
-
----
-
-### Diapositiva 37: Diapositiva 37
-
-Sin notas registradas.
+Pregunta tres: ¿Cuál es la opción más veloz para inicializar un arreglo de enteros con ceros?
+[click] Muy bien, REP STOSD con EAX en cero y ECX con la cantidad de palabras dobles.
 
 ---
 
-### Diapositiva 38: Diapositiva 38
+### Diapositiva 20: Ejercicios de práctica (Parte 2)
 
-Con esto concluimos la décima semana de tutorías.
+Continuemos con la segunda ronda de ejercicios de práctica.
 
-Hemos dominado una de las facetas más potentes del ensamblador x86: las instrucciones de cadena y los prefijos de repetición condicional.
+Pregunta cuatro: ¿Cuándo concluye el prefijo REPE CMPSB?
+[click] Exactamente, opción A: al agotarse ECX o al hallar la primera diferencia con ZF en cero.
 
-Estas técnicas les permitirán escribir código sumamente eficiente y elegante tanto para sus tareas como para el proyecto del curso.
+Pregunta cinco: ¿Por qué restamos uno tras aplicar NOT sobre ECX en strlen?
+[click] Muy bien, opción B: para descontar el propio byte nulo que fue escaneado antes de que la CPU se detuviera.
 
-¡Muchas gracias a todos por su participación y nos vemos en la próxima sesión!
+Pregunta seis: Si REPE CMPSB detecta una discrepancia, ¿dónde se ubican los bytes?
+[click] Excelente, en esi menos uno y edi menos uno, debido al autoincremento previo del hardware.
 
 ---
+
+### Diapositiva 21: Conclusiones integradoras
+
+Con esto concluimos la décima semana de tutorías de Arquitectura de Computadores.
+
+Hemos dominado una de las facetas más eficientes del ensamblador x86: las instrucciones de cadena y los prefijos de repetición condicional por hardware.
+
+Estas técnicas les dotan de destrezas indispensables para el desarrollo de rutinas de alto rendimiento y la manipulación de buffers en memoria.
+
+En la próxima semana daremos el paso hacia la persistencia de datos en disco mediante llamadas al sistema de archivos, el preprocesador de macros y la integración híbrida de C con NASM.
+
+¡Muchas gracias a todos por su compromiso y nos vemos en la siguiente sesión!

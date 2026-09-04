@@ -2,379 +2,292 @@
 ## Llamadas al sistema e interacción con el sistema operativo
 ### IC3101: Arquitectura de computadores
 
-Este documento compila el discurso oral del tutor para las dos sesiones de 90 minutos de la Semana 09.
+Este documento compila el guión oral del tutor para las dos sesiones de 90 minutos de la Semana 09, sincronizado con cada diapositiva y marcador de animación `[click]`.
 
 ---
 
-### Diapositiva 01: Diapositiva 1
-
-Sin notas registradas.
-
----
-
-### Diapositiva 02: Diapositiva 2
+### Diapositiva 01: Portada de la tutoría
 
 Hola a todos. Bienvenidos a la novena semana de tutorías de Arquitectura de Computadores.
 
 Hasta este momento hemos trabajado con instrucciones que operan internamente sobre registros y memoria, como sumas, comparaciones, saltos condicionales y marcos de pila.
 
-Hoy daremos un paso fundamental para conectar nuestros programas con el mundo exterior mediante las llamadas al sistema, comprendiendo la separación de privilegios del procesador y los mecanismos de entrada y salida en Linux.
+Hoy daremos un paso trascendental al conectar nuestros programas con el mundo exterior mediante las llamadas al sistema. Comprenderemos la separación de privilegios del procesador, el mecanismo de interrupciones por software y las operaciones fundamentales de entrada y salida por consola en Linux.
 
 ---
 
-### Diapositiva 03: Diapositiva 3
+### Diapositiva 02: Objetivos de la primera sesión
 
-Sin notas registradas.
+Antes de comenzar con el desarrollo teórico, repasemos los objetivos de esta primera sesión:
 
----
+[click] Primero, entenderemos cómo el hardware garantiza la estabilidad y seguridad del sistema mediante el modo dual y los anillos de protección.
 
-### Diapositiva 04: Objetivos de la primera sesión
-
-Antes de comenzar con la teoría, repasemos los objetivos de esta primera sesión:
-
-[click] Primero, entenderemos cómo el procesador garantiza la estabilidad del sistema mediante el modo dual y los anillos de protección.
-
-[click] Segundo, analizaremos el mecanismo de interrupción por software que permite solicitar servicios al sistema operativo de manera controlada.
+[click] Segundo, analizaremos el mecanismo de interrupción por software que permite solicitar servicios al núcleo de forma ordenada y controlada.
 
 [click] Tercero, aprenderemos la convención de registros para invocar llamadas al sistema bajo la arquitectura IA-32 en Linux.
 
-[click] Cuarto, estudiaremos los descriptores de archivo estándar para entrada y salida.
+[click] Cuarto, contrastaremos este mecanismo clásico con la instrucción syscall propia de la arquitectura moderna de 64 bits.
 
-[click] Y quinto, examinaremos la organización de la memoria del programa en secciones de datos, código y reserva.
+[click] Quinto, estudiaremos los descriptores de archivo estándar para gestionar entradas y salidas.
 
----
-
-### Diapositiva 05: Diapositiva 5
-
-Sin notas registradas.
+[click] Y sexto, examinaremos la organización del binario en memoria, comprendiendo por qué la sección BSS optimiza el uso del almacenamiento en disco.
 
 ---
 
-### Diapositiva 06: Jerarquía de privilegios x86
+### Diapositiva 03: Jerarquía de privilegios x86
 
-Comencemos analizando por qué existe la división de privilegios en el hardware.
+Comencemos analizando la división de privilegios en el hardware de la CPU.
 
-En la arquitectura x86 existen cuatro anillos de protección numerados del 0 al 3. Los sistemas operativos como Linux utilizan principalmente dos: el anillo 0 y el anillo 3.
+En la arquitectura x86 existen cuatro anillos de protección numerados de cero a tres. Los sistemas operativos modernos como Linux implementan el modelo dual utilizando principalmente dos niveles: el anillo cero y el anillo tres.
 
-[click] En el espacio de núcleo reside el sistema operativo. Tiene control absoluto sobre la memoria física, la tabla de páginas y los controladores de dispositivos.
+[click] En el anillo cero, correspondiente al modo núcleo, reside el sistema operativo. Este nivel posee facultades irrestrictas para administrar la memoria física, configurar tablas de páginas y controlar periféricos mediante registros especiales.
 
-[click] Por otro lado, en el espacio de usuario se ejecutan nuestras aplicaciones habituales. Si una aplicación intenta ejecutar una instrucción privilegiada, la CPU detiene la ejecución inmediatamente.
+[click] En el anillo tres, correspondiente al modo usuario, se ejecutan nuestras aplicaciones habituales. Cualquier intento de ejecutar una instrucción privilegiada provoca de inmediato una excepción de fallo de protección general.
 
-[click] Observemos este diagrama. La capa exterior contiene las aplicaciones comunes, mientras que el núcleo reside en el centro con el nivel máximo de autoridad y protección del procesador.
-
----
-
-### Diapositiva 07: Diapositiva 7
-
-Sin notas registradas.
+[click] Observemos este diagrama concéntrico. Para que una aplicación en el anillo tres solicite un servicio al núcleo, debe atravesar la frontera mediante una puerta de enlace segura provista por las interrupciones por software.
 
 ---
 
-### Diapositiva 08: Mecanismo de interrupciones por software
+### Diapositiva 04: Mecanismo de interrupciones por software
 
-Veamos ahora qué ocurre internamente cuando invocamos una llamada al sistema.
+Analicemos en detalle la secuencia que se desencadena al invocar una llamada al sistema.
 
-[click] El primer paso ocurre en el programa de usuario, el cual configura los registros necesarios y ejecuta la instrucción int 0x80.
+[click] Primero, el programa configura los registros con los parámetros requeridos y ejecuta la instrucción int 0x80.
 
-[click] Al recibir esta instrucción, la unidad central de procesamiento consulta la tabla de descriptores de interrupción en la posición 0x80, guarda el estado actual en la pila del núcleo y conmuta al nivel privilegiado.
+[click] Segundo, la CPU detiene la ejecución secuencial, consulta la tabla de descriptores de interrupción en la entrada 0x80, cambia el puntero de pila hacia la pila del núcleo y salva el estado del usuario.
 
-[click] Una vez en el núcleo, el despachador general utiliza el valor de EAX como índice en la tabla de llamadas al sistema para ubicar la función requerida.
+[click] Tercero, el núcleo recibe el control mediante el despachador de llamadas, busca la rutina correspondiente en la tabla interna indexada por EAX y la ejecuta. Al finalizar, deposita el resultado en EAX y ejecuta la instrucción iret para volver al espacio de usuario.
 
-[click] Al finalizar el servicio, el núcleo deposita el resultado en el registro EAX y ejecuta la instrucción iret para restaurar el contexto original y regresar al espacio de usuario de forma transparente.
-
----
-
-### Diapositiva 09: Diapositiva 9
-
-Sin notas registradas.
+[click] En el esquema de la derecha podemos apreciar con total claridad este viaje de ida y vuelta a través de la frontera de privilegios.
 
 ---
 
-### Diapositiva 10: Convención de llamadas en IA-32
+### Diapositiva 05: Convención de llamadas en IA-32
 
-Analicemos la convención de registros para invocar servicios en IA-32.
+Estudiemos la convención formal de registros para invocar llamadas al sistema bajo Linux IA-32.
 
-[click] El registro EAX es el más importante, pues contiene el número de servicio que identifica la llamada solicitada al sistema operativo.
+[click] El registro EAX es el selector central: almacena el número que identifica qué servicio del núcleo estamos solicitando.
 
-[click] El registro EBX recibe el primer argumento de la llamada.
+[click] El registro EBX recibe el primer argumento de la llamada, como el descriptor de archivo o el código de retorno.
 
-[click] El registro ECX recibe el segundo parámetro, típicamente la dirección de memoria donde se ubican los datos.
+[click] El registro ECX recibe el segundo parámetro, casi siempre una dirección de memoria donde se ubica la información.
 
-[click] Y el registro EDX contiene el tercer argumento, usualmente la cantidad máxima de bytes a transferir.
+[click] Y el registro EDX contiene el tercer parámetro, indicando el límite de bytes a procesar.
 
-[click] En esta tabla resumimos las tres llamadas elementales con las que trabajaremos: sys_exit identificada con el número 1, sys_read con el número 3 y sys_write con el número 4.
+[click] En esta tabla resumimos las tres llamadas elementales que utilizaremos en esta sesión: sys_exit identificada con el número uno, sys_read con el número tres y sys_write con el número cuatro.
 
-[click] Tengamos presente que al volver de la interrupción, el resultado de la operación queda registrado en EAX.
-
----
-
-### Diapositiva 11: Diapositiva 11
-
-Sin notas registradas.
+[click] Prestemos especial atención al retorno: tras ejecutar la interrupción, el núcleo devuelve el resultado directamente en EAX. Un valor positivo indica la cantidad real de bytes operados, mientras que un valor negativo denota un error del sistema.
 
 ---
 
-### Diapositiva 12: Descriptores de archivo en POSIX
+### Diapositiva 06: Comparativa arquitectónica: x86 frente a x86-64
 
-Hablemos ahora de la abstracción de entrada y salida mediante descriptores de archivo.
+Es crucial comparar el mecanismo clásico de 32 bits contra la arquitectura x86-64 moderna.
 
-En Linux todo se trata como un archivo o un flujo de bytes. Al iniciar cualquier proceso, el sistema operativo abre automáticamente tres canales fundamentales:
+[click] En sistemas de 32 bits, la invocación se realiza mediante la interrupción de software int 0x80. Este mecanismo implica consultar la tabla IDT en memoria y salvar registros en la pila, con un costo apreciable de ciclos de procesador.
 
-[click] El descriptor 0 corresponde a la entrada estándar, usualmente vinculada al teclado de la computadora.
+[click] En contraste, en x86-64 los procesadores incorporan la instrucción dedicada syscall, la cual conmuta al modo núcleo casi instantáneamente mediante registros internos MSR preconfigurados por el sistema operativo.
 
-[click] El descriptor 1 corresponde a la salida estándar, conectada a nuestra consola o emulador de terminal.
+[click] A la derecha observamos cómo cambia la convención de registros: mientras que en 32 bits usamos EAX, EBX, ECX y EDX, en 64 bits se utilizan RAX, RDI, RSI y RDX.
 
-[click] Y el descriptor 2 es la salida de error estándar, diseñada para emitir diagnósticos.
-
-[click] Observemos cómo la tabla interna del proceso asigna estos identificadores numéricos a los dispositivos físicos o archivos correspondientes.
-
-[click] En ensamblador simplemente cargamos el número del descriptor en el registro EBX para indicar hacia dónde dirigir la lectura o la escritura.
+[click] Tengamos presente que los números de servicio también cambian entre ambas arquitecturas. En nuestras prácticas utilizaremos estrictamente el estándar IA-32 de 32 bits.
 
 ---
 
-### Diapositiva 13: Diapositiva 13
+### Diapositiva 07: Descriptores de archivo en POSIX
 
-Sin notas registradas.
+En los sistemas UNIX y Linux rige el principio de que los canales de comunicación se gestionan como flujos homogéneos de bytes mediante descriptores de archivo.
 
----
+Al crearse cualquier proceso, el sistema operativo abre automáticamente tres descriptores universales:
 
-### Diapositiva 14: Secciones de memoria en NASM
+[click] El descriptor cero corresponde a la entrada estándar, conectado inicialmente al teclado.
 
-Revisemos cómo organizamos el código fuente en NASM.
+[click] El descriptor uno corresponde a la salida estándar, conectado a la pantalla de la terminal.
 
-[click] La sección punto text contiene la secuencia de instrucciones que ejecutará el procesador. Tiene permisos de sólo lectura y ejecución para impedir que el programa se modifique a sí mismo accidentalmente.
+[click] Y el descriptor dos es el canal de error estándar, destinado a emitir diagnósticos sin interferir con la salida de datos normal.
 
-[click] La sección punto data alberga las variables y cadenas de caracteres con valores iniciales conocidos desde el momento de compilar.
+[click] Observemos a la derecha la tabla de descriptores que mantiene el núcleo en el bloque de control del proceso. Los números tres en adelante quedan disponibles para archivos físicos en disco.
 
-[click] La sección punto bss se utiliza para reservar memoria para variables y buffers que recibirán datos durante la ejecución, como la entrada del usuario.
-
-[click] Aquí apreciamos la estructura típica de un archivo en ensamblador con sus tres secciones bien delimitadas.
-
-[click] Notemos que la sección BSS es sumamente eficiente, puesto que reservar un buffer de sesenta y cuatro bytes no agrega ningún peso al archivo binario generado en disco.
+[click] En ensamblador simplemente cargamos el número correspondiente en EBX antes de solicitar la llamada al sistema.
 
 ---
 
-### Diapositiva 15: Diapositiva 15
+### Diapositiva 08: Secciones de memoria en NASM
 
-Sin notas registradas.
+Revisemos cómo organizamos las secciones de un archivo fuente en NASM.
 
----
+[click] La sección punto text alberga las instrucciones que ejecutará la CPU. El sistema operativo le asigna atributos de sólo lectura y ejecución para prevenir corrupciones o modificaciones accidentales del código.
 
-### Diapositiva 16: Directivas de definición y reserva
+[click] La sección punto data almacena cadenas de caracteres y variables globales con contenido inicial conocido desde el momento de compilar.
 
-Veamos en detalle las directivas de datos que utilizaremos en nuestras prácticas.
+[click] La sección punto bss se utiliza para reservar memoria de trabajo y buffers que recibirán datos durante la ejecución, como la entrada del usuario.
 
-[click] Para inicializar variables en la sección de datos usamos db para bytes individuales, dw para palabras de dieciséis bits y dd para palabras dobles de treinta y dos bits.
+[click] En el bloque de código de la derecha apreciamos cómo delimitamos de forma limpia cada sección dentro de un archivo de ensamblador.
 
-[click] En contraste, dentro de la sección BSS usamos resb, resw o resd acompañados de un número entero que indica la cantidad de elementos vacíos a reservar.
-
-[click] Una técnica muy elegante para no contar caracteres manualmente es usar el operador signo de dólar menos la etiqueta de inicio. Esto calcula la longitud exacta en bytes de forma automática.
-
-[click] La directiva equ crea una constante simbólica en tiempo de ensamblado, facilitando un código limpio y mantenible.
+[click] Notemos la enorme ventaja de la sección BSS: reservar un buffer de sesenta y cuatro kilobytes no incrementa el peso del binario en el disco, ya que el cargador de Linux asigna y limpia la memoria en RAM en tiempo de carga.
 
 ---
 
-### Diapositiva 17: Diapositiva 17
+### Diapositiva 09: Directivas de definición y reserva
 
-Sin notas registradas.
+Veamos en detalle las directivas para definir y reservar datos.
 
----
+[click] Para inicializar variables en la sección data utilizamos db para bytes de 8 bits, dw para palabras de 16 bits y dd para palabras dobles de 32 bits.
 
-### Diapositiva 18: Ejemplo guiado: Salida en consola
+[click] En cambio, dentro de la sección BSS empleamos las directivas resb, resw o resd seguidas de la cantidad de elementos a reservar.
 
-Analicemos este primer programa completo.
+[click] Para no contar letras manualmente al emitir mensajes, usamos la fórmula dólar menos la etiqueta inicial. El símbolo de dólar indica la dirección de ensamblado actual, de modo que la resta produce exactamente la cantidad de bytes del texto.
 
-[click] Para emitir el mensaje por pantalla, configuramos EAX con el número cuatro correspondiente a sys_write, EBX con uno para la salida estándar, ECX con la dirección de la cadena y EDX con la longitud.
-
-[click] Luego ejecutamos int 0x80 para que el sistema operativo realice la escritura. Inmediatamente después preparamos la llamada sys_exit con código cero para cerrar el proceso de forma limpia.
-
-[click] Para ensamblar y enlazar este código en Linux de 32 bits utilizamos nasm con formato elf32 y ld con emulación elf_i386.
+[click] La directiva equ crea una constante simbólica en tiempo de ensamblado sin gastar memoria física, logrando un código mantenible y seguro.
 
 ---
 
-### Diapositiva 19: Diapositiva 19
+### Diapositiva 10: Ejemplo guiado: Salida en consola
 
-Sin notas registradas.
+Analicemos este primer programa completo en ensamblador con llamadas al sistema.
 
----
+[click] En la sección de datos declaramos el mensaje terminando en el salto de línea hexadecimal 0x0A y calculamos su longitud automática.
 
-### Diapositiva 20: Síntesis de la primera sesión
+[click] Para emitir el texto por pantalla preparamos sys_write con EAX en cuatro, la salida estándar en EBX con uno, el puntero del mensaje en ECX y la longitud en EDX antes de invocar la interrupción 0x80.
 
-Con esto concluimos la primera sesión teórica. Hemos cubierto los principios de protección por hardware, la tabla de llamadas al sistema y la segmentación en ensamblador.
+[click] Seguidamente preparamos sys_exit con EAX en uno y código de terminación exitosa cero en EBX, entregando el control de vuelta al sistema operativo.
 
-[click] Les dejo esta pregunta detonante para reflexionar antes del taller práctico: cuando el usuario escribe en consola y presiona Enter, ¿cómo limpiamos el carácter de salto de línea en memoria?
-
----
-
-### Diapositiva 21: Diapositiva 21
-
-Sin notas registradas.
+[click] Para compilar y ejecutar en Linux de 32 bits generamos el objeto ELF con nasm y enlazamos con ld usando la emulación elf_i386.
 
 ---
 
-### Diapositiva 22: Diapositiva 22
+### Diapositiva 11: Síntesis de la primera sesión
+
+Con esto concluimos la primera sesión teórica. Hemos cubierto los fundamentos del modo dual, el funcionamiento de la interrupción 0x80, la convención de llamadas y las secciones de memoria.
+
+[click] Les dejo esta pregunta detonante para reflexionar antes de pasar al taller práctico: cuando el usuario presiona Enter, la entrada almacena el byte 0x0A. ¿Cómo manipulamos la memoria para convertirlo en una cadena terminada en nulo?
+
+---
+
+### Diapositiva 12: Portada de la segunda sesión
 
 ¡Bienvenidos a la segunda sesión de la semana!
 
-Habiendo cubierto toda la base teórica de la separación de privilegios y la interfaz de llamadas al sistema, dedicaremos esta jornada completa al taller práctico y la resolución de ejercicios paso a paso.
+Habiendo cubierto toda la base teórica de la separación de privilegios, la tabla de descriptores y la convención de llamadas al sistema, dedicaremos esta jornada completa a la programación práctica interactiva, depuración en vivo con GDB y consolidación analítica.
 
 ---
 
-### Diapositiva 23: Diapositiva 23
+### Diapositiva 13: Objetivos de la segunda sesión
 
-Sin notas registradas.
+Antes de comenzar con los ejercicios prácticos, repasemos los objetivos de esta segunda sesión:
 
----
+[click] Primero, implementaremos la lectura interactiva desde el teclado utilizando sys_read hacia buffers en la sección BSS.
 
-### Diapositiva 24: Objetivos de la segunda sesión
+[click] Segundo, aprenderemos a sanitizar la entrada reemplazando el salto de línea por el byte nulo terminador.
 
-Antes de iniciar los ejercicios, repasemos los objetivos de esta segunda sesión práctica:
+[click] Tercero, aplicaremos buenas prácticas de seguridad acotando el tamaño máximo de captura para evitar desbordamientos de buffer.
 
-[click] Primero, implementaremos la lectura interactiva desde teclado con sys_read.
+[click] Cuarto, utilizaremos el depurador GDB para inspeccionar en vivo los registros antes y después de cada llamada al sistema.
 
-[click] Segundo, gestionaremos la memoria de trabajo en la sección BSS para almacenar la información recibida.
-
-[click] Tercero, aprenderemos a sanitizar cadenas suprimiendo el byte de salto de línea.
-
-[click] Cuarto, utilizaremos el depurador GDB para inspeccionar registros y memoria en vivo.
-
-[click] Y quinto, analizaremos los errores más comunes al interactuar con el sistema operativo para evitar comportamientos anómalos.
+[click] Y quinto, analizaremos las trampas más frecuentes al interactuar con el núcleo para blindar nuestro código contra fallos de segmentación.
 
 ---
 
-### Diapositiva 25: Diapositiva 25
+### Diapositiva 14: Captura con sys_read
 
-Sin notas registradas.
+Iniciemos la parte práctica analizando el funcionamiento de la llamada sys_read.
 
----
+[click] Para capturar texto, configuramos EAX con tres, EBX con cero correspondiente a stdin, ECX con la dirección de nuestro buffer y EDX con la capacidad máxima que estamos dispuestos a admitir.
 
-### Diapositiva 26: Captura con sys_read
+[click] Cuando el usuario termina de escribir y presiona la tecla Enter, el sistema operativo reactiva el proceso y coloca en EAX la cantidad exacta de bytes leídos.
 
-Entremos al taller práctico revisando cómo funciona sys_read.
-
-[click] Para leer datos, configuramos EAX con el valor tres, EBX con cero correspondiente a stdin, ECX con la dirección del buffer donde se guardará la entrada y EDX con la capacidad máxima.
-
-[click] Un detalle fundamental es que al retornar de la interrupción, EAX almacena la cantidad exacta de bytes que el usuario escribió.
-
-[click] Observemos este diagrama en memoria. Si el usuario escribe el nombre Juan y presiona Enter, el buffer contendrá las cuatro letras más el byte 0x0A del salto de línea, totalizando cinco bytes en EAX.
-
-[click] Notemos la importancia de pasar en EDX el tamaño real del buffer para evitar cualquier desbordamiento de memoria.
+[click] Observemos detenidamente el mapa de memoria del buffer a la derecha. Si el usuario escribe Juan y presiona Enter, el buffer almacena las cuatro letras más el carácter de salto de línea 0x0A, totalizando cinco bytes en EAX.
 
 ---
 
-### Diapositiva 27: Diapositiva 27
-
-Sin notas registradas.
-
----
-
-### Diapositiva 28: Taller 1: Saludo interactivo
+### Diapositiva 15: Saludo interactivo en consola
 
 Construyamos este programa interactivo paso a paso.
 
-Primero mostramos el mensaje de solicitud en consola con sys_write.
+En la columna izquierda vemos la primera etapa: solicitamos el nombre emitiendo una pregunta con sys_write y luego invocamos sys_read pasando nuestro buffer nom de treinta y dos bytes.
 
-Luego invocamos sys_read pasando nuestro buffer nombre de treinta y dos bytes. Observemos cómo guardamos el conteo que retorna EAX en la variable bytes_leidos.
+[click] Notemos que guardamos inmediatamente el retorno de EAX en la variable bytes_leidos. Esto es indispensable porque la siguiente llamada al sistema sobreescribirá EAX con su propio valor.
 
-[click] Finalmente imprimimos la palabra Hola seguida directamente del contenido de nuestro buffer con la cantidad exacta de bytes leídos antes de invocar sys_exit.
-
----
-
-### Diapositiva 29: Diapositiva 29
-
-Sin notas registradas.
+Finalmente, en la columna derecha imprimimos el prefijo Hola seguido del nombre del usuario empleando exactamente los bytes que fueron leídos, terminando con sys_exit.
 
 ---
 
-### Diapositiva 30: Supresión del salto de línea
+### Diapositiva 16: Supresión del salto de línea
 
-Un problema muy común al leer texto del usuario es que el salto de línea queda guardado dentro del buffer.
+Un problema recurrente en las aplicaciones de consola es que el salto de línea queda incrustado dentro del texto recibido.
 
-Si leímos cinco bytes, los índices van del cero al cuatro, por lo que el salto de línea está en la posición cuatro.
+Si el usuario escribió cuatro letras y presionó Enter, leímos cinco bytes. Dado que los arreglos inician en el índice cero, las letras ocupan las posiciones cero a tres, y el salto de línea 0x0A se sitúa en la posición cuatro.
 
-[click] Restamos uno a EAX con dec eax y escribimos un byte cero en la posición calculada mediante direccionamiento indexado.
+[click] Con la instrucción dec eax reducimos el conteo a cuatro, apuntando exactamente al índice donde yace el carácter 0x0A. Luego almacenamos un byte cero mediante direccionamiento base más índice.
 
-[click] Observemos la transformación gráfica en la columna derecha. El byte 0x0A se sustituye por 0x00.
-
-[click] Esto transforma la entrada en una cadena terminada en nulo, compatible con las funciones del lenguaje C.
+[click] Observemos la transición en la columna derecha: el carácter de salto de línea desaparece y la cadena se convierte en una cadena ASCIIZ estándar, lista para interactuar con funciones de C o bibliotecas externas.
 
 ---
 
-### Diapositiva 31: Diapositiva 31
+### Diapositiva 17: Depuración de llamadas con GDB
 
-Sin notas registradas.
+Veamos cómo emplear el depurador GDB para inspeccionar nuestras llamadas al sistema.
 
----
+[click] Al compilar con NASM es fundamental incluir los modificadores menos g y menos F dwarf para generar información simbólica completa para el depurador.
 
-### Diapositiva 32: Taller 2: Depuración con GDB
+[click] Dentro de GDB colocamos un punto de interrupción en la etiqueta start y avanzamos con stepi o nexti para posicionarnos justo antes de la instrucción int 0x80.
 
-Veamos ahora cómo utilizar GDB para depurar nuestros programas en ensamblador.
+[click] Con info registers verificamos que los cuatro registros clave tengan los valores previstos: EAX con el número de llamada, EBX con el descriptor, ECX con el puntero al buffer y EDX con la longitud.
 
-[click] Al ensamblar con NASM debemos incluir los parámetros menos g y menos F dwarf para generar la tabla de símbolos de depuración.
-
-[click] Dentro de GDB colocamos un punto de interrupción en _start con break y avanzamos instrucción por instrucción con nexti o stepi.
-
-[click] Con info registers verificamos que los parámetros de la llamada al sistema estén correctamente colocados en EAX, EBX, ECX y EDX.
-
-[click] El comando examine nos permite ver los caracteres exactos dentro de nuestro buffer para confirmar que los datos se leyeron adecuadamente.
+[click] Con el comando examine x/s comprobamos el texto apuntado por ECX en memoria, verificando la integridad de los datos antes de solicitar la operación al núcleo.
 
 ---
 
-### Diapositiva 33: Diapositiva 33
+### Diapositiva 18: Trampas comunes en llamadas
 
-Sin notas registradas.
+Revisemos las trampas más recurrentes al trabajar con llamadas al sistema operativo.
 
----
+[click] La primera es omitir sys_exit. En ensamblador la ejecución no se detiene al terminar el archivo: si no invocamos sys_exit explícitamente, la CPU continuará ejecutando bytes basura de memoria hasta provocar un fallo de segmentación.
 
-### Diapositiva 34: Errores comunes en llamadas
+[click] La segunda trampa es confundir la dirección con el contenido. En ECX debemos pasar la etiqueta msg sin corchetes, de lo contrario pasaremos el valor numérico de las letras como si fuera un puntero a memoria.
 
-Analicemos los tres errores más comunes al trabajar con llamadas al sistema:
+[click] La tercera es olvidar que tras int 0x80 el registro EAX queda completamente sobreescrito con la respuesta del núcleo.
 
-[click] Primero, olvidar invocar sys_exit. Si no detenemos el programa explícitamente, el procesador seguirá leyendo bytes basura en memoria y el sistema abortará con un fallo de segmentación.
-
-[click] Segundo, confundir el puntero con el contenido. En ECX debemos pasar la dirección msg y no su valor entre corchetes.
-
-[click] Y tercero, olvidar que EAX es sobreescrito por el núcleo al retornar de la interrupción.
-
-[click] Por ello, siempre guardamos el valor retornado inmediatamente antes de configurar la siguiente instrucción.
+[click] A la derecha observamos las correcciones estándar para cada uno de estos escenarios.
 
 ---
 
-### Diapositiva 35: Diapositiva 35
+### Diapositiva 19: Ejercicios de práctica (Parte 1)
 
-Sin notas registradas.
+Evaluemos lo aprendido con esta primera ronda de ejercicios de consolidación.
 
----
+Pregunta uno: ¿Por qué un programa de usuario no puede manipular directamente el hardware?
+[click] Exacto, opción B: el hardware impide ejecutar instrucciones privilegiadas fuera del anillo cero detonando un fallo general de protección.
 
-### Diapositiva 36: Mini-quiz formativo (Sesión 2)
+Pregunta dos: ¿Qué registro contiene el código del servicio en Linux IA-32?
+[click] Muy bien, el registro EAX.
 
-Pongamos a prueba los conocimientos adquiridos con este breve cuestionario formativo.
-
-Pregunta uno: ¿Qué registro define el código de la llamada al sistema?
-[click] Correcto, el registro EAX.
-
-Pregunta dos: ¿Por qué la sección BSS no incrementa el tamaño del archivo ejecutable?
-[click] Exactamente, porque sólo define la cantidad de memoria que el sistema operativo debe reservar al cargar el programa.
-
-Pregunta tres: Si ingresamos cuatro letras y presionamos Enter, ¿cuánto retorna sys_read en EAX?
-[click] Muy bien, retorna cinco bytes debido al carácter de salto de línea.
+Pregunta tres: Para enviar un mensaje de error por stderr, ¿cuál descriptor cargamos en EBX?
+[click] Correcto, el descriptor numérico dos.
 
 ---
 
-### Diapositiva 37: Diapositiva 37
+### Diapositiva 20: Ejercicios de práctica (Parte 2)
 
-Sin notas registradas.
+Continuemos con la segunda ronda de ejercicios prácticos.
 
----
+Pregunta cuatro: ¿Cuánto espacio suma al ejecutable en disco una reserva en la sección BSS?
+[click] Excelente, cero bytes, porque la memoria se asigna dinámicamente en RAM al cargar el programa.
 
-### Diapositiva 38: Diapositiva 38
+Pregunta cinco: Al escribir TEC y presionar Enter, ¿cuántos bytes retorna sys_read?
+[click] Muy bien, retorna cuatro bytes debido a la inclusión del carácter de fin de línea 0x0A.
 
-Con esto concluimos la novena semana de tutorías.
-
-Hemos cerrado la brecha entre las instrucciones puras de procesador y los servicios del sistema operativo, dominando la lectura, escritura y depuración de programas interactivos.
-
-En la próxima semana daremos un salto hacia la manipulación eficiente de bloques de memoria con las instrucciones de cadenas y prefijos de repetición.
-
-¡Excelente trabajo y nos vemos en la siguiente sesión!
+Pregunta seis: ¿Por qué es un error usar corchetes al cargar la dirección del buffer en ECX?
+[click] Exactamente, la opción B: los corchetes cargan los caracteres del texto como si fueran un puntero numérico, provocando que el kernel intente leer una dirección inválida.
 
 ---
+
+### Diapositiva 21: Conclusiones y siguiente paso
+
+Con esto concluimos la novena semana de tutorías de Arquitectura de Computadores.
+
+Hemos construido un puente sólido entre el código puro de máquina y los servicios del sistema operativo, dominando la entrada, salida y depuración interactiva sin dependencias de alto nivel.
+
+En la próxima semana daremos un salto decisivo hacia la manipulación eficiente de bloques masivos de memoria mediante las instrucciones de cadenas y los prefijos de repetición en hardware.
+
+¡Muchas gracias a todos por su compromiso y nos vemos en la siguiente sesión!

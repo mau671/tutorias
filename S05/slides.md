@@ -530,8 +530,7 @@ Memoria interna de máxima velocidad con partición jerárquica:
 </div>
 
 <div class="space-y-2 text-xs font-sans">
-  <div v-click="1" class="space-y-1.5">
-    <div class="text-blue-600 dark:text-blue-400 font-bold text-[11px]">Registros de propósito general (32 bits)</div>
+  <div v-click="1">
     <div class="grid grid-cols-2 gap-1.5 font-mono text-[10px]">
       <div class="p-2 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg">
         <div class="flex items-center justify-between mb-1">
@@ -704,7 +703,7 @@ Registros especializados y registro de estado del procesador:
 
 <div v-click="4" class="text-xs font-mono w-full">
   <div class="text-amber-700 dark:text-amber-400 font-bold text-center mb-2 font-sans text-[11px]">
-    Estructura del registro de banderas FLAGS (16 bits)
+    Estructura del registro de banderas FLAGS
   </div>
 
   <!-- Barra segmentada de bits del registro FLAGS (Bits 15 a 0) -->
@@ -741,60 +740,30 @@ Registros especializados y registro de estado del procesador:
   </div>
 
   <!-- Desglose estructurado de banderas individuales -->
-  <div class="grid grid-cols-2 gap-1.5 font-mono text-[9px] mt-1.5">
-    <div class="p-1.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg">
-      <div class="flex items-center justify-between mb-0.5">
-        <span class="text-rose-600 dark:text-rose-400 font-bold font-mono text-[10px]">CF</span>
-        <span class="text-[7.5px] font-sans font-semibold px-1 rounded bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800/40">Acarreo</span>
-      </div>
-      <p class="text-gray-600 dark:text-gray-300 text-[8px] font-sans leading-tight">
-        Acarreo o préstamo en operaciones sin signo.
-      </p>
+  <div class="grid grid-cols-2 gap-1.5 mt-1.5">
+    <div class="px-2 py-1 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg text-[8.5px] leading-tight">
+      <strong class="text-rose-600 dark:text-rose-400 font-mono">CF:</strong>
+      <span class="text-gray-600 dark:text-gray-300 font-sans"> Contiene el acarreo o préstamo en operaciones sin signo.</span>
     </div>
-    <div class="p-1.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg">
-      <div class="flex items-center justify-between mb-0.5">
-        <span class="text-rose-600 dark:text-rose-400 font-bold font-mono text-[10px]">ZF</span>
-        <span class="text-[7.5px] font-sans font-semibold px-1 rounded bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800/40">Cero</span>
-      </div>
-      <p class="text-gray-600 dark:text-gray-300 text-[8px] font-sans leading-tight">
-        Se activa en 1 si el resultado fue cero.
-      </p>
+    <div class="px-2 py-1 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg text-[8.5px] leading-tight">
+      <strong class="text-rose-600 dark:text-rose-400 font-mono">ZF:</strong>
+      <span class="text-gray-600 dark:text-gray-300 font-sans"> Se activa en 1 si el resultado de la operación fue cero.</span>
     </div>
-    <div class="p-1.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg">
-      <div class="flex items-center justify-between mb-0.5">
-        <span class="text-rose-600 dark:text-rose-400 font-bold font-mono text-[10px]">SF</span>
-        <span class="text-[7.5px] font-sans font-semibold px-1 rounded bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800/40">Signo</span>
-      </div>
-      <p class="text-gray-600 dark:text-gray-300 text-[8px] font-sans leading-tight">
-        Copia el bit MSB (1 si es negativo).
-      </p>
+    <div class="px-2 py-1 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg text-[8.5px] leading-tight">
+      <strong class="text-rose-600 dark:text-rose-400 font-mono">SF:</strong>
+      <span class="text-gray-600 dark:text-gray-300 font-sans"> Copia el bit más significativo; vale 1 si es negativo.</span>
     </div>
-    <div class="p-1.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg">
-      <div class="flex items-center justify-between mb-0.5">
-        <span class="text-rose-600 dark:text-rose-400 font-bold font-mono text-[10px]">OF</span>
-        <span class="text-[7.5px] font-sans font-semibold px-1 rounded bg-rose-50 text-rose-700 border border-rose-200 dark:bg-rose-950/60 dark:text-rose-300 dark:border-rose-800/40">Desborde</span>
-      </div>
-      <p class="text-gray-600 dark:text-gray-300 text-[8px] font-sans leading-tight">
-        Desbordamiento en aritmética con signo.
-      </p>
+    <div class="px-2 py-1 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg text-[8.5px] leading-tight">
+      <strong class="text-rose-600 dark:text-rose-400 font-mono">OF:</strong>
+      <span class="text-gray-600 dark:text-gray-300 font-sans"> Indica desbordamiento en operaciones con signo.</span>
     </div>
-    <div class="p-1.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg">
-      <div class="flex items-center justify-between mb-0.5">
-        <span class="text-emerald-600 dark:text-emerald-400 font-bold font-mono text-[10px]">DF</span>
-        <span class="text-[7.5px] font-sans font-semibold px-1 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/40">Dirección</span>
-      </div>
-      <p class="text-gray-600 dark:text-gray-300 text-[8px] font-sans leading-tight">
-        0 = autoincremento, 1 = decremento en cadenas.
-      </p>
+    <div class="px-2 py-1 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg text-[8.5px] leading-tight">
+      <strong class="text-emerald-600 dark:text-emerald-400 font-mono">DF:</strong>
+      <span class="text-gray-600 dark:text-gray-300 font-sans"> Controla autoincremento o decremento en cadenas.</span>
     </div>
-    <div class="p-1.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg">
-      <div class="flex items-center justify-between mb-0.5">
-        <span class="text-emerald-600 dark:text-emerald-400 font-bold font-mono text-[10px]">IF</span>
-        <span class="text-[7.5px] font-sans font-semibold px-1 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/40">Interrupción</span>
-      </div>
-      <p class="text-gray-600 dark:text-gray-300 text-[8px] font-sans leading-tight">
-        Habilita interrupciones externas (STI/CLI).
-      </p>
+    <div class="px-2 py-1 bg-gray-50 border border-gray-200 dark:bg-gray-900/70 dark:border-gray-800 rounded-lg text-[8.5px] leading-tight">
+      <strong class="text-emerald-600 dark:text-emerald-400 font-mono">IF:</strong>
+      <span class="text-gray-600 dark:text-gray-300 font-sans"> Habilita la atención de interrupciones externas.</span>
     </div>
   </div>
 </div>
@@ -1159,7 +1128,7 @@ transition: slide-up | slide-down
 
 <div class="text-center">
   <div class="text-3xl text-gray-500 dark:text-gray-400 mb-4 font-mono">Semana 05</div>
-  <h1 class="text-6xl font-bold mb-8">Sesión 02: Taller práctico</h1>
+  <h1 class="text-6xl font-bold mb-8">Sesión 02: Práctica guiada</h1>
   <div class="text-2xl text-blue-600 dark:text-blue-500 mt-4">IC3101: Arquitectura de computadores</div>
 </div>
 <!--
@@ -1205,7 +1174,11 @@ layout: two-cols
 transition: slide-left | slide-right
 ---
 
-# Taller 1: Programa mínimo en NASM
+<div class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 tracking-wider mb-1 font-mono">
+  Práctica
+</div>
+
+# Programa mínimo en NASM
 
 <div class="text-[11px] text-gray-600 dark:text-gray-400 mb-2">
 Estructura básica y retorno controlado al sistema operativo:
@@ -1293,7 +1266,11 @@ layout: two-cols
 transition: slide-up | slide-down
 ---
 
-# Taller 2: Traducción de C a NASM
+<div class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 tracking-wider mb-1 font-mono">
+  Práctica
+</div>
+
+# Traducción de C a NASM
 
 <div class="text-[11px] text-gray-600 dark:text-gray-400 mb-2">
 Mapeo metódico de sentencias de asignación y cálculos compuestos:
@@ -1383,7 +1360,11 @@ layout: two-cols
 transition: slide-left | slide-right
 ---
 
-# Taller 3: Operadores unarios y XCHG
+<div class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 tracking-wider mb-1 font-mono">
+  Práctica
+</div>
+
+# Operadores unarios y XCHG
 
 <div class="text-[11px] text-gray-600 dark:text-gray-400 mb-2">
 Operadores unarios de C e instrucción de intercambio atómico:
@@ -1476,7 +1457,11 @@ layout: two-cols
 transition: slide-up | slide-down
 ---
 
-# Taller 4: Compilación y ensamble
+<div class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 tracking-wider mb-1 font-mono">
+  Práctica
+</div>
+
+# Compilación y ensamble
 
 <div class="text-[11px] text-gray-600 dark:text-gray-400 mb-2">
 Flujo completo de construcción desde la línea de comandos en Linux:
@@ -1522,20 +1507,71 @@ Flujo completo de construcción desde la línea de comandos en Linux:
 
 ::right::
 
-<div v-click="4" class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/90 dark:border-gray-800 rounded-xl text-xs font-sans">
-  <div class="text-purple-600 dark:text-purple-400 font-bold mb-1.5 text-[10.5px] font-mono text-center">Inspección de ensamblador desde GCC</div>
-  <p class="text-gray-600 dark:text-gray-300 text-[10px] leading-relaxed mb-2">
-    Para observar exactamente qué ensamblador genera el compilador de C sin optimizaciones:
-  </p>
-  <div class="p-2 bg-white border border-gray-200 text-blue-700 dark:bg-black/60 dark:border-gray-700 dark:text-blue-300 rounded font-mono text-[9.5px] mb-2">
-    gcc -m32 -O0 -S programa.c -o programa.s -masm=intel
+<div v-click="4" class="text-xs font-sans">
+  <!-- Title outside the card (centered) -->
+  <div class="text-purple-600 dark:text-purple-400 font-bold mb-2 text-[11px] font-sans text-center">
+    Inspección de ensamblador desde GCC
   </div>
-  <ul class="text-[9.5px] text-gray-700 dark:text-gray-300 space-y-1">
-    <li>&bull; <span class="text-amber-700 dark:text-amber-300 font-mono">-m32</span>: Genera código para procesadores de 32 bits.</li>
-    <li>&bull; <span class="text-amber-700 dark:text-amber-300 font-mono">-O0</span>: Desactiva optimizaciones para ver el código literal.</li>
-    <li>&bull; <span class="text-amber-700 dark:text-amber-300 font-mono">-S</span>: Detiene el compilador antes de ensamblar.</li>
-    <li>&bull; <span class="text-amber-700 dark:text-amber-300 font-mono">-masm=intel</span>: Utiliza la sintaxis Intel legible.</li>
-  </ul>
+
+  <!-- Command Box -->
+  <div class="px-3 py-2 bg-gray-50 border border-gray-200 dark:bg-gray-900/90 dark:border-gray-800 rounded-xl font-mono text-[9.5px] shadow-sm">
+    <div class="flex items-center justify-between text-gray-700 dark:text-gray-300">
+      <span class="text-gray-400 dark:text-gray-500 font-bold">$ gcc</span>
+      <span class="px-1.5 py-0.5 rounded bg-blue-50 border border-blue-200 text-blue-700 dark:bg-blue-950/60 dark:border-blue-800/40 dark:text-blue-300 font-bold">-m32</span>
+      <span class="px-1.5 py-0.5 rounded bg-emerald-50 border border-emerald-200 text-emerald-700 dark:bg-emerald-950/60 dark:border-emerald-800/40 dark:text-emerald-300 font-bold">-O0</span>
+      <span class="px-1.5 py-0.5 rounded bg-amber-50 border border-amber-200 text-amber-800 dark:bg-amber-950/60 dark:border-amber-800/40 dark:text-amber-300 font-bold">-S</span>
+      <span class="px-1.5 py-0.5 rounded bg-purple-50 border border-purple-200 text-purple-700 dark:bg-purple-950/60 dark:border-purple-800/40 dark:text-purple-300 font-bold">-masm=intel</span>
+      <span class="text-gray-400 dark:text-gray-500 text-[8.5px]">prog.c -o prog.s</span>
+    </div>
+  </div>
+
+  <!-- Staggered Explanations with Connecting Arrows -->
+  <div class="relative w-full h-[115px] mt-1">
+    <svg viewBox="0 0 400 115" class="w-full h-full absolute inset-0 pointer-events-none" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr-blue" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+          <path d="M 0 0 L 6 3 L 0 6 z" class="fill-blue-500" />
+        </marker>
+        <marker id="arr-emerald" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+          <path d="M 0 0 L 6 3 L 0 6 z" class="fill-emerald-500" />
+        </marker>
+        <marker id="arr-amber" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+          <path d="M 0 0 L 6 3 L 0 6 z" class="fill-amber-500" />
+        </marker>
+        <marker id="arr-purple-right" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto">
+          <path d="M 0 0 L 6 3 L 0 6 z" class="fill-purple-500" />
+        </marker>
+      </defs>
+      <!-- Arrow 1: -m32 (x: 81 -> y: 10, card at y: 14) -->
+      <path d="M 81 0 L 81 10" class="stroke-blue-400 dark:stroke-blue-500" stroke-width="1.5" marker-end="url(#arr-blue)" />
+      <!-- Arrow 3: -S (x: 181 -> y: 10, card at y: 14) -->
+      <path d="M 181 0 L 181 10" class="stroke-amber-400 dark:stroke-amber-500" stroke-width="1.5" marker-end="url(#arr-amber)" />
+      <!-- Arrow 2: -O0 (x: 133 -> y: 60, card at y: 64) -->
+      <path d="M 133 0 L 133 60" class="stroke-emerald-400 dark:stroke-emerald-500" stroke-width="1.5" marker-end="url(#arr-emerald)" />
+      <!-- Arrow 4: -masm=intel (elbow arm turning right to x: 266, card at x: 272) -->
+      <path d="M 248 0 L 248 32 Q 248 38 254 38 L 266 38" class="stroke-purple-400 dark:stroke-purple-500" stroke-width="1.5" marker-end="url(#arr-purple-right)" />
+    </svg>
+    <div class="absolute top-[14px] left-[25px] w-[110px] p-1.5 rounded-lg bg-blue-50/90 border border-blue-200/90 dark:bg-blue-950/60 dark:border-blue-800/60 shadow-sm">
+      <div class="text-[8px] text-gray-700 dark:text-gray-200 leading-tight">
+        Genera código para procesadores de 32 bits.
+      </div>
+    </div>
+    <div class="absolute top-[14px] left-[145px] w-[95px] p-1.5 rounded-lg bg-amber-50/90 border border-amber-200/90 dark:bg-amber-950/60 dark:border-amber-800/60 shadow-sm">
+      <div class="text-[8px] text-gray-700 dark:text-gray-200 leading-tight">
+        Detiene el compilador antes de ensamblar.
+      </div>
+    </div>
+    <div class="absolute top-[64px] left-[70px] w-[125px] p-1.5 rounded-lg bg-emerald-50/90 border border-emerald-200/90 dark:bg-emerald-950/60 dark:border-emerald-800/60 shadow-sm z-10">
+      <div class="text-[8px] text-gray-700 dark:text-gray-200 leading-tight">
+        Desactiva optimizaciones para ver el código literal.
+      </div>
+    </div>
+    <div class="absolute top-[22px] left-[272px] w-[120px] p-1.5 rounded-lg bg-purple-50/90 border border-purple-200/90 dark:bg-purple-950/60 dark:border-purple-800/60 shadow-sm z-10">
+      <div class="text-[8px] text-gray-700 dark:text-gray-200 leading-tight">
+        Utiliza la sintaxis Intel legible.
+      </div>
+    </div>
+  </div>
 </div>
 <!--
 Practiquemos ahora los comandos de consola en Linux para construir nuestros programas.
@@ -1554,7 +1590,11 @@ layout: two-cols
 transition: slide-left | slide-right
 ---
 
-# Taller 5: Depuración con GDB
+<div class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 tracking-wider mb-1 font-mono">
+  Práctica
+</div>
+
+# Depuración con GDB
 
 <div class="text-[11px] text-gray-600 dark:text-gray-400 mb-2">
 Control paso a paso e inspección de registros en tiempo de ejecución:
@@ -1600,25 +1640,13 @@ Control paso a paso e inspección de registros en tiempo de ejecución:
 
 ::right::
 
-<div v-click="5" class="p-2 bg-gray-50 border border-gray-200 dark:bg-gray-900/90 dark:border-gray-800 rounded-xl text-xs font-mono">
-  <div class="text-blue-600 dark:text-blue-400 font-bold text-center mb-1 font-sans text-[10.5px]">Interfaz visual GDB (TUI: layout asm / regs)</div>
-  <div class="bg-gray-950 border border-gray-800 text-gray-100 rounded p-1.5 text-[9px]">
-    <div class="text-gray-400 border-b border-gray-800 pb-0.5 mb-1 flex justify-between">
-      <span>Registro</span><span>Hexadecimal</span><span>Decimal</span>
-    </div>
-    <div class="text-emerald-400">eax &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x0000001e &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 30</div>
-    <div class="text-gray-300">ebx &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x00000000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0</div>
-    <div class="text-gray-300">eip &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0x0804900a &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;_start+10&gt;</div>
-    <div class="border-t border-gray-800 my-1 pt-1 text-gray-400 font-sans">
-      Desensamblado interactivo:
-    </div>
-    <div class="text-gray-500">0x08049000 &lt;_start&gt;: &nbsp;&nbsp;&nbsp; mov eax, ds:0x804a000</div>
-    <div class="text-gray-500">0x08049005 &lt;_start+5&gt;: &nbsp; add eax, ds:0x804a004</div>
-    <div class="text-amber-300 font-bold bg-amber-950/40">&gt; 0x0804900a &lt;_start+10&gt;: sub eax, 0x5</div>
-    <div class="text-gray-500">0x0804900d &lt;_start+13&gt;: mov ds:0x804a008, eax</div>
+<div v-click="5" class="flex flex-col items-center justify-center">
+  <div class="text-blue-600 dark:text-blue-400 font-bold text-center mb-1.5 font-sans text-[11px]">
+    Interfaz visual de GDB
   </div>
-  <div class="text-[9px] text-gray-500 dark:text-gray-400 text-center font-sans mt-1">
-    Activar con <i>layout asm</i> y <i>layout regs</i> (Salir con <i>Ctrl+X A</i>)
+  <img src="/images/gdb_sesion.png" class="rounded-lg shadow-md max-h-72 object-contain" />
+  <div class="text-[9px] text-gray-500 dark:text-gray-400 text-center font-sans mt-1.5">
+    Inspección interactiva con <i>layout asm</i> y <i>layout regs</i> (alternar con <i>Ctrl+X A</i>)
   </div>
 </div>
 <!--
@@ -1632,7 +1660,7 @@ Pasemos a la herramienta más poderosa para comprender y depurar código a bajo 
 
 [click] Con info registers consultamos el contenido de toda la CPU y con el comando examine inspeccionamos la memoria RAM.
 
-[click] A la derecha vemos el modo visual TUI. Al escribir layout asm y layout regs, la pantalla se divide mostrando en tiempo real los registros y la línea exacta de código que se está ejecutando.
+[click] A la derecha vemos la interfaz visual de GDB. Al escribir layout asm y layout regs, la pantalla se divide mostrando en tiempo real los registros y la línea exacta de código que se está ejecutando.
 -->
 
 ---
@@ -1733,33 +1761,74 @@ Revisemos los errores más comunes que suelen presentarse en prácticas y evalua
 transition: fade
 ---
 
-# Mini-quiz formativo (Sesión 2)
+# Ejercicios de práctica
+
+<div class="text-[11px] text-gray-600 dark:text-gray-400 mb-2">
+Instrucciones, registros y banderas de condición:
+</div>
 
 <div class="space-y-2 mt-3 text-xs font-sans">
 <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-xl">
   <strong class="text-blue-600 dark:text-blue-400 text-[11px]">1. ¿Por qué la instrucción mov [varB], [varA] genera un error en el ensamblador x86?</strong>
-  <p class="text-gray-700 dark:text-gray-300 mt-0.5 text-[10px]">
-    A) Porque las variables no están en la pila &nbsp;&nbsp;&nbsp; B) Porque la arquitectura x86 no soporta transferencias de memoria a memoria en una sola instrucción &nbsp;&nbsp;&nbsp; C) Porque los nombres de variables deben llevar prefijo
-  </p>
-  <div v-click="1" class="text-emerald-600 dark:text-emerald-400 mt-0.5 text-[10px] font-bold">
+  <div class="grid grid-cols-[1fr_1.35fr_1fr] gap-3 text-[9.5px] text-gray-700 dark:text-gray-300 mt-1.5 items-start leading-snug">
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">A)</span>
+      <span>Porque las variables no están en la pila</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">B)</span>
+      <span>Porque la arquitectura x86 no soporta transferencias de memoria a memoria en una sola instrucción</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">C)</span>
+      <span>Porque los nombres de variables deben llevar prefijo</span>
+    </div>
+  </div>
+  <div v-click="1" class="text-emerald-600 dark:text-emerald-400 mt-1 text-[10px] font-bold">
     &rarr; Respuesta correcta: B) En x86 ningún opcode estándar permite dos operandos de memoria simultáneos, requiriendo un registro intermediario.
   </div>
 </div>
 <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-xl">
   <strong class="text-amber-700 dark:text-amber-400 text-[11px]">2. Si EAX contiene 0x12345678 y ejecutamos mov al, 0x99, ¿cuál es el nuevo valor en EAX?</strong>
-  <p class="text-gray-700 dark:text-gray-300 mt-0.5 font-mono text-[10px]">
-    A) 0x99345678 &nbsp;&nbsp;&nbsp; B) 0x00000099 &nbsp;&nbsp;&nbsp; C) 0x12345699 &nbsp;&nbsp;&nbsp; D) 0x12349978
-  </p>
-  <div v-click="2" class="text-emerald-600 dark:text-emerald-400 mt-0.5 text-[10px] font-bold">
+  <div class="grid grid-cols-4 gap-3 text-[9.5px] font-mono text-gray-700 dark:text-gray-300 mt-1.5 items-start leading-snug">
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">A)</span>
+      <span>0x99345678</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">B)</span>
+      <span>0x00000099</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">C)</span>
+      <span>0x12345699</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">D)</span>
+      <span>0x12349978</span>
+    </div>
+  </div>
+  <div v-click="2" class="text-emerald-600 dark:text-emerald-400 mt-1 text-[10px] font-bold font-sans">
     &rarr; Respuesta correcta: C) 0x12345699, ya que AL modifica estrictamente los 8 bits inferiores (bits 7 a 0) preservando el resto de EAX.
   </div>
 </div>
 <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-xl">
   <strong class="text-purple-600 dark:text-purple-400 text-[11px]">3. ¿Qué diferencia clave existe entre inc eax y add eax, 1?</strong>
-  <p class="text-gray-700 dark:text-gray-300 mt-0.5 text-[10px]">
-    A) INC es más lenta &nbsp;&nbsp;&nbsp; B) INC no altera la bandera de acarreo CF &nbsp;&nbsp;&nbsp; C) ADD no altera la bandera de cero ZF
-  </p>
-  <div v-click="3" class="text-emerald-600 dark:text-emerald-400 mt-0.5 text-[10px] font-bold">
+  <div class="grid grid-cols-3 gap-3 text-[9.5px] text-gray-700 dark:text-gray-300 mt-1.5 items-start leading-snug">
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">A)</span>
+      <span>INC es más lenta</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">B)</span>
+      <span>INC no altera la bandera de acarreo CF</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">C)</span>
+      <span>ADD no altera la bandera de cero ZF</span>
+    </div>
+  </div>
+  <div v-click="3" class="text-emerald-600 dark:text-emerald-400 mt-1 text-[10px] font-bold">
     &rarr; Respuesta correcta: B) La instrucción INC preserva intacta la bandera de acarreo CF, mientras que ADD actualiza todas las banderas.
   </div>
 </div>
@@ -1775,6 +1844,91 @@ Pregunta dos: Si EAX vale 0x12345678 y modificamos AL con 0x99, ¿cuánto vale E
 
 Pregunta tres: ¿Qué diferencia existe entre inc eax y add eax, 1?
 [click] Muy bien, la instrucción INC preserva intacta la bandera de acarreo CF, propiedad fundamental cuando se implementa aritmética multiprecisión.
+-->
+
+---
+transition: fade
+---
+
+# Ejercicios de práctica
+
+<div class="text-[11px] text-gray-600 dark:text-gray-400 mb-2">
+Trazado en memoria, inspección con GDB y llamadas al sistema:
+</div>
+
+<div class="space-y-2 mt-3 text-xs font-sans">
+<div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-xl">
+  <strong class="text-blue-600 dark:text-blue-400 text-[11px]">4. Si en .data definimos a = 10 y b = 25, ¿cuáles son sus valores en memoria tras ejecutar: mov eax, [a] &bull; mov ebx, [b] &bull; xchg eax, ebx &bull; add eax, 5 &bull; mov [a], eax?</strong>
+  <div class="grid grid-cols-3 gap-3 text-[9.5px] text-gray-700 dark:text-gray-300 mt-1.5 items-start leading-snug font-mono">
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0 font-sans">A)</span>
+      <span>a = 15, b = 25</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0 font-sans">B)</span>
+      <span>a = 30, b = 25</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0 font-sans">C)</span>
+      <span>a = 30, b = 10</span>
+    </div>
+  </div>
+  <div v-click="1" class="text-emerald-600 dark:text-emerald-400 mt-1 text-[10px] font-bold font-sans">
+    &rarr; Respuesta correcta: B) XCHG permuta EAX (10) con EBX (25). Tras sumar 5 a EAX se obtiene 30, que se almacena en [a]. La variable [b] en memoria nunca fue sobrescrita.
+  </div>
+</div>
+<div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-xl">
+  <strong class="text-amber-700 dark:text-amber-400 text-[11px]">5. ¿Cuál comando de GDB permite examinar cuatro palabras dobles en hexadecimal a partir de la etiqueta datos?</strong>
+  <div class="grid grid-cols-3 gap-3 text-[9.5px] font-mono text-gray-700 dark:text-gray-300 mt-1.5 items-start leading-snug">
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0 font-sans">A)</span>
+      <span>print /4x datos</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0 font-sans">B)</span>
+      <span>x/4xw &datos</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0 font-sans">C)</span>
+      <span>info memory datos 4</span>
+    </div>
+  </div>
+  <div v-click="2" class="text-emerald-600 dark:text-emerald-400 mt-1 text-[10px] font-bold font-sans">
+    &rarr; Respuesta correcta: B) x/4xw &datos indica examinar con formato hexadecimal (x) cuatro unidades (4) de tamaño palabra doble (w = word de 32 bits en GDB).
+  </div>
+</div>
+<div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-xl">
+  <strong class="text-purple-600 dark:text-purple-400 text-[11px]">6. Para finalizar un proceso en Linux x86 retornando código 0 mediante int 0x80, ¿qué registros deben prepararse?</strong>
+  <div class="grid grid-cols-3 gap-3 text-[9.5px] text-gray-700 dark:text-gray-300 mt-1.5 items-start leading-snug font-mono">
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0 font-sans">A)</span>
+      <span>EAX = 0, EBX = 1</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0 font-sans">B)</span>
+      <span>EAX = 1, EBX = 0</span>
+    </div>
+    <div class="flex items-start gap-1">
+      <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0 font-sans">C)</span>
+      <span>EAX = 4, EBX = 1</span>
+    </div>
+  </div>
+  <div v-click="3" class="text-emerald-600 dark:text-emerald-400 mt-1 text-[10px] font-bold font-sans">
+    &rarr; Respuesta correcta: B) En Linux x86 el número de servicio sys_exit es 1 en EAX, y el código de retorno al sistema se pasa en el registro EBX.
+  </div>
+</div>
+</div>
+<!--
+Continuemos con la segunda ronda de ejercicios prácticos de consolidación.
+
+Pregunta cuatro: Analicemos la traza de memoria. Cargamos diez en EAX y veinticinco en EBX. Al aplicar XCHG, los registros se permutan. Luego sumamos cinco a EAX, resultando treinta, y lo almacenamos en la variable a.
+[click] Muy bien, la respuesta es la B: a queda en treinta y b continúa valiendo veinticinco, pues nunca modificamos la celda de memoria de b.
+
+Pregunta cinco: ¿Qué comando de GDB nos permite inspeccionar cuatro palabras dobles consecutivas en hexadecimal?
+[click] Excelente, la respuesta correcta es x/4xw &datos. La x invoca el comando examine, el cuatro la cantidad, la segunda x el formato hexadecimal y la w el tamaño de palabra de cuatro bytes.
+
+Pregunta seis: Para cerrar nuestro proceso y devolver el control al sistema operativo sin errores:
+[click] Exactamente, la opción B: cargamos el identificador de servicio uno en EAX y el código cero en EBX antes de disparar la interrupción cero por ochenta.
 -->
 
 ---

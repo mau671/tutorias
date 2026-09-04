@@ -167,7 +167,7 @@ Con esto concluimos la primera sesión teórica. Hemos cubierto la relación ent
 
 ---
 
-### Diapositiva 13: Sesión 02: Taller práctico
+### Diapositiva 13: Sesión 02: Práctica guiada
 
 ¡Bienvenidos a la segunda sesión de la semana!
 
@@ -191,7 +191,7 @@ Antes de iniciar los ejercicios prácticos, repasemos los objetivos de esta segu
 
 ---
 
-### Diapositiva 15: Taller 1: Programa mínimo en NASM
+### Diapositiva 15: Práctica: Programa mínimo en NASM
 
 Comencemos con nuestro primer taller práctico construyendo el programa ejecutable mínimo en NASM.
 
@@ -205,7 +205,7 @@ Comencemos con nuestro primer taller práctico construyendo el programa ejecutab
 
 ---
 
-### Diapositiva 16: Taller 2: Traducción de C a NASM
+### Diapositiva 16: Práctica: Traducción de C a NASM
 
 En este segundo taller traduciremos una expresión matemática típica de C a ensamblador x86.
 
@@ -219,7 +219,7 @@ En este segundo taller traduciremos una expresión matemática típica de C a en
 
 ---
 
-### Diapositiva 17: Taller 3: Operadores unarios y XCHG
+### Diapositiva 17: Práctica: Operadores unarios y XCHG
 
 Veamos ahora la traducción de operadores unarios y el intercambio eficiente de variables.
 
@@ -233,7 +233,7 @@ Veamos ahora la traducción de operadores unarios y el intercambio eficiente de 
 
 ---
 
-### Diapositiva 18: Taller 4: Compilación y ensamble
+### Diapositiva 18: Práctica: Compilación y ensamble
 
 Practiquemos ahora los comandos de consola en Linux para construir nuestros programas.
 
@@ -247,7 +247,7 @@ Practiquemos ahora los comandos de consola en Linux para construir nuestros prog
 
 ---
 
-### Diapositiva 19: Taller 5: Depuración con GDB
+### Diapositiva 19: Práctica: Depuración con GDB
 
 Pasemos a la herramienta más poderosa para comprender y depurar código a bajo nivel: GDB.
 
@@ -259,7 +259,7 @@ Pasemos a la herramienta más poderosa para comprender y depurar código a bajo 
 
 [click] Con info registers consultamos el contenido de toda la CPU y con el comando examine inspeccionamos la memoria RAM.
 
-[click] A la derecha vemos el modo visual TUI. Al escribir layout asm y layout regs, la pantalla se divide mostrando en tiempo real los registros y la línea exacta de código que se está ejecutando.
+[click] A la derecha vemos la interfaz visual de GDB. Al escribir layout asm y layout regs, la pantalla se divide mostrando en tiempo real los registros y la línea exacta de código que se está ejecutando.
 
 ---
 
@@ -277,9 +277,9 @@ Revisemos los errores más comunes que suelen presentarse en prácticas y evalua
 
 ---
 
-### Diapositiva 21: Mini-quiz formativo (Sesión 2)
+### Diapositiva 21: Ejercicios de práctica
 
-Evaluemos lo aprendido con este breve cuestionario interactivo.
+Evaluemos lo aprendido con esta primera ronda de ejercicios prácticos de consolidación.
 
 Pregunta uno: ¿Por qué la instrucción mov [varB], [varA] produce un error de ensamblado?
 [click] Correcto, porque en x86 la arquitectura no soporta dos operandos de memoria en una misma instrucción.
@@ -292,7 +292,22 @@ Pregunta tres: ¿Qué diferencia existe entre inc eax y add eax, 1?
 
 ---
 
-### Diapositiva 22: Conclusiones y siguiente paso
+### Diapositiva 22: Ejercicios de práctica
+
+Continuemos con la segunda ronda de ejercicios prácticos de consolidación.
+
+Pregunta cuatro: Analicemos la traza de memoria. Cargamos diez en EAX y veinticinco en EBX. Al aplicar XCHG, los registros se permutan. Luego sumamos cinco a EAX, resultando treinta, y lo almacenamos en la variable a.
+[click] Muy bien, la respuesta es la B: a queda en treinta y b continúa valiendo veinticinco, pues nunca modificamos la celda de memoria de b.
+
+Pregunta cinco: ¿Qué comando de GDB nos permite inspeccionar cuatro palabras dobles consecutivas en hexadecimal?
+[click] Excelente, la respuesta correcta es x/4xw &datos. La x invoca el comando examine, el cuatro la cantidad, la segunda x el formato hexadecimal y la w el tamaño de palabra de cuatro bytes.
+
+Pregunta seis: Para cerrar nuestro proceso y devolver el control al sistema operativo sin errores:
+[click] Exactamente, la opción B: cargamos el identificador de servicio uno en EAX y el código cero en EBX antes de disparar la interrupción cero por ochenta.
+
+---
+
+### Diapositiva 23: Conclusiones y siguiente paso
 
 Con esto concluimos la quinta semana de tutorías de Arquitectura de Computadores.
 

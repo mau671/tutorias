@@ -5,3 +5,4 @@ dist_*/
 .vite/
 *.log
 .DS_Store
+*.o

@@ -15,8 +15,11 @@ Este agente/skill automatiza el diseño, programación y redacción de presentac
 * **Capacidad bi-sesional completa:** Cada presentación `slides.md` debe estructurarse para cubrir dos sesiones independientes de tutoría de **1.5 horas (90 minutos)** cada una (3 horas totales a la semana):
   - **Bloque 1 (Sesión 1 - 90 min):** Fundamentos teóricos, modelos arquitectónicos, análisis de conceptos clave y primeros ejemplos guiados.
   - **Diapositiva divisoria intermedia:** Diapositiva especial (`layout: section`) que marca el inicio de la **Sesión 2**, recapitulando los fundamentos previos y listando los objetivos del taller práctico.
-  - **Bloque 2 (Sesión 2 - 90 min):** Profundización técnica de bajo nivel, taller práctico en vivo (ejercicios paso a paso en ensamblador / C / cálculo binario / trazas de pipeline) y evaluación corta / quiz formativo.
+  - **Bloque 2 (Sesión 2 - 90 min):** Profundización técnica de bajo nivel, taller práctico en vivo (ejercicios paso a paso en ensamblador / C / cálculo binario / trazas de pipeline) y retos formativos de consolidación.
 * **Extensión adecuada:** Generar un deck completo (generalmente entre 20 y 35 diapositivas bien estructuradas) para cubrir holgadamente ambas jornadas con alta densidad técnica y visual.
+* **Alineación y verificación obligatoria contra `CRONOGRAMA.md`:**
+  - Antes de diseñar o dar por concluida cualquier semana `SXX/slides.md`, se DEBE cotejar punto por punto la lista de temas teóricos (Sesión 1) y prácticos (Sesión 2) definidos en `CRONOGRAMA.md`.
+  - Todo concepto de teoría debe tener su diapositiva explicativa y todo taller práctico, herramienta (ej. GDB, Make, GCC) o trampa recurrente debe estar integrado con ejemplos interactivos y ejercicios de consolidación correspondientes.
 
 ---
 
@@ -99,8 +102,62 @@ Las diapositivas NO deben ser genéricas ni consistir únicamente en listas inte
   - **Prohibición de `theme: 'dark'` o `theme: 'neutral'` cableados:** NO fijar temas rígidos en el bloque ```` ```mermaid {theme: 'dark'} ````; permitir que el sistema CSS global (`styles/index.css`) controle la reactividad clara/oscura.
   - **Pipelines con salidas/artefactos laterales:** Cuando un flujo requiera una columna central rígida (ej. fases de compilación `gcc`, pipelines de instrucciones) con flechas hacia la derecha apuntando a artefactos (`ejemplo.c`, `ejemplo.s`), NO usar diagramas ramificados en Mermaid (el motor Dagre fuerza una estructura en árbol/zigzag desplazando la columna principal). En su lugar, estructurar el pipeline con HTML/Tailwind nativo, donde la columna principal se mantiene 100% vertical, los conectores verticales cortan limpiamente en las etiquetas de herramientas (`gcc -E`, `as`, `ld`) sin líneas cruzadas, y las flechas laterales apuntan con precisión a badges de archivo (`bg-emerald-50 text-emerald-700`).
 * **Separación estricta de la Sesión 2 en 2 diapositivas independientes:**
-  - **Diapositiva A (Portada de Sesión 2):** Diapositiva centrada (`layout: center`, `transition: slide-up | slide-down`) con número de semana, título de la sesión y subtítulo. Queda estrictamente prohibido colocar los objetivos en esta diapositiva.
+  - **Diapositiva A (Portada de Sesión 2):** Diapositiva centrada (`layout: center`, `transition: slide-up | slide-down`) con número de semana, título de la sesión (usar `# Sesión 02: Práctica guiada` o `# Sesión 02: Práctica de laboratorio`, PROHIBIDO "Taller práctico") y subtítulo. Queda estrictamente prohibido colocar los objetivos en esta diapositiva.
   - **Diapositiva B (Objetivos de la Sesión 2):** Diapositiva independiente (`transition: fade`) con `# Objetivos de la segunda sesión`, lista `<v-clicks>` y guión oral sincronizado.
+* **Estandarización de actividades prácticas (Kicker `Práctica`):**
+  - **Prohibición de `# Taller X: [Nombre]`:** En las diapositivas de la Sesión 2, PROHIBIDO titular directamente con `Taller 1`, `Taller 2`, etc.
+  - **Kicker sobrio y Sentence Case:** Utilizar un kicker superior con la palabra fija **`Práctica`** en Sentence Case y color apagado (*muted*), seguido del título temático en `# [Nombre en Sentence Case]`:
+    ```html
+    <div class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 tracking-wider mb-1 font-mono">
+      Práctica
+    </div>
+
+    # Nombre de la actividad práctica
+    ```
+* **Cobertura y estructura de preguntas de práctica (Sin límite de 3 preguntas):**
+  - **Prohibición de "Mini-quiz":** PROHIBIDO titular `# Mini-quiz formativo (Sesión X)` o `# Quiz corto`. Utilizar denominaciones académicas limpias como `# Ejercicios de práctica` y `# Ejercicios de práctica (Parte 2)` (o `# Desafíos de consolidación`).
+  - **Multi-diapositiva de práctica obligatoria:** En las tutorías de 90 minutos de práctica, 3 preguntas resultan insuficientes para evaluar la totalidad de destrezas de la semana. Por lo tanto, **NO limitar los ejercicios a una sola diapositiva ni a un máximo de 3 preguntas**.
+  - **Distribución balanceada (6 a 9 preguntas en 2 o 3 diapositivas):**
+    - Diseñar **entre 2 y 3 diapositivas consecutivas de ejercicios de práctica**.
+    - Mantener un máximo de **3 preguntas por diapositiva** para garantizar aireación vertical, tipografía legible y evitar saturación visual.
+    - Asegurar que el conjunto de preguntas cubra exhaustivamente todas las áreas de la Sesión 2 descritas en `CRONOGRAMA.md` (ej. sintaxis y tipos de datos, interpretación de registros y banderas, depuración con GDB/herramientas y diagnóstico de trampas/errores comunes).
+* **Distribución en columnas para opciones de preguntas (`A)`, `B)`, `C)`, `D)`):**
+  - **Prohibición de opciones en párrafo continuo:** PROHIBIDO listar opciones dentro de un mismo `<p>` o en texto continuo donde las opciones largas salten de línea hacia el margen izquierdo cortando la lectura de la opción previa.
+  - **Columnas alineadas con envoltura vertical interna:** Estructurar las opciones en columnas independientes con cuadrícula (`grid grid-cols-... items-start`) o flexbox, con la letra fija (`<span class="font-bold shrink-0">A)</span>`) y el texto al lado (`<span>`):
+    ```html
+    <div class="grid grid-cols-3 gap-3 text-[9.5px] text-gray-700 dark:text-gray-300 mt-1.5 items-start leading-snug">
+      <div class="flex items-start gap-1">
+        <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">A)</span>
+        <span>Opción corta</span>
+      </div>
+      <div class="flex items-start gap-1">
+        <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">B)</span>
+        <span>Opción larga cuyo texto si supera el ancho envuelve debajo de sí misma sin saltar al inicio de la fila</span>
+      </div>
+      <div class="flex items-start gap-1">
+        <span class="font-bold text-gray-900 dark:text-gray-100 shrink-0">C)</span>
+        <span>Tercera opción en su respectiva columna</span>
+      </div>
+    </div>
+    ```
+* **Principio de ligereza visual y anti-cajas (*Anti-card wrapping*):**
+  - **Las tarjetas NO son un fondo decorativo universal:** PROHIBIDO envolver tablas comparativas, diagramas Mermaid, bloques de código, flujos con flechas o capturas de terminal dentro de tarjetas genéricas (`bg-gray-50 border ... rounded-xl`).
+  - Cada componente técnico debe lucir su propia estructura: las tablas con sus cabeceras limpias, los terminales con su marco nativo de ventana, y los flujos con sus nodos y conectores directos.
+  - Usar tarjetas exclusivamente cuando sea necesario agrupar semánticamente bloques fragmentados de texto o pares de datos (como la cuadrícula 2x2 de los registros EAX, EBX, ECX, EDX).
+* **Centrado armónico de títulos en artefactos técnicos:**
+  - Todo título que corone una tabla, una jerarquía de registros, un bloque de comandos o una captura gráfica en la columna derecha debe estar centrado horizontalmente (`text-center`), en tipografía sans-serif (`font-sans`), peso negrita (`font-bold`) y tamaño sobrio (`text-[11px]` o `text-[10.5px]`), con el acento cromático institucional (`text-blue-600 dark:text-blue-400 mb-1.5`).
+* **Prohibición de mini-títulos redundantes dentro de paneles:**
+  - Evitar colocar mini-encabezados interiores que repitan lo que ya declara el título principal `#` o el subtítulo de la diapositiva (ej. en una diapositiva titulada `# Banco de registros x86`, evitar insertar un subtítulo interno como `Registros de propósito general (32 bits)`). Reducir el ruido textual para resaltar el contenido técnico.
+* **Ajuste compacto de tarjetas (*Fit-content* sin vacíos innecesarios):**
+  - Las tarjetas (`cards`) deben abrazar su contenido real con espaciado vertical ceñido (`px-2 py-1` o `p-2`, `leading-tight` o `leading-snug`). PROHIBIDO dejar tarjetas con alturas desmedidas o vacíos verticales desproporcionados.
+  - En desglose de registros o banderas (ej. FLAGS), evitar badges redundantes de cabecera (`Acarreo`, `Cero`) cuando la estructura directa en una sola fila `FLAG: Explicación` resulte más compacta y legible.
+* **Prohibición de acotaciones redundantes entre paréntesis:**
+  - PROHIBIDO incluir notas obvias o redundantes entre paréntesis dentro de títulos o tarjetas (ej. `(TUI: ...)`, `(16 bits)` cuando el bus o registro lo hace evidente, `(IA-32)`, `(sin prefijos %)`). Redactar explicaciones limpias y directas.
+* **Alineación geométrica y flechas explicativas en comandos:**
+  - Al desglosar comandos o instrucciones mediante flechas SVG:
+    - La coordenada $X$ de origen de cada flecha debe coincidir con el centro geométrico exacto del parámetro o badge superior.
+    - Configurar los marcadores con `refX="5"` y finalizar la línea 4px antes del borde de la tarjeta para evitar que la punta quede tapada o cortada por el contenedor receptor.
+    - Para tarjetas contiguas, emplear codos en ángulo recto (`└──►`) que desplacen la tarjeta lateralmente.
 * **Marcadores y transformaciones animadas:**
   - Usar marcadores visuales `v-mark` (ej. `<span v-mark="{ at: 1, color: 'red', type: 'underline' }">...</span>`).
   - Utilizar transformaciones de código animadas con `magic-move` (```` ````md magic-move ```` ````).
@@ -135,6 +192,25 @@ Las diapositivas NO deben ser genéricas ni consistir únicamente en listas inte
       --bbox 0.15 0.10 0.55 0.90
     ```
   - **PROHIBIDO incluir leyendas o números de figura del libro original** dentro del recorte. El recorte debe contener estrictamente el gráfico limpio.
+* **Capturas reales de terminal para ejecución y depuración de programas (Skill `capturas-terminal`):**
+  - **Evidencia verídica obligatoria:** Siempre que una diapositiva requiera mostrar la ejecución de un programa en terminal, depuración interactiva con GDB, salida de comandos de Linux, árboles de procesos o pruebas prácticas, DEBES usar EXCLUSIVAMENTE la skill `capturas-terminal`.
+  - **Prohibición terminante de imágenes sintéticas o maquetas HTML:**
+    - PROHIBIDO crear tarjetas con fondo negro simulando ventanas de terminal (`<div class="bg-gray-950 ...">`).
+    - PROHIBIDO generar imágenes sintéticas con Python (Pillow/PIL), SVG o Canvas.
+    - Se debe abrir una ventana gráfica real de **Alacritty**, ejecutar el comando o sesión de depuración y capturar la ventana activa con **Spectacle** (`spectacle -b -n -a -o ...`).
+  - **Uso exclusivo de Alacritty y Spectacle:**
+    - Usar `alacritty` exclusivamente (NO Konsole, NO xterm).
+    - Dimensiones controladas: `-o "window.dimensions.columns=80..85"` y `-o "window.dimensions.lines=20..24"`.
+    - Título de ventana descriptivo y en **Sentence Case** obligatorio (PROHIBIDO títulos genéricos como `"Terminal"`, `"Mockup"`, `"Prueba"` o `"Consola"`).
+  - **Ubicación limpia fuera de tarjetas envolventes (Anti-card wrapping):**
+    - Las capturas de terminal de Alacritty ya incorporan de forma nativa la barra de título, controles de ventana, bordes y sombra de KDE Plasma / Wayland.
+    - PROHIBIDO envolver la captura dentro de un contenedor o tarjeta adicional (`bg-gray-50 border ... rounded-xl`).
+    - Colocar el título temático afuera (`<div class="text-blue-600 dark:text-blue-400 font-bold text-center mb-1.5 font-sans text-[11px]">Título</div>`), la imagen directa (`<img src="/images/...png" class="rounded-lg shadow-md max-h-72 object-contain" />`) y el pie explicativo abajo en texto sutil (`text-[9px] text-gray-500 dark:text-gray-400 text-center font-sans mt-1.5`).
+  - **Seguridad en la gestión de procesos (PROHIBIDO `killall alacritty`):**
+    - NUNCA ejecutar `killall alacritty` ni `killall -9 alacritty`, ya que cierra de golpe la terminal de trabajo activa del usuario.
+    - Capturar siempre el PID específico del subshell o terminal lanzado en segundo plano (`TERM_PID=$!`) y finalizar estrictamente dicho proceso (`kill -9 $TERM_PID 2>/dev/null || true`).
+  - **Rutas de depuración limpias y sin saltos feos:**
+    - Al compilar binarios para depuración con GDB, usar rutas relativas o `-fdebug-prefix-map=$PWD=.` para evitar que rutas absolutas largas provoquen saltos de línea antiestéticos en el terminal.
 * **Prohibición de estilo IA neón:**
   - Queda prohibido generar imágenes con estética *cyberpunk*, neón, brillos exagerados o degradados magenta/cyan. Los gráficos deben ser sobrios, planos (*flat design*) y académicos.
 * **Rutas públicas en Slidev:**
@@ -216,19 +292,19 @@ Cada semana desglosa con precisión el contenido de la **Sesión 1** y la **Sesi
 * **Bibliografía:** Libro C (capítulo 6), Sivarama (capítulos 15 y 16).
 
 ### S09: Llamadas al sistema e interacción con el sistema operativo
-* **Sesión 1 (Teoría):** Modo dual (usuario / núcleo). Interrupciones por software y mecanismo de *syscalls* en Linux (x86 `int 0x80` vs x86-64 `syscall`).
-* **Sesión 2 (Práctica):** Taller de E/S básica: lectura y escritura en consola mediante llamadas al sistema. Manejo de archivos desde ensamblador.
+* **Sesión 1 (Teoría):** Modo dual (usuario / núcleo). Interrupciones por software y mecanismo de *syscalls* en Linux (x86 `int 0x80` vs x86-64 `syscall`). Descriptores de archivo estándar POSIX (`stdin = 0`, `stdout = 1`, `stderr = 2`).
+* **Sesión 2 (Práctica):** Taller de E/S básica por consola: captura de texto desde teclado con `sys_read` en buffers `.bss` y despliegue interactivo con `sys_write`.
 * **Bibliografía:** Libro C (capítulo 7), Sivarama (capítulos 17 y 18).
 
-### S10: Macros, directivas de memoria y arreglos
-* **Sesión 1 (Teoría):** Macros de preensamblado vs rutinas. Directivas de datos (`db`, `dw`, `dd`, `resb`, `resd`). Organización de arreglos contiguos en memoria.
-* **Sesión 2 (Práctica):** Taller de recorrido y manipulación de arreglos numéricos y cadenas en NASM. Práctica guiada con arreglos.
-* **Bibliografía:** Sivarama (capítulos 19 y 20).
+### S10: Procesamiento de cadenas y manipulación de memoria
+* **Sesión 1 (Teoría):** Representación de cadenas ASCIIZ, registros especializados (ESI, EDI, ECX), bandera DF (`cld`/`std`), instrucciones de bloque (`movsb`/`movsd`, `stosb`/`stosd`, `lodsb`/`lodsd`, `cmpsb`/`cmpsd`, `scasb`/`scasd`) y prefijos de repetición (`rep`, `repe`, `repne`).
+* **Sesión 2 (Práctica):** Taller de implementación de funciones estándar de memoria en NASM: `strlen`, `memcpy`, `strcpy`, `memset`, `strcmp` y análisis de eficiencia en ciclos de procesador.
+* **Bibliografía:** Sivarama (capítulos 17 y 18).
 
-### S11: Modularización, enlazado y segmentación
-* **Sesión 1 (Teoría):** Compilación y ensamblado separado. Símbolos globales (`global`) y externos (`extern`). Proceso de enlazado (*linking*) y resolución de direcciones.
-* **Sesión 2 (Práctica):** Taller de integración de módulos mixtos: invocar rutinas escritas en NASM desde un programa principal en C y viceversa.
-* **Bibliografía:** Sivarama (capítulos 21 y 22).
+### S11: Manejo de archivos en disco, macros y modularización (C con NASM)
+* **Sesión 1 (Teoría):** Persistencia en disco en Linux (`sys_open`, `sys_creat`, `sys_close`, `sys_lseek`), modos de apertura y permisos octales. Preprocesador de NASM (`%define`, `%include`, `%macro`). Modularización y enlace separado (`global`, `extern`).
+* **Sesión 2 (Práctica):** Taller de creación y escritura de archivos en disco, lectura por bloques a buffers de memoria y proyecto híbrido modular C + NASM compilado con `gcc -m32`.
+* **Bibliografía:** Sivarama (capítulos 19, 20 y 21), Libro C (capítulo 8).
 
 ### S12: Arquitectura del procesador, segmentación (pipeline) y riesgos
 * **Sesión 1 (Teoría):** Concepto de pipeline y etapas clásicas (IF, ID, EX, MEM, WB). Riesgos estructurales, de datos (dependencias RAW, WAR, WAW) y de control. Comparación RISC vs CISC.
