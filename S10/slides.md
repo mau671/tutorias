@@ -275,12 +275,10 @@ La bandera de dirección en <i>EFLAGS</i> determina el sentido de avance en memo
       <div class="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-1.5 rounded text-gray-700 dark:text-gray-300">0x102</div>
       <div class="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-1.5 rounded text-gray-700 dark:text-gray-300">0x103</div>
     </div>
-
     <div class="p-2 bg-emerald-50 border border-emerald-200 dark:bg-emerald-950/40 dark:border-emerald-800/40 rounded-lg flex justify-between items-center text-[10px] text-emerald-800 dark:text-emerald-300">
       <span class="font-bold font-mono">CLD (DF = 0):</span>
       <span>Avance ascendente &rarr; (+1 byte)</span>
     </div>
-
     <div class="p-2 bg-rose-50 border border-rose-200 dark:bg-rose-950/40 dark:border-rose-800/40 rounded-lg flex justify-between items-center text-[10px] text-rose-800 dark:text-rose-300">
       <span class="font-bold font-mono">STD (DF = 1):</span>
       <span>Avance descendente &larr; (-1 byte)</span>
@@ -350,13 +348,11 @@ Instrucciones básicas para transferir y almacenar bloques de memoria:
       <span>[ESI] &rarr; AL</span>
       <span class="text-gray-500 font-sans text-[8.5px]">ESI &plusmn; 1</span>
     </div>
-
     <div class="p-2 bg-emerald-50 border border-emerald-200 dark:bg-emerald-950/40 dark:border-emerald-800/40 rounded-lg flex justify-between items-center text-gray-800 dark:text-gray-200">
       <span class="font-bold text-emerald-700 dark:text-emerald-300 font-sans">STOSB:</span>
       <span>AL &rarr; [EDI]</span>
       <span class="text-gray-500 font-sans text-[8.5px]">EDI &plusmn; 1</span>
     </div>
-
     <div class="p-2 bg-amber-50 border border-amber-200 dark:bg-amber-950/40 dark:border-amber-800/40 rounded-lg flex justify-between items-center text-gray-800 dark:text-gray-200">
       <span class="font-bold text-amber-800 dark:text-amber-300 font-sans">MOVSB:</span>
       <span>[ESI] &rarr; [EDI]</span>
@@ -424,7 +420,6 @@ Comparación de bloques y búsqueda de caracteres actualizando banderas:
         <span class="text-rose-600 dark:text-rose-400 font-bold">Distintos: ZF = 0</span>
       </div>
     </div>
-
     <div class="p-2 bg-emerald-50 border border-emerald-200 dark:bg-emerald-950/40 dark:border-emerald-800/40 rounded-lg">
       <div class="font-bold text-emerald-700 dark:text-emerald-300 font-mono mb-1 text-[10px]">SCASB: AL vs [EDI]</div>
       <div class="flex justify-around font-mono text-[9px]">
@@ -857,7 +852,6 @@ limpiar_memoria:
   <div class="text-blue-600 dark:text-blue-400 font-bold text-center mb-1 text-[11px]">
     Efecto del relleno en memoria (REP STOSB)
   </div>
-
   <div class="w-full max-w-[340px] space-y-2">
     <div>
       <div class="text-[9px] text-gray-500 dark:text-gray-400 mb-1">Contenido previo (basura en memoria):</div>
@@ -868,11 +862,9 @@ limpiar_memoria:
         <div class="bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-1 rounded text-gray-500">0x8B</div>
       </div>
     </div>
-
     <div class="text-center font-mono text-[9.5px] font-bold text-emerald-600 dark:text-emerald-400">
       &darr; Relleno en microcódigo con AL = 0x00 &darr;
     </div>
-
     <div>
       <div class="text-[9px] text-gray-500 dark:text-gray-400 mb-1">Buffer inicializado:</div>
       <div class="grid grid-cols-4 gap-1 text-center font-mono text-[9.5px]">

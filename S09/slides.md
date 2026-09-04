@@ -352,7 +352,7 @@ Evolución del mecanismo de invocación al núcleo entre generaciones:
     </p>
   </div>
 
-  <div v-click="2" class="p-2 bg-gray-900/60 border border-gray-800 rounded-lg">
+  <div v-click="2" class="p-2 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
     <div class="text-emerald-600 dark:text-emerald-400 font-bold text-[10.5px] mb-0.5">Arquitectura x86-64 (64 bits &bull; AMD64)</div>
     <p class="text-gray-600 dark:text-gray-300 text-[9.5px] leading-snug">
       Utiliza la instrucción especializada <i>syscall</i>. Salta de forma ultrarrápida usando registros de modelo específico (<i>MSR</i>) sin consultar la IDT.
@@ -480,19 +480,16 @@ Abstracción unificada de flujos de entrada y salida mediante identificadores en
       <span class="font-bold text-gray-800 dark:text-gray-200">stdin</span>
       <span class="text-gray-500 dark:text-gray-400 font-sans text-[9px]">/dev/tty (teclado)</span>
     </div>
-
     <div class="flex items-center justify-between p-1.5 bg-white dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 rounded-md font-mono text-[9.5px]">
       <span class="px-1.5 py-0.5 rounded bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 font-bold">FD 1</span>
       <span class="font-bold text-gray-800 dark:text-gray-200">stdout</span>
       <span class="text-gray-500 dark:text-gray-400 font-sans text-[9px]">/dev/pts/X (pantalla)</span>
     </div>
-
     <div class="flex items-center justify-between p-1.5 bg-white dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 rounded-md font-mono text-[9.5px]">
       <span class="px-1.5 py-0.5 rounded bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300 font-bold">FD 2</span>
       <span class="font-bold text-gray-800 dark:text-gray-200">stderr</span>
       <span class="text-gray-500 dark:text-gray-400 font-sans text-[9px]">/dev/pts/X (sin buffer)</span>
     </div>
-
     <div class="flex items-center justify-between p-1.5 bg-white/50 dark:bg-gray-800/40 border border-gray-200/60 dark:border-gray-700/40 rounded-md font-mono text-[9.5px] opacity-75">
       <span class="px-1.5 py-0.5 rounded bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 font-bold">FD 3+</span>
       <span class="text-gray-600 dark:text-gray-300">Archivos / Sockets</span>
@@ -639,10 +636,10 @@ section .data
   longitud equ $ - saludo
 ```
 
-    <p class="mt-1 text-gray-600 dark:text-gray-300 font-sans text-[9.5px] leading-snug">
-      El símbolo especial <i>$</i> representa la dirección de memoria actual. Al restarle la dirección inicial <i>saludo</i>, NASM calcula en tiempo de ensamblado los bytes exactos.
-    </p>
-  </div>
+  <p class="mt-1 text-gray-600 dark:text-gray-300 font-sans text-[9.5px] leading-snug">
+    El símbolo especial <i>$</i> representa la dirección de memoria actual. Al restarle la dirección inicial <i>saludo</i>, NASM calcula en tiempo de ensamblado los bytes exactos.
+  </p>
+</div>
 
   <div v-click="4" class="p-2 bg-purple-50 border border-purple-200 dark:bg-purple-950/40 dark:border-purple-800/40 rounded-lg text-[9.5px] font-sans text-gray-700 dark:text-gray-300">
     <span class="text-purple-700 dark:text-purple-300 font-bold block mb-0.5">Propiedad de equ:</span>
@@ -1029,7 +1026,6 @@ Sustitución del byte <i>0x0A</i> por el terminador nulo <i>0x00</i> (formato AS
   </div>
 
   <div class="w-full max-w-[340px] space-y-2">
-    <!-- Antes -->
     <div>
       <div class="text-[9px] text-gray-500 dark:text-gray-400 mb-1">Tras sys_read (EAX = 5):</div>
       <div class="grid grid-cols-5 gap-1 text-center font-mono text-[9.5px]">
@@ -1040,12 +1036,9 @@ Sustitución del byte <i>0x0A</i> por el terminador nulo <i>0x00</i> (formato AS
         <div class="bg-rose-100 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-700 p-1 rounded font-bold text-rose-700 dark:text-rose-300">0x0A</div>
       </div>
     </div>
-
     <div class="text-center font-mono text-[9.5px] font-bold text-amber-700 dark:text-amber-400">
       &darr; dec eax &bull; mov byte [nom + eax], 0x00 &darr;
     </div>
-
-    <!-- Después -->
     <div>
       <div class="text-[9px] text-gray-500 dark:text-gray-400 mb-1">Cadena terminada en nulo (ASCIIZ):</div>
       <div class="grid grid-cols-5 gap-1 text-center font-mono text-[9.5px]">
