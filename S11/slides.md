@@ -1171,13 +1171,18 @@ transition: slide-left | slide-right
 Manejo de errores del kernel y validación en consola:
 </div>
 
-<div class="space-y-2 font-sans text-[9.5px]">
-  <div class="p-2 bg-rose-50 border border-rose-200 dark:bg-rose-950/40 dark:border-rose-800/40 rounded-lg text-rose-900 dark:text-rose-200">
-    <div class="font-bold text-[10px] mb-0.5">Manejo de errores del kernel</div>
-    <p class="text-[9px] leading-snug">
-      Si la creación falla (ej. por intentar escribir en un directorio protegido como <i>/root/</i>), el programa debe emitir un mensaje de diagnóstico al canal de error estándar (FD 2) y salir con código no nulo.
+<div class="space-y-2 font-sans text-xs">
+  <div class="space-y-0.5">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-rose-600 dark:text-rose-400 text-[11px]">Tratamiento de excepción</span>
+      <span class="text-rose-400 dark:text-rose-500/60 font-mono text-xs">&mdash;&mdash;&gt;</span>
+      <code class="text-[9.5px] font-mono text-rose-700 bg-rose-50 border border-rose-200 dark:text-rose-300 dark:bg-rose-950/60 dark:border-rose-800/40 px-1.5 py-0.5 rounded">stderr (FD 2)</code>
+    </div>
+    <p class="text-gray-600 dark:text-gray-400 text-[9.5px] leading-snug pl-1">
+      Si la creación falla, emite el diagnóstico hacia FD 2 y finaliza con código no nulo.
     </p>
   </div>
+
   <div v-click="1" class="font-mono text-[8px]">
 
 ```asm
