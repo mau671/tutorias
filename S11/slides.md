@@ -778,51 +778,72 @@ transition: slide-left | slide-right
 Conexión de módulos compilados de forma independiente:
 </div>
 
-<div class="space-y-2 font-sans text-[9.5px]">
-  <div class="p-2 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
-    <div class="text-blue-600 dark:text-blue-400 font-bold text-[10.5px] mb-0.5">El rol de global y extern</div>
-    <p class="text-gray-600 dark:text-gray-300 leading-snug">
-      La directiva <i>global</i> exporta un símbolo a la tabla de símbolos del archivo objeto ELF, haciéndolo visible al enlazador. La directiva <i>extern</i> declara que un símbolo reside en otro archivo.
-    </p>
-  </div>
-  <div v-click="1" class="p-2 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
-    <div class="text-emerald-600 dark:text-emerald-400 font-bold text-[10.5px] mb-0.5">¿Por qué construir proyectos híbridos?</div>
-    <p class="text-gray-600 dark:text-gray-300 leading-snug">
-      Permite combinar lo mejor de ambos mundos: la expresividad de C para la interfaz y lógica de alto nivel, y ensamblador para rutinas críticas donde se requiere control exacto de registros y microcódigo.
-    </p>
-  </div>
-  <div v-click="2" class="p-2 bg-purple-50 border border-purple-200 dark:bg-purple-950/40 dark:border-purple-800/40 rounded-lg text-purple-900 dark:text-purple-200 leading-snug">
-    <strong>Cadena de construcción con GCC de 32 bits:</strong>
-    <div class="font-mono text-[8.5px] mt-1 space-y-0.5 text-gray-800 dark:text-gray-200">
-      <div>nasm -f elf32 rutina.asm -o rutina.o</div>
-      <div>gcc -m32 -c main.c -o main.o</div>
-      <div>gcc -m32 main.o rutina.o -o ejecutable</div>
+<div class="space-y-3 mt-1.5 text-xs font-sans">
+  <div class="space-y-0.5">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-blue-600 dark:text-blue-400 text-[11px]">1. Visibilidad de símbolos</span>
+      <span class="text-blue-400 dark:text-blue-500/60 font-mono text-xs">&mdash;&mdash;&gt;</span>
+      <code class="text-[9.5px] font-mono text-blue-700 bg-blue-50 border border-blue-200 dark:text-blue-300 dark:bg-blue-950/60 dark:border-blue-800/40 px-1.5 py-0.5 rounded">global / extern</code>
     </div>
+    <p class="text-gray-600 dark:text-gray-300 text-[10px] leading-relaxed pl-1">
+      <code>global</code> exporta un símbolo a la tabla ELF haciéndolo visible al enlazador; <code>extern</code> declara que el símbolo reside en otro archivo objeto.
+    </p>
+  </div>
+
+  <div v-click="1" class="space-y-0.5">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-emerald-600 dark:text-emerald-400 text-[11px]">2. Arquitectura modular</span>
+      <span class="text-emerald-400 dark:text-emerald-500/60 font-mono text-xs">&mdash;&mdash;&gt;</span>
+      <code class="text-[9.5px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 dark:text-emerald-300 dark:bg-emerald-950/60 dark:border-emerald-800/40 px-1.5 py-0.5 rounded">C + Ensamblador</code>
+    </div>
+    <p class="text-gray-600 dark:text-gray-300 text-[10px] leading-relaxed pl-1">
+      Combina la expresividad de C para la interfaz y lógica de control con la eficiencia de NASM para rutinas críticas donde se requiere control exacto de registros.
+    </p>
+  </div>
+
+  <div v-click="2" class="space-y-0.5">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-purple-600 dark:text-purple-400 text-[11px]">3. Compilación independiente</span>
+      <span class="text-purple-400 dark:text-purple-500/60 font-mono text-xs">&mdash;&mdash;&gt;</span>
+      <code class="text-[9.5px] font-mono text-purple-700 bg-purple-50 border border-purple-200 dark:text-purple-300 dark:bg-purple-950/60 dark:border-purple-800/40 px-1.5 py-0.5 rounded">gcc -m32</code>
+    </div>
+    <p class="text-gray-600 dark:text-gray-300 text-[10px] leading-relaxed pl-1">
+      Cada fuente se genera por separado a objeto <code>.o</code> de 32 bits, delegando a GCC la invocación de <code>ld</code> para la resolución final de enlaces sin colisiones.
+    </p>
   </div>
 </div>
 
 ::right::
 
-<div class="text-blue-600 dark:text-blue-400 font-bold mb-1.5 text-[11px] text-center font-sans">
+<div class="text-blue-600 dark:text-blue-400 font-bold mb-2.5 text-[11px] text-center font-sans">
   Cadena de enlazado de módulos independientes
 </div>
 
-<div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-xl space-y-2 font-sans">
-  <div class="flex items-center justify-between p-1.5 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 text-[9px]">
-    <span class="font-mono font-bold text-blue-600">rutina.asm</span>
-    <span class="text-gray-500 font-mono">&rarr; nasm -f elf32 &rarr;</span>
-    <span class="font-mono font-bold text-emerald-600">rutina.o</span>
+<div class="space-y-2 text-xs font-sans">
+  <div class="flex items-center justify-between px-3 py-2 bg-gray-50 dark:bg-gray-800/70 rounded-lg border border-gray-200 dark:border-gray-700 text-[9.5px]">
+    <span class="font-mono font-bold text-blue-600 dark:text-blue-400">rutina.asm</span>
+    <span class="text-gray-400 dark:text-gray-500 font-mono text-xs">&rarr; nasm -f elf32 &rarr;</span>
+    <span class="font-mono font-bold text-emerald-600 dark:text-emerald-400">rutina.o</span>
   </div>
-  <div class="flex items-center justify-between p-1.5 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 text-[9px]">
-    <span class="font-mono font-bold text-blue-600">main.c</span>
-    <span class="text-gray-500 font-mono">&rarr; gcc -m32 -c &rarr;</span>
-    <span class="font-mono font-bold text-emerald-600">main.o</span>
+
+  <div class="flex items-center justify-between px-3 py-2 bg-gray-50 dark:bg-gray-800/70 rounded-lg border border-gray-200 dark:border-gray-700 text-[9.5px]">
+    <span class="font-mono font-bold text-blue-600 dark:text-blue-400">main.c</span>
+    <span class="text-gray-400 dark:text-gray-500 font-mono text-xs">&rarr; gcc -m32 -c &rarr;</span>
+    <span class="font-mono font-bold text-emerald-600 dark:text-emerald-400">main.o</span>
   </div>
-  <div v-click="3" class="text-center font-mono text-[9px] font-bold text-gray-500">
-    &darr; Enlazador (ld invocado por gcc -m32) &darr;
+
+  <div v-click="3" class="flex items-center justify-center gap-2 py-1 text-gray-400 dark:text-gray-500 font-mono text-[9px] font-bold">
+    <span>&darr;</span>
+    <span>Enlazador (ld invocado por gcc -m32)</span>
+    <span>&darr;</span>
   </div>
-  <div v-click="3" class="p-2 bg-emerald-100/60 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-700 rounded-lg text-center font-mono text-[9.5px] font-bold text-emerald-800 dark:text-emerald-300">
+
+  <div v-click="3" class="px-3 py-2 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-300 dark:border-emerald-700/60 rounded-lg text-center font-mono text-[10px] font-bold text-emerald-700 dark:text-emerald-300">
     Archivo ejecutable final (formato ELF32)
+  </div>
+
+  <div v-click="3" class="mt-2 text-[9px] text-gray-500 dark:text-gray-400 text-center font-sans">
+    &bull; GCC unifica las tablas de símbolos y genera el binario ejecutable sin colisiones.
   </div>
 </div>
 
@@ -988,24 +1009,36 @@ transition: slide-left | slide-right
 Especificación técnica y estructura de datos en memoria:
 </div>
 
-<div class="space-y-2 font-sans text-[9.5px]">
-  <div class="p-2 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
-    <div class="text-blue-600 dark:text-blue-400 font-bold text-[10.5px] mb-0.5">Enunciado de la práctica</div>
-    <p class="text-gray-600 dark:text-gray-300 leading-snug">
-      Crear un archivo en disco llamado <i>/tmp/registro.txt</i> con permisos <i>0644o</i>, escribir un mensaje estructurado de texto y cerrar el descriptor garantizando la integridad de los datos.
+<div class="space-y-3 mt-1.5 text-xs font-sans">
+  <div class="space-y-0.5">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-blue-600 dark:text-blue-400 text-[11px]">1. Especificación técnica</span>
+      <span class="text-blue-400 dark:text-blue-500/60 font-mono text-xs">&mdash;&mdash;&gt;</span>
+      <code class="text-[9.5px] font-mono text-blue-700 bg-blue-50 border border-blue-200 dark:text-blue-300 dark:bg-blue-950/60 dark:border-blue-800/40 px-1.5 py-0.5 rounded">0644o (rw-r--r--)</code>
+    </div>
+    <p class="text-gray-600 dark:text-gray-300 text-[10px] leading-relaxed pl-1">
+      Crear en disco el archivo <code>/tmp/registro.txt</code> con permisos estándar de persistencia, escribir el mensaje estructurado y cerrar el descriptor asegurando la integridad física.
     </p>
   </div>
-  <div v-click="1" class="p-2 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
-    <div class="text-emerald-600 dark:text-emerald-400 font-bold text-[10.5px] mb-1">Estructura de datos requerida</div>
-    <div class="space-y-1 font-mono text-[9px]">
-      <div class="p-1 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
-        <span class="text-blue-600 font-bold">.data:</span> ruta db "/tmp/registro.txt", 0
+
+  <div v-click="1" class="space-y-1">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-emerald-600 dark:text-emerald-400 text-[11px]">2. Secciones en memoria</span>
+      <span class="text-emerald-400 dark:text-emerald-500/60 font-mono text-xs">&mdash;&mdash;&gt;</span>
+      <code class="text-[9.5px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 dark:text-emerald-300 dark:bg-emerald-950/60 dark:border-emerald-800/40 px-1.5 py-0.5 rounded">.data / .bss</code>
+    </div>
+    <div class="space-y-1 font-mono text-[9px] pl-1">
+      <div class="flex items-center gap-2 px-2 py-1 bg-gray-50 dark:bg-gray-800/70 rounded border border-gray-200 dark:border-gray-700">
+        <span class="text-blue-600 dark:text-blue-400 font-bold shrink-0">.data:</span>
+        <span class="text-gray-700 dark:text-gray-300"><code>ruta db "/tmp/registro.txt", 0</code></span>
       </div>
-      <div class="p-1 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
-        <span class="text-emerald-600 font-bold">.data:</span> texto db "Registro persistente en disco", 0x0A
+      <div class="flex items-center gap-2 px-2 py-1 bg-gray-50 dark:bg-gray-800/70 rounded border border-gray-200 dark:border-gray-700">
+        <span class="text-emerald-600 dark:text-emerald-400 font-bold shrink-0">.data:</span>
+        <span class="text-gray-700 dark:text-gray-300"><code>texto db "Registro persistente...", 0x0A</code></span>
       </div>
-      <div class="p-1 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
-        <span class="text-purple-600 font-bold">.bss:</span> fd_archivo resd 1 (reserva de 4 bytes para el descriptor)
+      <div class="flex items-center gap-2 px-2 py-1 bg-gray-50 dark:bg-gray-800/70 rounded border border-gray-200 dark:border-gray-700">
+        <span class="text-purple-600 dark:text-purple-400 font-bold shrink-0">.bss:</span>
+        <span class="text-gray-700 dark:text-gray-300"><code>fd_archivo resd 1</code> (descriptor de 4 bytes)</span>
       </div>
     </div>
   </div>
@@ -1013,27 +1046,26 @@ Especificación técnica y estructura de datos en memoria:
 
 ::right::
 
-<div class="text-blue-600 dark:text-blue-400 font-bold mb-1.5 text-[11px] text-center font-sans">
+<div class="text-blue-600 dark:text-blue-400 font-bold mb-2.5 text-[11px] text-center font-sans">
   Preparación de registros para sys_creat (Servicio 8)
 </div>
 
-<div class="space-y-2 font-sans text-[9.5px]">
-  <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-xl space-y-1.5 font-mono text-[9.5px]">
-    <div class="flex justify-between items-center p-1.5 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
-      <span class="font-bold text-blue-600">EAX = 8</span>
-      <span class="text-gray-600 dark:text-gray-300 font-sans text-[9px]">Número de servicio sys_creat</span>
-    </div>
-    <div class="flex justify-between items-center p-1.5 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
-      <span class="font-bold text-emerald-600">EBX = ruta</span>
-      <span class="text-gray-600 dark:text-gray-300 font-sans text-[9px]">Puntero a cadena terminada en 0x00</span>
-    </div>
-    <div class="flex justify-between items-center p-1.5 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
-      <span class="font-bold text-amber-600">ECX = 0644o</span>
-      <span class="text-gray-600 dark:text-gray-300 font-sans text-[9px]">Permisos rw-r--r-- (420 decimal)</span>
-    </div>
+<div class="space-y-2 text-xs font-sans">
+  <div class="flex justify-between items-center px-3 py-2 bg-gray-50 dark:bg-gray-800/70 rounded-lg border border-gray-200 dark:border-gray-700 font-mono text-[9.5px]">
+    <span class="font-bold text-blue-600 dark:text-blue-400">EAX = 8</span>
+    <span class="text-gray-600 dark:text-gray-300 font-sans text-[9px]">Número de servicio sys_creat</span>
   </div>
-  <div v-click="2" class="p-2 bg-blue-50 border border-blue-200 dark:bg-blue-950/40 dark:border-blue-800/40 rounded-lg text-[9px] text-blue-900 dark:text-blue-200 leading-snug">
-    <strong>Validación del resultado:</strong> Al retornar de <i>int 0x80</i>, el kernel entrega en EAX el nuevo descriptor (ej. 3). Si EAX es negativo, el archivo no pudo ser creado (ej. ruta inexistente o falta de permisos).
+  <div class="flex justify-between items-center px-3 py-2 bg-gray-50 dark:bg-gray-800/70 rounded-lg border border-gray-200 dark:border-gray-700 font-mono text-[9.5px]">
+    <span class="font-bold text-emerald-600 dark:text-emerald-400">EBX = ruta</span>
+    <span class="text-gray-600 dark:text-gray-300 font-sans text-[9px]">Puntero a cadena terminada en 0x00</span>
+  </div>
+  <div class="flex justify-between items-center px-3 py-2 bg-gray-50 dark:bg-gray-800/70 rounded-lg border border-gray-200 dark:border-gray-700 font-mono text-[9.5px]">
+    <span class="font-bold text-amber-600 dark:text-amber-400">ECX = 0644o</span>
+    <span class="text-gray-600 dark:text-gray-300 font-sans text-[9px]">Permisos rw-r--r-- (420 decimal)</span>
+  </div>
+
+  <div v-click="2" class="mt-2 text-[9px] text-gray-500 dark:text-gray-400 text-center font-sans">
+    &bull; Al retornar de <i>int 0x80</i>, el kernel entrega en EAX el nuevo descriptor. Si EAX es menor a cero, ocurrió una anomalía.
   </div>
 </div>
 
@@ -1239,24 +1271,36 @@ transition: slide-left | slide-right
 Técnica de ventanas en memoria y control de flujo con sys_read:
 </div>
 
-<div class="space-y-2 font-sans text-[9.5px]">
-  <div class="p-2 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
-    <div class="text-blue-600 dark:text-blue-400 font-bold text-[10.5px] mb-0.5">El desafío de la lectura en memoria acotada</div>
-    <p class="text-gray-600 dark:text-gray-300 leading-snug">
-      Un archivo en disco puede medir kilobytes o gigabytes. Es inviable reservar memoria infinita: la técnica profesional consiste en leer en *ventanas de bloques fijos* (ej. 64 bytes).
+<div class="space-y-3 mt-1.5 text-xs font-sans">
+  <div class="space-y-0.5">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-blue-600 dark:text-blue-400 text-[11px]">1. Técnica de ventanas fijas</span>
+      <span class="text-blue-400 dark:text-blue-500/60 font-mono text-xs">&mdash;&mdash;&gt;</span>
+      <code class="text-[9.5px] font-mono text-blue-700 bg-blue-50 border border-blue-200 dark:text-blue-300 dark:bg-blue-950/60 dark:border-blue-800/40 px-1.5 py-0.5 rounded">sys_read en bucle</code>
+    </div>
+    <p class="text-gray-600 dark:text-gray-300 text-[10px] leading-relaxed pl-1">
+      Un archivo físico puede medir kilobytes o gigabytes. La arquitectura robusta procesa la información leyendo bloques secuenciales de tamaño constante (ej. 64 bytes).
     </p>
   </div>
-  <div v-click="1" class="p-2 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
-    <div class="text-emerald-600 dark:text-emerald-400 font-bold text-[10.5px] mb-1">Los tres estados de retorno de sys_read (EAX)</div>
-    <div class="space-y-1 font-mono text-[9px]">
-      <div class="p-1 bg-emerald-50 dark:bg-emerald-950/40 rounded border border-emerald-300 text-emerald-900 dark:text-emerald-200">
-        <strong>EAX &gt; 0:</strong> Se leyeron <i>N</i> bytes con éxito. Procesar y pedir más.
+
+  <div v-click="1" class="space-y-1">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-emerald-600 dark:text-emerald-400 text-[11px]">2. Estados de retorno en EAX</span>
+      <span class="text-emerald-400 dark:text-emerald-500/60 font-mono text-xs">&mdash;&mdash;&gt;</span>
+      <code class="text-[9.5px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 dark:text-emerald-300 dark:bg-emerald-950/60 dark:border-emerald-800/40 px-1.5 py-0.5 rounded">Condición de corte</code>
+    </div>
+    <div class="space-y-1 text-[9.5px] pl-1 font-sans">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-emerald-600 font-mono shrink-0">EAX &gt; 0:</span>
+        <span class="text-gray-600 dark:text-gray-300">Lectura exitosa de <i>N</i> bytes transferidos al buffer.</span>
       </div>
-      <div class="p-1 bg-blue-50 dark:bg-blue-950/40 rounded border border-blue-300 text-blue-900 dark:text-blue-200">
-        <strong>EAX == 0:</strong> Fin de archivo (EOF). No quedan más bytes en disco.
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-blue-600 font-mono shrink-0">EAX == 0:</span>
+        <span class="text-gray-600 dark:text-gray-300">Fin de archivo (EOF). No restan más bytes en disco.</span>
       </div>
-      <div class="p-1 bg-rose-50 dark:bg-rose-950/40 rounded border border-rose-300 text-rose-900 dark:text-rose-200">
-        <strong>EAX &lt; 0:</strong> Error de lectura en el hardware o descriptor corrupto.
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-rose-600 font-mono shrink-0">EAX &lt; 0:</span>
+        <span class="text-gray-600 dark:text-gray-300">Fallo de lectura en hardware o descriptor inválido.</span>
       </div>
     </div>
   </div>
@@ -1264,28 +1308,37 @@ Técnica de ventanas en memoria y control de flujo con sys_read:
 
 ::right::
 
-<div class="text-blue-600 dark:text-blue-400 font-bold mb-1.5 text-[11px] text-center font-sans">
+<div class="text-blue-600 dark:text-blue-400 font-bold mb-2.5 text-[11px] text-center font-sans">
   Máquina de estados del bucle de lectura
 </div>
 
-<div class="p-3 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-xl space-y-2 font-sans text-[9px]">
-  <div class="p-1.5 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 rounded text-center font-bold text-blue-800 dark:text-blue-200">
+<div class="space-y-2 text-xs font-sans">
+  <div class="p-2 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 rounded-lg text-center font-mono text-[9.5px] font-bold text-blue-800 dark:text-blue-200">
     sys_open("/tmp/datos.txt", O_RDONLY)
   </div>
-  <div class="text-center font-mono font-bold text-gray-500">&darr; Descriptor válido (EAX &ge; 3) &darr;</div>
-  <div class="p-2 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 rounded">
-    <div class="font-bold text-emerald-800 dark:text-emerald-200 text-center font-mono">bucle_lectura:</div>
-    <div class="text-center text-gray-600 dark:text-gray-300 mt-0.5">sys_read(fd, buffer, 64)</div>
+
+  <div class="text-center font-mono font-bold text-[9px] text-gray-400 dark:text-gray-500">
+    &darr; Descriptor válido (EAX &ge; 3) &darr;
   </div>
+
+  <div class="p-2 bg-gray-50 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700 rounded-lg text-center font-mono text-[9.5px]">
+    <div class="font-bold text-emerald-600 dark:text-emerald-400">.bucle_lectura:</div>
+    <div class="text-gray-600 dark:text-gray-300 text-[9px] mt-0.5">sys_read(fd, buffer, 64)</div>
+  </div>
+
   <div v-click="2" class="grid grid-cols-2 gap-2 text-center font-mono text-[8.5px]">
-    <div class="p-1.5 bg-emerald-100 dark:bg-emerald-900/60 rounded border border-emerald-400 text-emerald-800 dark:text-emerald-200">
-      EAX &gt; 0<br>
-      Escribir en stdout &rarr; Volver al bucle
+    <div class="p-2 bg-emerald-50 dark:bg-emerald-950/50 rounded-lg border border-emerald-300 dark:border-emerald-700 text-emerald-800 dark:text-emerald-200">
+      <div class="font-bold">EAX &gt; 0</div>
+      <div class="text-[8px] text-gray-600 dark:text-gray-300 mt-0.5">sys_write(stdout) &rarr; loop</div>
     </div>
-    <div class="p-1.5 bg-gray-200 dark:bg-gray-700 rounded border border-gray-400 text-gray-800 dark:text-gray-200">
-      EAX == 0 (EOF)<br>
-      Salir &rarr; sys_close(fd)
+    <div class="p-2 bg-gray-100 dark:bg-gray-800/90 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200">
+      <div class="font-bold">EAX == 0 (EOF)</div>
+      <div class="text-[8px] text-gray-600 dark:text-gray-300 mt-0.5">sys_close(fd) &rarr; exit</div>
     </div>
+  </div>
+
+  <div v-click="2" class="mt-2 text-[9px] text-gray-500 dark:text-gray-400 text-center font-sans">
+    &bull; El valor devuelto por <i>sys_read</i> en EAX sirve simultáneamente como bandera de control y longitud de bytes a imprimir.
   </div>
 </div>
 
@@ -1655,46 +1708,59 @@ transition: slide-left | slide-right
 Firma de subrutina externa y disposición del marco de pila:
 </div>
 
-<div class="space-y-2 font-sans text-[9.5px]">
-  <div class="p-2 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
-    <div class="text-blue-600 dark:text-blue-400 font-bold text-[10.5px] mb-0.5">Firma de la función en lenguaje C</div>
-    <div class="font-mono text-[9px] p-1 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 text-blue-600 font-bold">
-      extern int contar_bytes(const char *ruta);
+<div class="space-y-3 mt-1.5 text-xs font-sans">
+  <div class="space-y-0.5">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-blue-600 dark:text-blue-400 text-[11px]">1. Declaración externa en C</span>
+      <span class="text-blue-400 dark:text-blue-500/60 font-mono text-xs">&mdash;&mdash;&gt;</span>
+      <code class="text-[9.5px] font-mono text-blue-700 bg-blue-50 border border-blue-200 dark:text-blue-300 dark:bg-blue-950/60 dark:border-blue-800/40 px-1.5 py-0.5 rounded">extern int contar_bytes(...)</code>
     </div>
-    <p class="text-gray-600 dark:text-gray-300 mt-1 leading-snug">
-      El programa en C delega a ensamblador la tarea de abrir el archivo, calcular su tamaño total en bytes mediante <i>sys_lseek</i> y retornar el conteo.
+    <p class="text-gray-600 dark:text-gray-300 text-[10px] leading-relaxed pl-1">
+      El anfitrión en C delega a ensamblador la apertura del archivo y la medición con <code>sys_lseek</code>, esperando el retorno entero en <code>EAX</code>.
     </p>
   </div>
-  <div v-click="1" class="p-2 bg-emerald-50 border border-emerald-200 dark:bg-emerald-950/40 dark:border-emerald-800/40 rounded-lg text-emerald-900 dark:text-emerald-200">
-    <div class="font-bold text-[10px] mb-0.5">Acceso a argumentos en la pila</div>
-    <p class="text-[9px] leading-snug">
-      Al montar el marco con <i>push ebp</i> y <i>mov ebp, esp</i>, el puntero a la cadena con la ruta reside exactamente en <i>[ebp + 8]</i>.
+
+  <div v-click="1" class="space-y-0.5">
+    <div class="flex items-center gap-2">
+      <span class="font-bold text-emerald-600 dark:text-emerald-400 text-[11px]">2. Convención cdecl en 32 bits</span>
+      <span class="text-emerald-400 dark:text-emerald-500/60 font-mono text-xs">&mdash;&mdash;&gt;</span>
+      <code class="text-[9.5px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 dark:text-emerald-300 dark:bg-emerald-950/60 dark:border-emerald-800/40 px-1.5 py-0.5 rounded">[ebp + 8]</code>
+    </div>
+    <p class="text-gray-600 dark:text-gray-300 text-[10px] leading-relaxed pl-1">
+      Al montar el marco con <code>push ebp</code> y <code>mov ebp, esp</code>, el puntero al primer parámetro de la ruta reside exactamente en <code>[ebp + 8]</code>.
     </p>
   </div>
 </div>
 
 ::right::
 
-<div class="text-blue-600 dark:text-blue-400 font-bold mb-1.5 text-[11px] text-center font-sans">
+<div class="text-blue-600 dark:text-blue-400 font-bold mb-2.5 text-[11px] text-center font-sans">
   Mapa de la pila de memoria (cdecl)
 </div>
 
-<div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-xl space-y-1.5 font-mono text-[9.5px]">
-  <div class="flex justify-between items-center p-1.5 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
-    <span class="font-bold text-blue-600">[ebp + 8]</span>
-    <span class="text-gray-700 dark:text-gray-300">Puntero a ruta (const char *)</span>
+<div class="space-y-2 text-xs font-sans">
+  <div class="flex justify-between items-center px-3 py-2 bg-gray-50 dark:bg-gray-800/70 rounded-lg border border-gray-200 dark:border-gray-700 font-mono text-[9.5px]">
+    <span class="font-bold text-blue-600 dark:text-blue-400">[ebp + 8]</span>
+    <span class="text-gray-700 dark:text-gray-300 font-sans text-[9px]">Puntero a ruta (const char *)</span>
   </div>
-  <div class="flex justify-between items-center p-1.5 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
-    <span class="font-bold text-emerald-600">[ebp + 4]</span>
-    <span class="text-gray-700 dark:text-gray-300">Dirección de retorno (EIP guardado)</span>
+
+  <div class="flex justify-between items-center px-3 py-2 bg-gray-50 dark:bg-gray-800/70 rounded-lg border border-gray-200 dark:border-gray-700 font-mono text-[9.5px]">
+    <span class="font-bold text-emerald-600 dark:text-emerald-400">[ebp + 4]</span>
+    <span class="text-gray-700 dark:text-gray-300 font-sans text-[9px]">Dirección de retorno (EIP guardado)</span>
   </div>
-  <div class="flex justify-between items-center p-1.5 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
-    <span class="font-bold text-amber-600">[ebp]</span>
-    <span class="text-gray-700 dark:text-gray-300">EBP anterior del llamador en C</span>
+
+  <div class="flex justify-between items-center px-3 py-2 bg-gray-50 dark:bg-gray-800/70 rounded-lg border border-gray-200 dark:border-gray-700 font-mono text-[9.5px]">
+    <span class="font-bold text-amber-600 dark:text-amber-400">[ebp]</span>
+    <span class="text-gray-700 dark:text-gray-300 font-sans text-[9px]">EBP anterior del llamador en C</span>
   </div>
-  <div v-click="2" class="flex justify-between items-center p-1.5 bg-purple-50 dark:bg-purple-950/40 rounded border border-purple-300 text-purple-900 dark:text-purple-200">
+
+  <div v-click="2" class="flex justify-between items-center px-3 py-2 bg-purple-50 dark:bg-purple-950/50 rounded-lg border border-purple-300 dark:border-purple-700/60 font-mono text-[9.5px] text-purple-900 dark:text-purple-200">
     <span class="font-bold">[esp]</span>
-    <span>Registros preservados (push ebx)</span>
+    <span class="font-sans text-[9px]">Registros preservados (push ebx)</span>
+  </div>
+
+  <div v-click="2" class="mt-2 text-[9px] text-gray-500 dark:text-gray-400 text-center font-sans">
+    &bull; La subrutina debe preservar registros <i>callee-saved</i> (EBX, ESI, EDI) antes de retornar.
   </div>
 </div>
 
