@@ -278,7 +278,7 @@ Cada proyecto semanal de Slidev cubre exactamente dos sesiones de 90 minutos:
   * Desafío de consolidación: diseño e implementación de un módulo de persistencia y parseo de registros estructurados en disco.
 * **Lecturas del curso asociadas:** Sivarama (capítulos 19, 20 y 21) correspondiente a los Reportes de Lectura 11 y 12; Libro C (capítulo 8).
 * **Propósito pedagógico:** Capacitación integral en persistencia, modularidad y ensamblador híbrido, dotando a los estudiantes de las herramientas para abordar proyectos de programación complejos de cualquier profesor.
-* **Acción en el repositorio:** Pendiente de crear en `S11/`.
+* **Acción en el repositorio:** Implementada en [S11/slides.md](file:///home/mau/Tutorias/IC3101/S11/slides.md).
 
 ---
 
@@ -405,7 +405,7 @@ Cada proyecto semanal de Slidev cubre exactamente dos sesiones de 90 minutos:
 | **S08** | Pila, subrutinas y medio término | Pila, `call`/`ret`, convención cdecl, stack frame | Subrutinas recursivas y reto de medio término | Sivarama 15, 16, 19; Libro C 6 | **Refuerzo integral de medio término** | Pendiente |
 | **S09** | Llamadas al sistema operativo | Modo dual, `int 0x80`, descriptores POSIX | Captura en buffer de teclado y salida en consola | Sivarama 17, 18; Libro C 7 (Rep. 10) | Interacción directa con el SO | Implementado |
 | **S10** | Cadenas e instrucciones bloque | `movs`, `stos`, `lods`, `cmps`, `scas`, prefijos `rep` | `strlen`, `memcpy`, `strcpy`, `memset`, `strcmp` | Sivarama 17, 18 (Rep. 10) | Optimización masiva de memoria | Implementado |
-| **S11** | **Archivos en disco y módulos** | **`sys_open`, `sys_creat`, `sys_close`, macros, C+NASM** | **Persistencia en disco y proyectos híbridos C+NASM** | **Sivarama 19 a 21 (Rep. 11, 12); Libro C 8** | **Soporte técnico para proyectos** | Pendiente |
+| **S11** | **Archivos en disco y módulos** | **`sys_open`, `sys_creat`, `sys_close`, macros, C+NASM** | **Persistencia en disco y proyectos híbridos C+NASM** | **Sivarama 19 a 21 (Rep. 11, 12); Libro C 8** | **Soporte técnico para proyectos** | Implementado |
 | **S12** | Segmentación (*pipeline*) | Etapas IF-ID-EX-MEM-WB, riesgos de datos/control | Trazas de cauce, paradas, reenvío, reordenamiento | Stallings 14, 15, 16 | Análisis de microarquitectura | Pendiente |
 | **S13** | Entrada y salida de hardware | Módulos E/S, polling vs interrupciones IRQ, DMA | Cálculo de sobrecarga de CPU y ancho de banda | Stallings 3, 7 | Acompañamiento en interfaces E/S | Pendiente |
 | **S14** | Jerarquía y memorias caché | Localidad, mapeo directo/asociativo, reemplazo | Cálculo de campos de dirección, fallos y AMAT | Stallings 4, 5 | **Refuerzo cuantitativo de caché** | Pendiente |
