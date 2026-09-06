@@ -1203,27 +1203,14 @@ Manejo de errores del kernel y validación en consola:
 
 ::right::
 
-<div class="text-blue-600 dark:text-blue-400 font-bold mb-1.5 text-[11px] text-center font-sans">
+<div class="text-blue-600 dark:text-blue-400 font-bold mb-2 text-[11px] text-center font-sans">
   Verificación en consola del archivo creado
 </div>
 
-<div class="space-y-2.5 font-sans text-[9.5px]">
-  <div>
-    <div class="text-gray-700 dark:text-gray-200 font-bold mb-1 text-[9px]">Comprobación de permisos y tamaño:</div>
-    <div class="px-2.5 py-1.5 bg-gray-900 text-gray-100 rounded-lg font-mono text-[8.5px] border border-gray-800">
-      $ ls -l /tmp/registro.txt<br>
-      <span class="text-emerald-400">-rw-r--r-- 1 mau mau 30 sep 6 12:00 /tmp/registro.txt</span>
-    </div>
-  </div>
-
-  <div v-click="2">
-    <div class="text-gray-700 dark:text-gray-200 font-bold mb-1 text-[9px]">Examen del contenido persistente:</div>
-    <div class="px-2.5 py-1.5 bg-gray-900 text-gray-100 rounded-lg font-mono text-[8.5px] border border-gray-800">
-      $ cat /tmp/registro.txt<br>
-      <span class="text-gray-300">Registro persistente en disco</span><br>
-      $ hexdump -C /tmp/registro.txt<br>
-      <span class="text-blue-400">00000000 52 65 67 69 73 74 72 6f ... 0a</span>
-    </div>
+<div v-click="2" class="flex flex-col items-center">
+  <img src="/images/verificacion_archivo.png" class="rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 max-h-[300px] w-auto object-contain" />
+  <div class="mt-2 text-[9px] text-gray-500 dark:text-gray-400 text-center font-sans">
+    Inspección real de permisos 0644, tamaño exacto (30 bytes) y volcado con hexdump.
   </div>
 </div>
 
@@ -1888,29 +1875,16 @@ int main(int argc, char *argv[]) {
 
 ::right::
 
-<div class="text-blue-600 dark:text-blue-400 font-bold mb-1.5 text-[11px] text-center font-sans">
+<div class="text-blue-600 dark:text-blue-400 font-bold mb-2 text-[11px] text-center font-sans">
   Comandos de construcción y ejecución en consola
 </div>
 
-<div class="space-y-2.5 font-sans text-[9.5px]">
-  <div>
-    <div class="text-blue-600 dark:text-blue-400 font-bold mb-1 font-mono text-[9px]">1. Ensamblado del módulo NASM</div>
-    <div class="px-2.5 py-1.5 bg-gray-900 text-gray-100 rounded-lg font-mono text-[8.5px] border border-gray-800">
-      $ nasm -f elf32 contar_bytes.asm -o contar_bytes.o
-    </div>
-  </div>
-  <div v-click="1">
-    <div class="text-emerald-600 dark:text-emerald-400 font-bold mb-1 font-mono text-[9px]">2. Compilación y enlazado con GCC</div>
-    <div class="px-2.5 py-1.5 bg-gray-900 text-gray-100 rounded-lg font-mono text-[8.5px] border border-gray-800">
-      $ gcc -m32 main.c contar_bytes.o -o auditor_archivos
-    </div>
-  </div>
-  <div v-click="2">
-    <div class="text-amber-600 dark:text-amber-400 font-bold mb-1 font-mono text-[9px]">3. Prueba de ejecución</div>
-    <div class="px-2.5 py-1.5 bg-gray-900 text-emerald-400 rounded-lg font-mono text-[8.5px] border border-gray-800">
-      $ ./auditor_archivos /tmp/registro.txt<br>
-      <span class="text-gray-300">El archivo '/tmp/registro.txt' mide 30 bytes</span>
-    </div>
+<div v-click="1" class="flex flex-col items-center">
+  <img v-if="$clicks < 2" src="/images/compilacion_hibrida.png" class="rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 max-h-[290px] w-auto object-contain" />
+  <img v-else src="/images/ejecucion_hibrida.png" class="rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 max-h-[290px] w-auto object-contain" />
+  <div class="mt-2 text-[9px] text-gray-500 dark:text-gray-400 text-center font-sans">
+    <span v-if="$clicks < 2">Pasos 1 y 2: Ensamblado con NASM (elf32) y compilación/enlazado con GCC (-m32).</span>
+    <span v-else>Paso 3: Ejecución del auditor integrado comprobando el tamaño exacto de 30 bytes.</span>
   </div>
 </div>
 
