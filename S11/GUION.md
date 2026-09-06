@@ -24,15 +24,21 @@ Asimismo, exploraremos el potente preprocesador de NASM con macros multiparámet
 
 ---
 
-### Diapositiva 03: Hoja de ruta de la semana
+### Diapositiva 03: Objetivos de la primera sesión
 
-Esta diapositiva resume el itinerario completo de la semana.
+Antes de entrar en materia teórica, repasemos los objetivos de esta primera sesión:
 
-En la primera sesión abordaremos la teoría de archivos físicos en Linux, el ciclo de vida de los descriptores de archivo, las banderas de apertura, los permisos de Unix en formato octal, la arquitectura del preprocesador de macros y la convención binaria de llamadas cdecl.
+[click] Primero, comprenderemos la filosofía Unix donde todo es un archivo y cómo el núcleo gestiona los descriptores en el bloque de control del proceso.
 
-[click] Para la segunda sesión, hemos preparado cuatro talleres técnicos extensivos de múltiples diapositivas cada uno. No veremos ejemplos superficiales de una sola lámina, sino el desglose minucioso de cada fase: diseño en memoria, implementación del código en ensamblador y verificación práctica en consola.
+[click] Segundo, estudiaremos las llamadas al sistema fundamentales para crear, abrir, leer, escribir, cerrar y reposicionar punteros en archivos físicos en disco.
 
-Concluiremos con seis ejercicios de consolidación diseñados para fijar cada concepto crítico.
+[click] Tercero, aprenderemos a combinar banderas de acceso mediante operaciones a nivel de bits y a configurar permisos en formato octal.
+
+[click] Cuarto, analizaremos el manejo profesional de fallos del kernel interpretando los códigos negativos de retorno en EAX.
+
+[click] Quinto, exploraremos las herramientas del preprocesador de NASM para definir constantes simbólicas, incluir cabeceras y construir macros seguras con etiquetas locales.
+
+[click] Y sexto, dominaremos el estándar binario de llamadas cdecl para transferir parámetros por la pila y enlazar módulos de C con subrutinas en ensamblador.
 
 ---
 
@@ -166,17 +172,17 @@ En cdecl de 32 bits, los argumentos se pasan a través de la pila en orden inver
 
 ---
 
-### Diapositiva 13: Diapositiva 13
+### Diapositiva 13: Sesión 02: Práctica guiada
 
-Con esto damos inicio formal a la segunda sesión de la semana 11.
+¡Bienvenidos a la segunda sesión de la semana!
 
-Habiendo comprendido la teoría de descriptores de archivo, banderas de acceso, permisos octales, macros de preprocesador y la convención binaria cdecl, pasaremos a implementar soluciones prácticas completas en la terminal de Linux.
+Habiendo cubierto toda la base teórica de persistencia, llamadas al sistema, preprocesador de macros y convención cdecl, dedicaremos esta jornada completa a la programación práctica en consola, implementando rutinas de archivo paso a paso y construyendo un proyecto modular híbrido con C y NASM.
 
 ---
 
 ### Diapositiva 14: Objetivos de la segunda sesión
 
-Repasemos los cuatro objetivos de esta segunda sesión.
+Antes de iniciar los ejercicios prácticos, repasemos los cuatro objetivos de esta segunda jornada:
 
 [click] Primero, aprenderemos a crear archivos en disco físico aplicando permisos octales, escribiendo registros en memoria y cerrando el descriptor con seguridad.
 
@@ -184,7 +190,7 @@ Repasemos los cuatro objetivos de esta segunda sesión.
 
 [click] Tercero, construiremos una librería de macros reutilizable en un archivo .inc aplicando etiquetas locales seguras.
 
-[click] Cuarto, unificaremos C y NASM en un proyecto ejecutable enlazado con GCC de 32 bits, verificando la convención cdecl.
+[click] Y cuarto, unificaremos C y NASM en un proyecto ejecutable enlazado con GCC de 32 bits, verificando la convención cdecl.
 
 ---
 
@@ -338,9 +344,9 @@ Pregunta 3: La bandera O_TRUNC tiene como propósito expreso truncar la longitud
 
 ---
 
-### Diapositiva 27: Ejercicios de práctica (Parte 2)
+### Diapositiva 27: Ejercicios de práctica
 
-Segunda y última parte de reactivos formativos.
+Continuamos con la siguiente ronda de reactivos formativos.
 
 Pregunta 4: A diferencia de la lectura en consola donde el usuario puede ingresar líneas vacías, en archivos físicos en disco la condición universal de fin de archivo ocurre cuando sys_read retorna cero en EAX, indicando que el cursor alcanzó el último byte. La respuesta correcta es la B.
 

@@ -23,53 +23,38 @@ Asimismo, exploraremos el potente preprocesador de NASM con macros multiparámet
 -->
 
 ---
-layout: two-cols
-transition: slide-left | slide-right
+transition: fade
 ---
 
-# Hoja de ruta de la semana
+# Objetivos de la primera sesión
 
-<div class="text-[11px] text-gray-600 dark:text-gray-400 mb-2">
-Estructura bi-sesional planificada para el dominio integral de persistencia y modularidad:
+<div class="mb-4 text-sm text-gray-600 dark:text-gray-300">
+Comprender los fundamentos de persistencia en disco, llamadas al sistema y preprocesamiento en ensamblador:
 </div>
+<v-clicks>
 
-<div class="space-y-2 font-sans text-[9.5px]">
-  <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
-    <div class="text-blue-600 dark:text-blue-400 font-bold text-[10.5px] mb-1 font-mono">Sesión 01: Fundamentos teóricos y modelos</div>
-    <ul class="space-y-1 text-gray-600 dark:text-gray-300">
-      <li>&bull; Abstracción del sistema de archivos en Linux y tabla de descriptores en el PCB.</li>
-      <li>&bull; Llamadas al sistema: <i>sys_creat</i>, <i>sys_open</i>, <i>sys_read</i>, <i>sys_write</i>, <i>sys_close</i> y <i>sys_lseek</i>.</li>
-      <li>&bull; Banderas de acceso, modos de creación y permisos octales Unix (0644, 0755).</li>
-      <li>&bull; Tratamiento riguroso de errores del núcleo y códigos negativos en EAX.</li>
-      <li>&bull; Preprocesador de NASM: constantes <i>%define</i>, inclusiones <i>%include</i> y macros <i>%macro</i>.</li>
-      <li>&bull; Interfaz binaria y convención de llamadas estándar <i>cdecl</i> para interoperar C y NASM.</li>
-    </ul>
-  </div>
-</div>
+- **Abstracción de archivos y tabla de descriptores:** Analizar la filosofía Unix y el ciclo de vida de los descriptores de archivo en el PCB.
+- **Llamadas al sistema para almacenamiento en disco:** Dominar los servicios <i>sys_creat</i>, <i>sys_open</i>, <i>sys_read</i>, <i>sys_write</i>, <i>sys_close</i> y <i>sys_lseek</i>.
+- **Banderas de apertura y permisos octales:** Configurar modos de acceso (<i>O_RDONLY</i>, <i>O_CREAT</i>, <i>O_TRUNC</i>) y máscaras de protección estándar (0644o, 0755o).
+- **Tratamiento de anomalías y convención errno:** Interpretar los códigos de error negativos devueltos por el kernel en EAX (-1 a -4095).
+- **Preprocesador de NASM y modularidad:** Utilizar constantes <i>%define</i>, inclusión de archivos <i>%include</i> y macros con parámetros y etiquetas locales (%%).
+- **Interfaz binaria de llamadas cdecl:** Comprender el paso de argumentos por pila, registros preservados y enlace con GCC.
 
-::right::
-
-<div class="space-y-2 font-sans text-[9.5px] mt-8">
-  <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
-    <div class="text-emerald-600 dark:text-emerald-400 font-bold text-[10.5px] mb-1 font-mono">Sesión 02: Talleres prácticos y consolidación</div>
-    <ul class="space-y-1 text-gray-600 dark:text-gray-300">
-      <li>&bull; <strong>Práctica 1 (3 diapositivas):</strong> Creación y apertura con descriptor de archivo, escritura de datos y diagnóstico de fallos en consola.</li>
-      <li>&bull; <strong>Práctica 2 (3 diapositivas):</strong> Lectura secuencial por bloques, detección de fin de archivo (EOF) y posicionamiento con <i>sys_lseek</i>.</li>
-      <li>&bull; <strong>Práctica 3 (2 diapositivas):</strong> Abstracción de llamadas al sistema con macros y construcción de cabecera modular <i>.inc</i>.</li>
-      <li>&bull; <strong>Práctica 4 (3 diapositivas):</strong> Interfaz binaria C+NASM, subrutina de conteo y programa anfitrión enlazado con GCC.</li>
-      <li>&bull; <strong>Desafíos de consolidación (2 diapositivas):</strong> Evaluación formativa de 6 reactivos con opciones alineadas y análisis paso a paso.</li>
-    </ul>
-  </div>
-</div>
-
+</v-clicks>
 <!--
-Esta diapositiva resume el itinerario completo de la semana.
+Antes de entrar en materia teórica, repasemos los objetivos de esta primera sesión:
 
-En la primera sesión abordaremos la teoría de archivos físicos en Linux, el ciclo de vida de los descriptores de archivo, las banderas de apertura, los permisos de Unix en formato octal, la arquitectura del preprocesador de macros y la convención binaria de llamadas cdecl.
+[click] Primero, comprenderemos la filosofía Unix donde todo es un archivo y cómo el núcleo gestiona los descriptores en el bloque de control del proceso.
 
-[click] Para la segunda sesión, hemos preparado cuatro talleres técnicos extensivos de múltiples diapositivas cada uno. No veremos ejemplos superficiales de una sola lámina, sino el desglose minucioso de cada fase: diseño en memoria, implementación del código en ensamblador y verificación práctica en consola.
+[click] Segundo, estudiaremos las llamadas al sistema fundamentales para crear, abrir, leer, escribir, cerrar y reposicionar punteros en archivos físicos en disco.
 
-Concluiremos con seis ejercicios de consolidación diseñados para fijar cada concepto crítico.
+[click] Tercero, aprenderemos a combinar banderas de acceso mediante operaciones a nivel de bits y a configurar permisos en formato octal.
+
+[click] Cuarto, analizaremos el manejo profesional de fallos del kernel interpretando los códigos negativos de retorno en EAX.
+
+[click] Quinto, exploraremos las herramientas del preprocesador de NASM para definir constantes simbólicas, incluir cabeceras y construir macros seguras con etiquetas locales.
+
+[click] Y sexto, dominaremos el estándar binario de llamadas cdecl para transferir parámetros por la pila y enlazar módulos de C con subrutinas en ensamblador.
 -->
 
 ---
@@ -948,26 +933,15 @@ layout: center
 transition: slide-up | slide-down
 ---
 
-<div class="text-center space-y-4">
-  <div class="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800/40 tracking-wide uppercase font-mono inline-block">
-    IC3101 &bull; Sesión 02 de 02
-  </div>
-
-  # Sesión 02: Práctica guiada
-
-  <div class="text-gray-600 dark:text-gray-400 text-sm max-w-xl mx-auto leading-relaxed">
-    Talleres paso a paso de persistencia en disco, desarrollo modular con macros y proyectos híbridos C con NASM
-  </div>
-
-  <div class="pt-2 text-xs font-mono text-gray-500 dark:text-gray-400">
-    Duración estimada: 90 minutos &bull; 4 Prácticas extendidas &bull; Retos de consolidación
-  </div>
+<div class="text-center">
+  <div class="text-3xl text-gray-500 dark:text-gray-400 mb-4 font-mono">Semana 11</div>
+  <h1 class="text-6xl font-bold mb-8">Sesión 02: Práctica guiada</h1>
+  <div class="text-2xl text-blue-600 dark:text-blue-500 mt-4">IC3101: Arquitectura de computadores</div>
 </div>
-
 <!--
-Con esto damos inicio formal a la segunda sesión de la semana 11.
+¡Bienvenidos a la segunda sesión de la semana!
 
-Habiendo comprendido la teoría de descriptores de archivo, banderas de acceso, permisos octales, macros de preprocesador y la convención binaria cdecl, pasaremos a implementar soluciones prácticas completas en la terminal de Linux.
+Habiendo cubierto toda la base teórica de persistencia, llamadas al sistema, preprocesador de macros y convención cdecl, dedicaremos esta jornada completa a la programación práctica en consola, implementando rutinas de archivo paso a paso y construyendo un proyecto modular híbrido con C y NASM.
 -->
 
 ---
@@ -976,45 +950,19 @@ transition: fade
 
 # Objetivos de la segunda sesión
 
-<div class="text-[11px] text-gray-600 dark:text-gray-400 mb-4">
-Metas de aprendizaje técnico y aplicación en bajo nivel para la jornada de hoy:
+<div class="mb-4 text-sm text-gray-600 dark:text-gray-300">
+Desarrollar destrezas prácticas en manejo de archivos, modularidad con macros e integración C con NASM:
 </div>
+<v-clicks>
 
-<div class="max-w-2xl space-y-2.5 font-sans text-xs">
-  <v-clicks>
-    <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg flex items-start gap-3">
-      <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 flex items-center justify-center font-mono font-bold text-[10px] shrink-0">1</span>
-      <div>
-        <strong class="text-gray-800 dark:text-gray-200">Creación y persistencia de archivos en disco:</strong>
-        <p class="text-[10px] text-gray-600 dark:text-gray-400 mt-0.5">Implementar rutinas con <i>sys_creat</i> y <i>sys_open</i> configurando permisos octales 0644, verificando fallos del kernel y liberando descriptores con <i>sys_close</i>.</p>
-      </div>
-    </div>
-    <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg flex items-start gap-3">
-      <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 flex items-center justify-center font-mono font-bold text-[10px] shrink-0">2</span>
-      <div>
-        <strong class="text-gray-800 dark:text-gray-200">Lectura en bloques y detección de EOF:</strong>
-        <p class="text-[10px] text-gray-600 dark:text-gray-400 mt-0.5">Construir bucles de lectura por ventanas en memoria con <i>sys_read</i>, detectando fin de archivo (EAX = 0) y manipulando el cursor con <i>sys_lseek</i>.</p>
-      </div>
-    </div>
-    <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg flex items-start gap-3">
-      <span class="w-5 h-5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 flex items-center justify-center font-mono font-bold text-[10px] shrink-0">3</span>
-      <div>
-        <strong class="text-gray-800 dark:text-gray-200">Modularidad con macros en NASM:</strong>
-        <p class="text-[10px] text-gray-600 dark:text-gray-400 mt-0.5">Diseñar una cabecera modular <i>.inc</i> con macros multiparámetro utilizando etiquetas locales con doble porcentaje (%%) para evitar colisiones.</p>
-      </div>
-    </div>
-    <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg flex items-start gap-3">
-      <span class="w-5 h-5 rounded-full bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300 flex items-center justify-center font-mono font-bold text-[10px] shrink-0">4</span>
-      <div>
-        <strong class="text-gray-800 dark:text-gray-200">Integración de aplicaciones híbridas C + NASM:</strong>
-        <p class="text-[10px] text-gray-600 dark:text-gray-400 mt-0.5">Programar y enlazar una subrutina en ensamblador invocada desde C respetando el estándar <i>cdecl</i> y la preservación de registros en la pila.</p>
-      </div>
-    </div>
-  </v-clicks>
-</div>
+- **Creación y persistencia de archivos en disco:** Implementar rutinas con <i>sys_creat</i> y <i>sys_open</i> configurando permisos octales 0644, verificando fallos del kernel y liberando descriptores con <i>sys_close</i>.
+- **Lectura en bloques y detección de EOF:** Construir bucles de lectura por ventanas en memoria con <i>sys_read</i>, detectando fin de archivo (EAX = 0) y manipulando el cursor con <i>sys_lseek</i>.
+- **Modularidad con macros en NASM:** Diseñar una cabecera modular <i>.inc</i> con macros multiparámetro utilizando etiquetas locales con doble porcentaje (%%) para evitar colisiones.
+- **Integración de aplicaciones híbridas C + NASM:** Programar y enlazar una subrutina en ensamblador invocada desde C respetando el estándar <i>cdecl</i> y la preservación de registros en la pila.
 
+</v-clicks>
 <!--
-Repasemos los cuatro objetivos de esta segunda sesión.
+Antes de iniciar los ejercicios prácticos, repasemos los cuatro objetivos de esta segunda jornada:
 
 [click] Primero, aprenderemos a crear archivos en disco físico aplicando permisos octales, escribiendo registros en memoria y cerrando el descriptor con seguridad.
 
@@ -1022,7 +970,7 @@ Repasemos los cuatro objetivos de esta segunda sesión.
 
 [click] Tercero, construiremos una librería de macros reutilizable en un archivo .inc aplicando etiquetas locales seguras.
 
-[click] Cuarto, unificaremos C y NASM en un proyecto ejecutable enlazado con GCC de 32 bits, verificando la convención cdecl.
+[click] Y cuarto, unificaremos C y NASM en un proyecto ejecutable enlazado con GCC de 32 bits, verificando la convención cdecl.
 -->
 
 ---
@@ -1981,8 +1929,8 @@ transition: slide-left | slide-right
 
 # Ejercicios de práctica
 
-<div class="text-[11px] text-gray-600 dark:text-gray-400 mb-3">
-Reactivos de consolidación técnica (Preguntas 1 a 3):
+<div class="text-[11px] text-gray-600 dark:text-gray-400 mb-2">
+Llamadas al sistema, macros de preprocesador y banderas de acceso:
 </div>
 
 <div class="space-y-3 font-sans text-xs">
@@ -2065,10 +2013,10 @@ transition: slide-left | slide-right
   Práctica
 </div>
 
-# Ejercicios de práctica (Parte 2)
+# Ejercicios de práctica
 
-<div class="text-[11px] text-gray-600 dark:text-gray-400 mb-3">
-Reactivos de consolidación técnica (Preguntas 4 a 6):
+<div class="text-[11px] text-gray-600 dark:text-gray-400 mb-2">
+Trazado de bucles de lectura, convención cdecl y cierre de descriptores:
 </div>
 
 <div class="space-y-3 font-sans text-xs">
@@ -2134,7 +2082,7 @@ Reactivos de consolidación técnica (Preguntas 4 a 6):
 </div>
 
 <!--
-Segunda y última parte de reactivos formativos.
+Continuamos con la siguiente ronda de reactivos formativos.
 
 Pregunta 4: A diferencia de la lectura en consola donde el usuario puede ingresar líneas vacías, en archivos físicos en disco la condición universal de fin de archivo ocurre cuando sys_read retorna cero en EAX, indicando que el cursor alcanzó el último byte. La respuesta correcta es la B.
 
