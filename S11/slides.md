@@ -2096,47 +2096,35 @@ layout: center
 transition: fade
 ---
 
-<div class="text-center space-y-4">
-  <div class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/40 tracking-wide uppercase font-mono inline-block">
-    IC3101 &bull; Semana 11
+<div class="text-center max-w-xl mx-auto font-sans">
+  <h1 class="text-3xl font-bold mb-3 text-gray-900 dark:text-white">Conclusiones y siguiente paso</h1>
+  <div class="p-3.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-xl text-left text-xs text-gray-700 dark:text-gray-300 space-y-1.5 mt-3">
+    <p>
+      &bull; Comprendimos la filosofía Unix de descriptores de archivo y el ciclo de vida estricto de apertura, transferencia por bloques y cierre obligatorio.
+    </p>
+    <p>
+      &bull; Dominamos las llamadas al sistema <i>sys_creat</i>, <i>sys_open</i>, <i>sys_read</i>, <i>sys_write</i>, <i>sys_close</i> y <i>sys_lseek</i> junto con la interpretación de códigos <i>errno</i> negativos en EAX.
+    </p>
+    <p>
+      &bull; Adquirimos destreza en el diseño de cabeceras modulares <i>.inc</i> y macros seguras con etiquetas locales con doble porcentaje (%%) para evitar colisiones.
+    </p>
+    <p>
+      &bull; Integramos aplicaciones híbridas C + NASM respetando rigurosamente el contrato binario <i>cdecl</i> y la preservación de registros en la pila.
+    </p>
+    <p>
+      &bull; En la <strong>Semana 12</strong> estudiaremos la <strong>arquitectura del procesador, segmentación de cauce (pipeline) y riesgos</strong> (estructurales, de datos y de control).
+    </p>
   </div>
-
-  # Conclusiones y balance de la semana
-
-  <div class="text-gray-600 dark:text-gray-400 text-sm max-w-xl mx-auto leading-relaxed">
-    Persistencia en almacenamiento secundario, abstracción con macros y arquitectura de software modular híbrido
-  </div>
-
-  <div class="grid grid-cols-3 gap-3 max-w-2xl mx-auto pt-2 text-left font-sans text-[9.5px]">
-    <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
-      <div class="font-bold text-blue-600 dark:text-blue-400 mb-0.5">Persistencia en disco</div>
-      <p class="text-gray-600 dark:text-gray-300 leading-snug">
-        El ciclo estricto de apertura, lectura/escritura por bloques y cierre garantiza la integridad de los datos en el sistema de archivos.
-      </p>
-    </div>
-    <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
-      <div class="font-bold text-emerald-600 dark:text-emerald-400 mb-0.5">Macros de NASM</div>
-      <p class="text-gray-600 dark:text-gray-300 leading-snug">
-        Las macros con etiquetas locales (%%) ofrecen abstracción sin coste de pila, unificando llamadas al sistema en cabeceras <i>.inc</i>.
-      </p>
-    </div>
-    <div class="p-2.5 bg-gray-50 border border-gray-200 dark:bg-gray-900/60 dark:border-gray-800 rounded-lg">
-      <div class="font-bold text-purple-600 dark:text-purple-400 mb-0.5">Módulos C + NASM</div>
-      <p class="text-gray-600 dark:text-gray-300 leading-snug">
-        El respeto a la convención <i>cdecl</i> permite orquestar aplicaciones donde C gobierna el flujo y NASM optimiza la operación de bajo nivel.
-      </p>
-    </div>
+  <div class="text-blue-600 dark:text-blue-400 font-semibold mt-3 text-xs">
+    ¡Muchas gracias por su atención y nos vemos en la Semana 12!
   </div>
 </div>
-
 <!--
-Llegamos al final de la semana 11 habiendo dominado tres pilares esenciales de los sistemas de cómputo.
+Con esto concluimos la undécima semana de tutorías de Arquitectura de Computadores.
 
-Primero, la persistencia en disco: sabemos cómo crear, inspeccionar, leer y escribir archivos físicos manejando descriptores y evaluando códigos de error del kernel.
+Hemos construido los cimientos indispensables para interactuar con almacenamiento persistente y estructurar aplicaciones modulares de bajo nivel, dominando la sincronía entre C y ensamblador.
 
-Segundo, las macros de NASM: ahora disponemos de herramientas de preprocesado para diseñar bibliotecas modulares legibles y seguras sin colisión de etiquetas.
+En la próxima semana profundizaremos en la microarquitectura interna del procesador, analizando la segmentación de cauce y las técnicas para mitigar riesgos en hardware.
 
-Y tercero, la interoperabilidad híbrida: comprendemos a nivel de bits la convención cdecl para construir proyectos reales donde C y ensamblador trabajan en perfecta sincronía.
-
-Con estas competencias estamos plenamente equipados para abordar los temas de microarquitectura y segmentación de instrucciones que nos esperan la próxima semana. ¡Muchas gracias a todos por su participación y excelente trabajo!
+¡Excelente trabajo a todos y nos vemos en la siguiente sesión!
 -->

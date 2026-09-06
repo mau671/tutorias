@@ -356,14 +356,12 @@ Pregunta 6: Cada proceso en Linux tiene un límite en la cantidad máxima de des
 
 ---
 
-### Diapositiva 28: Diapositiva 28
+### Diapositiva 28: Conclusiones y siguiente paso
 
-Llegamos al final de la semana 11 habiendo dominado tres pilares esenciales de los sistemas de cómputo.
+Con esto concluimos la undécima semana de tutorías de Arquitectura de Computadores.
 
-Primero, la persistencia en disco: sabemos cómo crear, inspeccionar, leer y escribir archivos físicos manejando descriptores y evaluando códigos de error del kernel.
+Hemos construido los cimientos indispensables para interactuar con almacenamiento persistente y estructurar aplicaciones modulares de bajo nivel, dominando la sincronía entre C y ensamblador.
 
-Segundo, las macros de NASM: ahora disponemos de herramientas de preprocesado para diseñar bibliotecas modulares legibles y seguras sin colisión de etiquetas.
+En la próxima semana profundizaremos en la microarquitectura interna del procesador, analizando la segmentación de cauce y las técnicas para mitigar riesgos en hardware.
 
-Y tercero, la interoperabilidad híbrida: comprendemos a nivel de bits la convención cdecl para construir proyectos reales donde C y ensamblador trabajan en perfecta sincronía.
-
-Con estas competencias estamos plenamente equipados para abordar los temas de microarquitectura y segmentación de instrucciones que nos esperan la próxima semana. ¡Muchas gracias a todos por su participación y excelente trabajo!
+¡Excelente trabajo a todos y nos vemos en la siguiente sesión!
