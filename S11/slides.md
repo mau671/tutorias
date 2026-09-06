@@ -445,7 +445,7 @@ Detección e interpretación de códigos de error devueltos en EAX:
 
 <div class="font-mono text-[8.5px]">
 
-```asm {all|1-5|7-9|11-13|15-18}
+```asm {all|1-5|7-9|11-13|15-18}{maxHeight:'320px'}
 ; Intentar abrir archivo para lectura
 mov eax, 5           ; sys_open
 mov ebx, ruta        ; puntero a cadena con ruta
@@ -534,7 +534,7 @@ Manipulación del puntero de posición interno de lectura y escritura:
 
 <div class="font-mono text-[8.5px]">
 
-```asm {all|1-5|7-9|11-15}
+```asm {all|1-5|7-9|11-15}{maxHeight:'320px'}
 ; Mover el puntero al final del archivo
 mov eax, 19          ; sys_lseek
 mov ebx, [fd_archivo]; descriptor de archivo
@@ -632,7 +632,7 @@ Transformación del texto fuente antes de la generación de código de máquina:
 
 <div class="font-mono text-[8.5px]">
 
-```asm {all|1-4|6-9|11-14}
+```asm {all|1-4|6-9|11-14}{maxHeight:'320px'}
 ; Definición de constantes del sistema
 %define SYS_EXIT   1
 %define SYS_READ   3
@@ -729,7 +729,7 @@ Sintaxis avanzada y prevención de colisión de símbolos:
 
 <div class="font-mono text-[8.5px]">
 
-```asm {all|1-3|5-10|12-14|16-19}
+```asm {all|1-3|5-10|12-14|16-19}{maxHeight:'330px'}
 ; Macro para escribir buffer en descriptor con validación
 %macro escribir_seguro 3
   ; %1 = fd, %2 = buffer, %3 = longitud
@@ -1112,7 +1112,7 @@ Implementación paso a paso del ciclo de creación y escritura:
 
 <div class="font-mono text-[8px]">
 
-```asm {all|1-7|9-15|17-23|25-29}
+```asm {all|1-7|9-15|17-23|25-29}{maxHeight:'340px'}
 ; Paso 1: Crear archivo con permisos 0644
 mov eax, 8            ; sys_creat
 mov ebx, ruta         ; "/tmp/registro.txt"
@@ -1185,7 +1185,7 @@ Manejo de errores del kernel y validación en consola:
 
   <div v-click="1" class="font-mono text-[8px]">
 
-```asm
+```asm {*}{maxHeight:'260px'}
 .error_creat:
   mov eax, 4          ; sys_write
   mov ebx, 2          ; stderr (FD 2)
@@ -1377,7 +1377,7 @@ Implementación del bucle de lectura por bloques y salida a stdout:
 
 <div class="font-mono text-[8px]">
 
-```asm {all|1-7|9-16|18-24|26-31}
+```asm {all|1-7|9-16|18-24|26-31}{maxHeight:'340px'}
 ; Abrir archivo en modo solo lectura
 mov eax, 5            ; sys_open
 mov ebx, ruta         ; ruta ASCIIZ
@@ -1466,7 +1466,7 @@ Manipulación del cursor y cálculo de tamaño con sys_lseek:
 
 <div class="font-mono text-[8.5px]">
 
-```asm {all|1-6|8-11|13-18}
+```asm {all|1-6|8-11|13-18}{maxHeight:'270px'}
 ; 1. Averiguar tamaño total del archivo
 mov eax, 19           ; sys_lseek
 mov ebx, [fd_archivo] ; descriptor
@@ -1541,7 +1541,7 @@ Encapsulación declarativa y prevención de colisión de símbolos:
 
 <div class="font-mono text-[8px]">
 
-```asm {all|1-3|5-12|14-20}
+```asm {all|1-3|5-12|14-20}{maxHeight:'330px'}
 ; Macro para abrir archivo con comprobación
 %macro abrir_archivo 2
   ; %1 = ruta, %2 = banderas
@@ -1616,7 +1616,7 @@ Cabecera modular archivos.inc y simplificación del código fuente:
 
 <div class="font-mono text-[8px]">
 
-```asm {all|1-3|5-9|11-16|18-20}
+```asm {all|1-3|5-9|11-16|18-20}{maxHeight:'330px'}
 ; Inclusión de la cabecera modular
 %include "archivos.inc"
 
@@ -1786,7 +1786,7 @@ Subrutina contar_bytes en NASM con preservación de registros:
 
 <div class="font-mono text-[7.8px]">
 
-```asm {all|1-7|9-16|18-26|28-34}
+```asm {all|1-7|9-16|18-26|28-34}{maxHeight:'340px'}
 global contar_bytes
 section .text
 
@@ -1863,7 +1863,7 @@ Programa anfitrión en C y flujo de construcción con GCC:
 
 <div class="font-mono text-[8.5px]">
 
-```c {all|1-4|6-10|11-15|16-17}
+```c {all|1-4|6-10|11-15|16-17}{maxHeight:'320px'}
 #include <stdio.h>
 
 // Declaración de función externa en NASM

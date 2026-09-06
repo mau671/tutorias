@@ -39,6 +39,47 @@ table.text-center th.text-left {
   text-align: left;
 }
 
+/* ==========================================================================
+   Bloques de código: contención vertical, scroll suave y barra estilizada
+   ========================================================================== */
+.slidev-code-wrapper {
+  max-height: 350px;
+  overflow-y: auto !important;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.45) transparent;
+  scroll-behavior: smooth;
+}
+
+.slidev-code-wrapper::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.slidev-code-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.slidev-code-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.4);
+  border-radius: 9999px;
+}
+
+.slidev-code-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.7);
+}
+
+html.dark .slidev-code-wrapper {
+  scrollbar-color: rgba(107, 114, 128, 0.5) transparent;
+}
+
+html.dark .slidev-code-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(107, 114, 128, 0.45);
+}
+
+html.dark .slidev-code-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.75);
+}
+
 /* Centrado y temas automáticos de diagramas Mermaid */
 .mermaid,
 .slidev-mermaid {
