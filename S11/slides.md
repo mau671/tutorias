@@ -1,41 +1,15 @@
 ---
 theme: default
-background: https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1920&auto=format&fit=crop
-title: Tutoría 11 - Manejo de archivos en disco, macros y modularización (C con NASM)
-info: |
-  ## Tutoría 11: Manejo de archivos en disco, macros y modularización (C con NASM)
-  Arquitectura de Computadores (IC3101)
-  Instituto Tecnológico de Costa Rica
-class: text-center
-drawings:
-  persist: false
+layout: center
 transition: slide-left | slide-right
-mdc: true
-fonts:
-  sans: 'Inter'
-  serif: 'Noto Serif'
-  mono: 'JetBrains Mono'
-css: unocss
+addons:
+  - slidev-component-zoom
 ---
 
-<div class="flex flex-col items-center justify-center h-full text-center">
-  <div class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800/40 mb-3 tracking-wide uppercase font-mono">
-    IC3101 &bull; Arquitectura de Computadores
-  </div>
-
-  # Manejo de archivos en disco, macros y modularización
-
-  <div class="text-gray-600 dark:text-gray-400 text-sm max-w-2xl mx-auto mt-2 leading-relaxed">
-    Persistencia en el sistema de archivos con llamadas al sistema, preprocesador de NASM y proyectos híbridos de lenguaje C con ensamblador
-  </div>
-
-  <div class="mt-8 flex gap-4 text-xs font-mono text-gray-500 dark:text-gray-400">
-    <span>Semana 11</span>
-    <span>&bull;</span>
-    <span>Modalidad bi-sesional (2 sesiones &times; 1.5 horas)</span>
-    <span>&bull;</span>
-    <span>Linux x86 (IA-32)</span>
-  </div>
+<div class="text-center">
+  <div class="text-3xl text-gray-500 dark:text-gray-400 mb-4 font-mono">Semana 11</div>
+  <h1 class="text-5xl font-bold mb-6 text-gray-900 dark:text-white">Manejo de archivos en disco, macros y modularización</h1>
+  <div class="text-2xl text-blue-600 dark:text-blue-400">IC3101: Arquitectura de computadores</div>
 </div>
 
 <!--
