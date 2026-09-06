@@ -6,7 +6,13 @@ Este documento compila el guión oral del tutor para las dos sesiones de 90 minu
 
 ---
 
-### Diapositiva 01: Manejo de archivos en disco, macros y modularización
+### Diapositiva 01: Diapositiva 1
+
+(Sin notas del presentador)
+
+---
+
+### Diapositiva 02: Manejo de archivos en disco, macros y modularización
 
 Bienvenidos a la undécima semana de tutorías de Arquitectura de Computadores.
 
@@ -18,7 +24,7 @@ Asimismo, exploraremos el potente preprocesador de NASM con macros multiparámet
 
 ---
 
-### Diapositiva 02: Hoja de ruta de la semana
+### Diapositiva 03: Hoja de ruta de la semana
 
 Esta diapositiva resume el itinerario completo de la semana.
 
@@ -30,7 +36,7 @@ Concluiremos con seis ejercicios de consolidación diseñados para fijar cada co
 
 ---
 
-### Diapositiva 03: Persistencia y descriptores de archivo
+### Diapositiva 04: Persistencia y descriptores de archivo
 
 Recordemos el principio cardinal de los sistemas tipo Unix: todo recurso de entrada y salida se modela conceptualmente como un archivo.
 
@@ -46,7 +52,7 @@ En la semana 9 estudiamos los tres canales estándar: cero para teclado, uno par
 
 ---
 
-### Diapositiva 04: Llamadas al sistema para archivos en Linux
+### Diapositiva 05: Llamadas al sistema para archivos en Linux
 
 En Linux de 32 bits, la invocación de llamadas al sistema se realiza cargando el número del servicio en EAX y sus parámetros en EBX, ECX y EDX antes de disparar int 0x80.
 
@@ -62,7 +68,7 @@ La llamada más elemental para crear un archivo nuevo es sys_creat, correspondie
 
 ---
 
-### Diapositiva 05: Banderas de acceso y permisos octales
+### Diapositiva 06: Banderas de acceso y permisos octales
 
 Para abrir un archivo con sys_open debemos suministrar dos parámetros clave: las banderas de acceso en ECX y los permisos en EDX.
 
@@ -76,7 +82,7 @@ Las tres banderas de acceso mutuamente excluyentes son O_RDONLY con valor cero, 
 
 ---
 
-### Diapositiva 06: Tratamiento riguroso de errores del núcleo
+### Diapositiva 07: Tratamiento riguroso de errores del núcleo
 
 Un programador profesional de sistemas nunca asume que una llamada al sistema tuvo éxito. En almacenamiento masivo, los errores son cotidianos: el archivo puede no existir, el usuario puede carecer de permisos o el disco puede estar lleno.
 
@@ -90,7 +96,7 @@ Cuando una syscall falla, el kernel Linux coloca en el registro EAX un entero ne
 
 ---
 
-### Diapositiva 07: Desplazamiento y acceso con sys_lseek
+### Diapositiva 08: Desplazamiento y acceso con sys_lseek
 
 Por defecto, las operaciones de entrada y salida son estrictamente secuenciales. Sin embargo, en bases de datos y estructuras complejas necesitamos acceder a cualquier registro arbitrario sin tener que leer todo el archivo previo.
 
@@ -104,7 +110,7 @@ Para esto existe sys_lseek, correspondiente a la llamada al sistema 19.
 
 ---
 
-### Diapositiva 08: Preprocesador de NASM: constantes y macros
+### Diapositiva 09: Preprocesador de NASM: constantes y macros
 
 A medida que nuestros programas de bajo nivel crecen, escribir números mágicos como 5, 3 o 4 directamente en el código oscurece la lectura y propicia errores difíciles de depurar.
 
@@ -118,7 +124,7 @@ NASM incorpora un procesador de macros de una potencia extraordinaria que actúa
 
 ---
 
-### Diapositiva 09: Macros con parámetros y etiquetas locales
+### Diapositiva 10: Macros con parámetros y etiquetas locales
 
 El verdadero poder de las macros de NASM radica en su capacidad de recibir parámetros.
 
@@ -132,7 +138,7 @@ Definimos una macro indicando su nombre y la cantidad de argumentos que espera, 
 
 ---
 
-### Diapositiva 10: Enlace separado y proyectos híbridos C + NASM
+### Diapositiva 11: Enlace separado y proyectos híbridos C + NASM
 
 En la práctica profesional de sistemas, rara vez se programa una aplicación de miles de líneas en un único archivo de código.
 
@@ -146,7 +152,7 @@ Para que un archivo en C pueda invocar una rutina escrita en NASM, debemos decla
 
 ---
 
-### Diapositiva 11: Convención de llamadas cdecl en Linux x86
+### Diapositiva 12: Convención de llamadas cdecl en Linux x86
 
 Para que un binario compilado por GCC pueda ejecutar código ensamblado por NASM sin corromper la memoria, ambos deben respetar rigurosamente un contrato: la convención de llamadas cdecl.
 
@@ -160,7 +166,7 @@ En cdecl de 32 bits, los argumentos se pasan a través de la pila en orden inver
 
 ---
 
-### Diapositiva 12: Sesión 02: Práctica guiada
+### Diapositiva 13: Diapositiva 13
 
 Con esto damos inicio formal a la segunda sesión de la semana 11.
 
@@ -168,7 +174,7 @@ Habiendo comprendido la teoría de descriptores de archivo, banderas de acceso, 
 
 ---
 
-### Diapositiva 13: Objetivos de la segunda sesión
+### Diapositiva 14: Objetivos de la segunda sesión
 
 Repasemos los cuatro objetivos de esta segunda sesión.
 
@@ -182,9 +188,9 @@ Repasemos los cuatro objetivos de esta segunda sesión.
 
 ---
 
-### Diapositiva 14: Creación y apertura con descriptor de archivo
+### Diapositiva 15: Creación y apertura con descriptor de archivo
 
-Comenzamos el Taller 1 analizando la especificación del problema.
+Comenzamos analizando la especificación técnica del problema.
 
 Queremos crear el archivo /tmp/registro.txt con permisos estándar de lectura y escritura para el usuario y lectura para los demás (0644 en octal).
 
@@ -194,7 +200,7 @@ Queremos crear el archivo /tmp/registro.txt con permisos estándar de lectura y 
 
 ---
 
-### Diapositiva 15: Escritura de datos y cierre seguro del descriptor
+### Diapositiva 16: Escritura de datos y cierre seguro del descriptor
 
 En esta diapositiva implementamos el flujo completo de escritura en ensamblador.
 
@@ -208,9 +214,9 @@ Notemos las cuatro fases claramente delimitadas. Primero preparamos sys_creat.
 
 ---
 
-### Diapositiva 16: Diagnóstico de errores y verificación de archivo
+### Diapositiva 17: Diagnóstico de errores y verificación de archivo
 
-Para cerrar el Taller 1, analizamos cómo responder ante situaciones anómalas.
+Para cerrar esta primera etapa, analizamos cómo responder ante situaciones anómalas.
 
 Si el archivo no se puede crear, la bifurcación jl nos envía a la etiqueta .error_creat.
 
@@ -220,9 +226,9 @@ Si el archivo no se puede crear, la bifurcación jl nos envía a la etiqueta .er
 
 ---
 
-### Diapositiva 17: Lectura secuencial por bloques y detección de EOF
+### Diapositiva 18: Lectura secuencial por bloques y detección de EOF
 
-Pasamos ahora al Taller 2: lectura secuencial de archivos en disco.
+Pasamos ahora a la lectura secuencial de archivos en disco.
 
 En aplicaciones reales nunca debemos asumir que un archivo cabe en un buffer fijo. Por ello, empleamos la técnica de ventanas de lectura en bloques de tamaño constante, como 64 o 256 bytes.
 
@@ -232,7 +238,7 @@ En aplicaciones reales nunca debemos asumir que un archivo cabe en un buffer fij
 
 ---
 
-### Diapositiva 18: Implementación del bucle de lectura y emisión
+### Diapositiva 19: Implementación del bucle de lectura y emisión
 
 Analicemos la implementación técnica del bucle de lectura.
 
@@ -246,9 +252,9 @@ Abrimos el archivo con modo O_RDONLY (cero) y validamos el descriptor devuelto.
 
 ---
 
-### Diapositiva 19: Posicionamiento en archivos con sys_lseek
+### Diapositiva 20: Posicionamiento en archivos con sys_lseek
 
-Para culminar el Taller 2, examinemos la llamada sys_lseek.
+Para culminar esta fase, examinemos la llamada sys_lseek.
 
 Cuando terminamos de leer o escribir un archivo, el cursor queda posicionado al final. Si quisiéramos leerlo de nuevo sin cerrarlo y reabrirlo, la única manera es mediante sys_lseek.
 
@@ -258,9 +264,9 @@ Cuando terminamos de leer o escribir un archivo, el cursor queda posicionado al 
 
 ---
 
-### Diapositiva 20: Abstracción de llamadas al sistema con macros
+### Diapositiva 21: Abstracción de llamadas al sistema con macros
 
-En el Taller 3 abordamos la ingeniería de macros para construir bibliotecas de código reutilizable.
+Abordamos a continuación la ingeniería de macros para construir bibliotecas de código reutilizable.
 
 En lugar de reescribir una y otra vez la carga de registros para int 0x80, diseñamos macros limpias y expresivas.
 
@@ -270,7 +276,7 @@ En lugar de reescribir una y otra vez la carga de registros para int 0x80, dise�
 
 ---
 
-### Diapositiva 21: Construcción de cabecera modular para llamadas
+### Diapositiva 22: Construcción de cabecera modular para llamadas
 
 Aquí vemos el resultado final de aplicar modularidad mediante macros.
 
@@ -282,9 +288,9 @@ Creamos una cabecera llamada archivos.inc con todas nuestras macros y constantes
 
 ---
 
-### Diapositiva 22: Interfaz binaria de llamadas entre C y NASM
+### Diapositiva 23: Interfaz binaria de llamadas entre C y NASM
 
-Llegamos al Taller 4, donde uniremos el lenguaje C con NASM en una solución híbrida.
+Llegamos ahora a la integración donde uniremos el lenguaje C con NASM en una solución híbrida.
 
 En el archivo de C declaramos la función contar_bytes como extern int, indicando que su implementación reside en un módulo binario externo.
 
@@ -294,7 +300,7 @@ En el archivo de C declaramos la función contar_bytes como extern int, indicand
 
 ---
 
-### Diapositiva 23: Subrutina NASM invocada desde lenguaje C
+### Diapositiva 24: Subrutina NASM invocada desde lenguaje C
 
 En esta diapositiva apreciamos el código completo de la subrutina contar_bytes en NASM.
 
@@ -308,7 +314,7 @@ Observen el prólogo: push ebp, mov ebp, esp y push ebx.
 
 ---
 
-### Diapositiva 24: Programa anfitrión en C y cadena de enlazado
+### Diapositiva 25: Programa anfitrión en C y cadena de enlazado
 
 Para completar la solución híbrida, redactamos el programa principal en C.
 
@@ -316,11 +322,11 @@ Observen qué sencillo resulta: main.c valida que el usuario proporcione un arch
 
 [click] En la consola ejecutamos los dos pasos de compilación: nasm -f elf32 genera el objeto de la subrutina, y gcc -m32 compila main.c enlazándolo con contar_bytes.o en un binario ejecutable único.
 
-[click] Al ejecutar la aplicación contra nuestro archivo generado en el Taller 1, obtenemos la medición precisa de 30 bytes, integrando armónicamente ambos lenguajes.
+[click] Al ejecutar la aplicación contra nuestro archivo generado previamente, obtenemos la medición precisa de 30 bytes, integrando armónicamente ambos lenguajes.
 
 ---
 
-### Diapositiva 25: Ejercicios de práctica
+### Diapositiva 26: Ejercicios de práctica
 
 Iniciamos la primera ronda de ejercicios formativos.
 
@@ -332,7 +338,7 @@ Pregunta 3: La bandera O_TRUNC tiene como propósito expreso truncar la longitud
 
 ---
 
-### Diapositiva 26: Ejercicios de práctica (Parte 2)
+### Diapositiva 27: Ejercicios de práctica (Parte 2)
 
 Segunda y última parte de reactivos formativos.
 
@@ -344,7 +350,7 @@ Pregunta 6: Cada proceso en Linux tiene un límite en la cantidad máxima de des
 
 ---
 
-### Diapositiva 27: Conclusiones y balance de la semana
+### Diapositiva 28: Diapositiva 28
 
 Llegamos al final de la semana 11 habiendo dominado tres pilares esenciales de los sistemas de cómputo.
 
@@ -355,5 +361,3 @@ Segundo, las macros de NASM: ahora disponemos de herramientas de preprocesado pa
 Y tercero, la interoperabilidad híbrida: comprendemos a nivel de bits la convención cdecl para construir proyectos reales donde C y ensamblador trabajan en perfecta sincronía.
 
 Con estas competencias estamos plenamente equipados para abordar los temas de microarquitectura y segmentación de instrucciones que nos esperan la próxima semana. ¡Muchas gracias a todos por su participación y excelente trabajo!
-
----
